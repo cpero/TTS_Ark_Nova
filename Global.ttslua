@@ -1,0 +1,38 @@
+require('ArkNova.Constants')
+require('ArkNova.Helpers')
+
+--                        Global Event Handlers
+
+function onLoad(saved_data)
+    if saved_data ~= "" then
+        GLOBAL_STATE = JSON.decode(saved_data)
+        print("Loaded game!")
+    else
+        GLOBAL_STTE = {}
+        print("Welcome to Ark Nova!")
+        print("Please use the buttons on the board to get started.")
+    end
+end
+
+function onSave()
+
+end
+
+function setupGame()
+  log("Setup game clicked")
+
+  GLOBAL_STATE = {}
+  local players = Player.getPlayers()
+  for _, player in ipairs(players) do
+    GLOBAL_STATE[player.color] = {
+      table = "MISC"
+    }
+
+    local color = string.lower(player.color)
+    local pieces = PIECES[color];
+    local playerZone = getObjectFromGUID(pieces["zone"]).getPosition()
+
+    -- spawm player buttons
+    -- move player tokens ?
+  end
+end

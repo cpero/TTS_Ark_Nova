@@ -1,0 +1,66 @@
+--                        Global Parameters
+-- Anything defined in this block will be available to all sub-scripts. Use
+-- with caution!
+
+GAME_STATE = {}
+
+PIECES = {
+  black = {
+    bag = "d76cf0",
+    agent1 = "9f9815",
+    agent2 = "663f13",
+    agent3 = "905b7d",
+    agent4 = "f35931",
+    token1 = "15f2f4",
+    token2 = "8f2664",
+    token3 = "23f41a",
+    zone = "a04845"
+  },
+  yellow = {
+    bag = "21836f",
+    agent1 = "cd770a",
+    agent2 = "90e4e5",
+    agent3 = "2b4fd3",
+    agent4 = "508189",
+    token1 = "6880dc",
+    token2 = "dad22e",
+    token3 = "ebe3cb",
+    zone = "822f06"
+  },
+  red = {
+    bag = "885ada",
+    agent1 = "60b533",
+    agent2 = "a39b5c",
+    agent3 = "2821be",
+    agent4 = "0d0f21",
+    token1 = "fc8a15",
+    token2 = "29b851",
+    token3 = "d88f36",
+    zone = "32e922"
+  },
+  blue = {
+    bag = "5dd08d",
+    agent1 = "478d07",
+    agent2 = "b52a8a",
+    agent3 = "c6062b",
+    agent4 = "09a020",
+    token1 = "d21fc0",
+    token2 = "8db94b",
+    token3 = "dd539e",
+    zone = "cb7f5a"
+  }
+}
+
+BREAK_TOKEN = "bbf4bd"
+MAIN_BOARD = "1b01e6"
+PROJECT_DECK = "27f70f"
+
+ANIMALS_DECK = "89c064"
+CARDS_DECK = "e4d37d"
+BUILD_DECK = "4b7b18"
+SPONSORS_DECK = "99e339"
+ASSOCIATION_DECK = "35f5c9"
+
+MAP_A_BAG = "9e3768"
+MAP_0_BAG = "d71bb5"
+MAP_MISC_BAG = "7f96e0"
