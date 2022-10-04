@@ -5,62 +5,87 @@
 GAME_STATE = {}
 
 PIECES = {
-  black = {
-    bag = "d76cf0",
-    agent1 = "9f9815",
-    agent2 = "663f13",
-    agent3 = "905b7d",
-    agent4 = "f35931",
-    token1 = "15f2f4",
-    token2 = "8f2664",
-    token3 = "23f41a",
-    zone = "a04845"
+  white = {
+    bag = "911ef6",
+    agent1 = "8226c6",
+    agent2 = "76e12b",
+    agent3 = "fc5be3",
+    agent4 = "82f92d",
+    appeal_token = "026dd5",
+    conservation_token = "b9390c",
+    rep_token = "a3ee65",
+    zone = "d8acd6"
   },
   yellow = {
-    bag = "21836f",
-    agent1 = "cd770a",
-    agent2 = "90e4e5",
-    agent3 = "2b4fd3",
-    agent4 = "508189",
-    token1 = "6880dc",
-    token2 = "dad22e",
-    token3 = "ebe3cb",
-    zone = "822f06"
+    bag = "e0309b",
+    agent1 = "9edac5",
+    agent2 = "731ac3",
+    agent3 = "5c010f",
+    agent4 = "8876a6",
+    appeal_token = "6aa00c",
+    conservation_token = "641bf4",
+    rep_token = "fb9207",
+    zone = "8ad9db"
   },
   red = {
-    bag = "885ada",
-    agent1 = "60b533",
-    agent2 = "a39b5c",
-    agent3 = "2821be",
-    agent4 = "0d0f21",
-    token1 = "fc8a15",
-    token2 = "29b851",
-    token3 = "d88f36",
-    zone = "32e922"
+    bag = "32df13",
+    agent1 = "53910d",
+    agent2 = "484be4",
+    agent3 = "a106d9",
+    agent4 = "ffc547",
+    appeal_token = "c8c287",
+    conservation_token = "62fc61",
+    rep_token = "1ae25a",
+    zone = "85538c"
   },
   blue = {
-    bag = "5dd08d",
-    agent1 = "478d07",
-    agent2 = "b52a8a",
-    agent3 = "c6062b",
-    agent4 = "09a020",
-    token1 = "d21fc0",
-    token2 = "8db94b",
-    token3 = "dd539e",
-    zone = "cb7f5a"
+    bag = "acea32",
+    agent1 = "273ceb",
+    agent2 = "6b8fa0",
+    agent3 = "a2bda7",
+    agent4 = "a08017",
+    appeal_token = "92c2c3",
+    conservation_token = "d00422",
+    rep_token = "e3ec08",
+    zone = "d5294d"
   }
 }
 
+EXTRA_MARKERS = "669758"
 BREAK_TOKEN = "bbf4bd"
+CONSTRICT_TOKENS = "902d46"
+VENOM_TOKENS = "81cd3e"
+X_TOKENS = "e2af64" -- This represents the black "X" tokens
+TWO_X_TOKENS = "1bd7f1" -- This represents the "2x" tokens. Name is slightly misleading
+
+TABLE = "d7b6e1"
+
+ASSOCIATION_DECK = "118109"
+ANIMALS_DECK = "5e1d75"
+BUILD_DECK = "071284"
+SPONSORS_DECK = "50c25f"
+CARDS_DECK = "14c118"
+
+SINGLE_PLAYER_CARD = "1e5455"
+
+ENCLOSURES = {"b89493", "a23b67", "1fd2c8", "33b7eb", "d15fab"}
+AVIARY = "d9ff5d"
+REPTILE_HOUSE = "3cd044"
+PETTING_ZOO = "d20da2"
+SPECIAL_ENCLOSURES = "6be1bc"
+KIOSK = "f95ecc"
+PAVILLION = "de5f43"
+
+GLOBE_MISC_MAPS = "c142e2"
+GLOBE_A_MAPS = "9c19ae"
+GLOBE_O_MAPS = "64b055"
+
+UNIVERSITIES = {"ab7510", "246917", "c1f153"}
+PARTNERSHIPS = {"8478da", "f1ef52", "160086", "1fa074", "92c212"}
+
+CONSERVATION_BONUSES = "1c73d4"
 MAIN_BOARD = "1b01e6"
 PROJECT_DECK = "27f70f"
-
-ANIMALS_DECK = "89c064"
-CARDS_DECK = "e4d37d"
-BUILD_DECK = "4b7b18"
-SPONSORS_DECK = "99e339"
-ASSOCIATION_DECK = "35f5c9"
-
-MAP_A_BAG = "9e3768"
-MAP_0_BAG = "d71bb5"
-MAP_MISC_BAG = "7f96e0"
+SIDE_BOARD = "21492c"
+CONSERVATION_DECK = "853c1f"
+OBJECTIVE_DECK = "bd92ce"

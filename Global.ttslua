@@ -1,5 +1,4 @@
 require('ArkNova.Constants')
-require('ArkNova.Helpers')
 
 --                        Global Event Handlers
 
@@ -16,23 +15,4 @@ end
 
 function onSave()
 
-end
-
-function setupGame()
-  log("Setup game clicked")
-
-  GLOBAL_STATE = {}
-  local players = Player.getPlayers()
-  for _, player in ipairs(players) do
-    GLOBAL_STATE[player.color] = {
-      table = "MISC"
-    }
-
-    local color = string.lower(player.color)
-    local pieces = PIECES[color];
-    local playerZone = getObjectFromGUID(pieces["zone"]).getPosition()
-
-    -- spawm player buttons
-    -- move player tokens ?
-  end
 end
