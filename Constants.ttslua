@@ -2,7 +2,13 @@
 -- Anything defined in this block will be available to all sub-scripts. Use
 -- with caution!
 
-GAME_STATE = {}
+GAME_STATE = {
+  setup = false,
+  white = {},
+  yellow = {},
+  red = {},
+  blue = {}
+}
 
 PIECES = {
   white = {
@@ -49,6 +55,14 @@ PIECES = {
     rep_token = "e3ec08",
     zone = "d5294d"
   }
+}
+
+-- These are centered in front of the player zones for easier button spawning/manipulation
+ANCHORS = {
+  white = "7efeef",
+  yellow = "7380ea",
+  red = "0366a9",
+  blue = "dacc52"
 }
 
 EXTRA_MARKERS = "669758"

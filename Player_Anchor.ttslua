@@ -1,0 +1,31 @@
+-- This file is an "object" implementation of the anchors. It should have
+-- passable params and be reusable
+
+require("ArkNova.Constants")
+require("ArkNova.Helpers")
+require("ArkNova.State")
+
+function onLoad()
+end
+
+function anchorSetup(params)
+  color = params["color"]
+  player_ready = false
+  setColorState(color, "ready", false)
+  self.UI.setAttribute(color.."SetupBtn", "active", true)
+
+  table = getObjectFromGUID(TABLE)
+  table.call("readyPlayer", {color = color, ready = player_ready})
+end
+
+function ready()
+  log("Ready clicked! " .. color)
+  player_ready = not player_ready
+  table.call("readyPlayer", {color = color, ready = player_ready})
+  setColorState(color, "ready", player_ready)
+  if player_ready then
+    self.UI.setAttribute(color.."SetupBtn", "color", "#00ff00")
+  else
+    self.UI.setAttribute(color.."SetupBtn", "color", color)
+  end
+end

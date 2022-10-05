@@ -1,0 +1,26 @@
+require("ArkNova.Constants")
+require("ArkNova.Helpers")
+
+function initFreshGame()
+  self.UI.setAttribute("setupBtn", "active", true)
+  ready_players = {}
+end
+
+function setup()
+  log("Setup button clicked")
+  self.UI.setAttribute("setupBtn", "active", false)
+
+  local players = Player.getPlayers()
+  for _, player in ipairs(players) do
+    local color = toLowerCase(player.color)
+    log("Now processing " .. color)
+    local anchor = getObjectFromGUID(ANCHORS[color])
+    anchor.call("anchorSetup", {color = color})
+  end
+end
+
+function readyPlayer(params)
+  local color = params["color"]
+  local ready = params["ready"]
+  ready_players[color] = ready
+end

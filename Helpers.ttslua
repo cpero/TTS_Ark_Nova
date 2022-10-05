@@ -1,0 +1,3 @@
+function toLowerCase(str)
+  return string.lower(str)
+end

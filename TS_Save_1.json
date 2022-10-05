@@ -1,17 +1,24 @@
 {
   "SaveName": "v1",
-  "EpochTime": 1664928290,
-  "Date": "10/4/2022 8:04:50 PM",
+  "EpochTime": 1664947978,
+  "Date": "10/5/2022 1:32:58 AM",
   "VersionNumber": "v13.2.2",
-  "GameMode": "Large Table",
-  "GameType": "",
-  "GameComplexity": "",
+  "GameMode": "Ark Nova",
+  "GameType": "Game",
+  "GameComplexity": "Low Complexity",
+  "PlayingTime": [
+    60,
+    180
+  ],
+  "PlayerCounts": [
+    1,
+    4
+  ],
   "Tags": [],
   "Gravity": 0.5,
   "PlayArea": 0.5,
   "Table": "Table_None",
   "Sky": "Sky_Forest",
-  "SkyURL": "http://cloud-3.steamusercontent.com/ugc/783002817662118580/EEF2FF28224A83EB29EC7D5B3CA728782F1554FC/",
   "Note": "",
   "TabStates": {
     "0": {
@@ -159,7 +166,7 @@
     "ThickLines": false,
     "Snapping": false,
     "Offset": false,
-    "BothSnapping": false,
+    "BothSnapping": true,
     "xSize": 1.0,
     "ySize": 1.0,
     "PosOffset": {
@@ -357,7 +364,7 @@
       "Size": 1.0
     }
   ],
-  "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Global\")\n\nend)\n__bundle_register(\"ArkNova.Global\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Constants\")\r\n\r\n--                        Global Event Handlers\r\n\r\nfunction onLoad(saved_data)\r\n    if saved_data ~= \"\" then\r\n        GLOBAL_STATE = JSON.decode(saved_data)\r\n        print(\"Loaded game!\")\r\n    else\r\n        GLOBAL_STATE = {\r\n          setup = true\r\n        }\r\n        print(\"Welcome to Ark Nova!\")\r\n        print(\"Please use the buttons on the board to get started.\")\r\n    end\r\nend\r\n\r\nfunction onSave()\r\n\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nGAME_STATE = {}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\"\r\n  }\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+  "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Global\")\n\nend)\n__bundle_register(\"ArkNova.Global\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Constants\")\nrequire(\"ArkNova.State\")\n\n--                        Global Event Handlers\nGlobal.setVar(\"GLOBAL_STATE\", GLOBAL_STATE)\n\nfunction onLoad(saved_data)\n    if saved_data ~= \"\" then\n        GLOBAL_STATE = JSON.decode(saved_data)\n        print(\"Loaded game!\")\n    else\n        print(\"Welcome to Ark Nova!\")\n        print(\"Please use the buttons on the board to get started.\")\n        setState(\"setup\", true)\n        local table = getObjectFromGUID(TABLE)\n        table.call(\"initFreshGame\")\n    end\nend\n\nfunction onSave()\n\nend\n\nend)\n__bundle_register(\"ArkNova.State\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- TODO This will be the state manager for the game. It's commented out currently because it doesn't work soz\r\n\r\nfunction setState(key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- log(state)\r\n  -- state[key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction setColorState(color, key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- state[color][key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction getStateValue(color, key)\r\n  -- return Global.getVar(\"GLOBAL_STATE\")[color][key]\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nGAME_STATE = {\r\n  setup = false,\r\n  white = {},\r\n  yellow = {},\r\n  red = {},\r\n  blue = {}\r\n}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
   "LuaScriptState": "",
   "XmlUI": "<!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->",
   "ObjectStates": [
@@ -433,7 +440,7 @@
       "ColorDiffuse": {
         "r": 0.602941155,
         "g": 0.519287646,
-        "b": 0.443335474
+        "b": 0.4433349
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -521,9 +528,9 @@
         },
         "CastShadows": true
       },
-      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Constants\")\r\n\r\nfunction setup()\r\n  log(\"Setup button clicked\")\r\n\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nGAME_STATE = {}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\"\r\n  }\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Table\")\n\nend)\n__bundle_register(\"ArkNova.Table\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nfunction initFreshGame()\r\n  self.UI.setAttribute(\"setupBtn\", \"active\", true)\r\n  ready_players = {}\r\nend\r\n\r\nfunction setup()\r\n  log(\"Setup button clicked\")\r\n  self.UI.setAttribute(\"setupBtn\", \"active\", false)\r\n\r\n  local players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    local color = toLowerCase(player.color)\r\n    log(\"Now processing \" .. color)\r\n    local anchor = getObjectFromGUID(ANCHORS[color])\r\n    anchor.call(\"anchorSetup\", {color = color})\r\n  end\r\nend\r\n\r\nfunction readyPlayer(params)\r\n  local color = params[\"color\"]\r\n  local ready = params[\"ready\"]\r\n  ready_players[color] = ready\r\n  log(ready_players)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nGAME_STATE = {\r\n  setup = false,\r\n  white = {},\r\n  yellow = {},\r\n  red = {},\r\n  blue = {}\r\n}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
       "LuaScriptState": "",
-      "XmlUI": "<button onClick=\"setup\" position=\"-175 180 -1000\" rotation=\"180 180 0\" width=\"5000\" height=\"2000\" fontSize=\"250\" fontStyle=\"bold\">Setup Game</button>"
+      "XmlUI": "<button\r\n  id=\"setupBtn\"\r\n  active=\"false\"\r\n  onClick=\"setup\"\r\n  position=\"-175 180 -1000\"\r\n  rotation=\"180 180 0\"\r\n  width=\"5000\"\r\n  height=\"2000\"\r\n  fontSize=\"250\"\r\n  fontStyle=\"bold\">\r\n    Setup Game\r\n</button>"
     },
     {
       "GUID": "64950f",
@@ -533,8 +540,8 @@
         "posY": 25.0,
         "posZ": -76.0,
         "rotX": 73.93002,
-        "rotY": 0.06999975,
-        "rotZ": -0.0005683938,
+        "rotY": 0.06999944,
+        "rotZ": -0.000568466,
         "scaleX": 11.7,
         "scaleY": 1.0,
         "scaleZ": 11.7
@@ -632,11 +639,11 @@
       "Name": "Custom_Model_Bag",
       "Transform": {
         "posX": -82.49181,
-        "posY": 1.76488721,
+        "posY": 1.76488709,
         "posZ": -61.8210945,
-        "rotX": 8.147962E-06,
-        "rotY": 0.005342304,
-        "rotZ": -1.82276182E-07,
+        "rotX": 7.25912469E-06,
+        "rotY": 0.00534256548,
+        "rotZ": 1.06431109E-07,
         "scaleX": 3.02162123,
         "scaleY": 1.75675666,
         "scaleZ": 3.02162123
@@ -1318,9 +1325,9 @@
         "posX": 73.5,
         "posY": 1.78454781,
         "posZ": -53.5,
-        "rotX": -8.475613E-06,
+        "rotX": -6.812556E-06,
         "rotY": 179.999619,
-        "rotZ": 3.0663864E-07,
+        "rotZ": 5.146367E-07,
         "scaleX": 2.14999914,
         "scaleY": 2.14999914,
         "scaleZ": 2.14999914
@@ -1452,9 +1459,9 @@
         "posX": 73.0,
         "posY": 1.77204871,
         "posZ": -59.0,
-        "rotX": -9.4844645E-06,
+        "rotX": -8.29369947E-06,
         "rotY": 165.0165,
-        "rotZ": 1.51872837E-06,
+        "rotZ": 2.79726055E-06,
         "scaleX": 1.89999938,
         "scaleY": 1.89999938,
         "scaleZ": 1.89999938
@@ -1586,9 +1593,9 @@
         "posX": 73.0,
         "posY": 1.77204823,
         "posZ": -56.0,
-        "rotX": -6.83282224E-06,
+        "rotX": -1.17903819E-05,
         "rotY": 179.992752,
-        "rotZ": 6.903877E-07,
+        "rotZ": 2.80653325E-07,
         "scaleX": 1.89999926,
         "scaleY": 1.89999926,
         "scaleZ": 1.89999926
@@ -1720,9 +1727,9 @@
         "posX": -77.0,
         "posY": 1.73954916,
         "posZ": -62.0,
-        "rotX": 7.357415E-06,
-        "rotY": 0.019725414,
-        "rotZ": 1.43907E-07,
+        "rotX": 7.890002E-06,
+        "rotY": 0.0197256915,
+        "rotZ": -2.07324138E-06,
         "scaleX": 1.125,
         "scaleY": 1.25,
         "scaleZ": 1.125
@@ -1854,9 +1861,9 @@
         "posX": -78.0,
         "posY": 1.73954916,
         "posZ": -62.0,
-        "rotX": 1.04592145E-05,
-        "rotY": 0.0197255164,
-        "rotZ": -2.38247776E-06,
+        "rotX": 1.04997926E-05,
+        "rotY": 0.0197256543,
+        "rotZ": -7.895013E-07,
         "scaleX": 1.125,
         "scaleY": 1.25,
         "scaleZ": 1.125
@@ -1988,9 +1995,9 @@
         "posX": -79.0,
         "posY": 1.73954916,
         "posZ": -62.0,
-        "rotX": 1.12778234E-05,
-        "rotY": 0.01972559,
-        "rotZ": -5.440443E-07,
+        "rotX": 1.07703518E-05,
+        "rotY": 0.0197256673,
+        "rotZ": -1.21043752E-06,
         "scaleX": 1.125,
         "scaleY": 1.25,
         "scaleZ": 1.125
@@ -2122,9 +2129,9 @@
         "posX": -80.0,
         "posY": 1.73954916,
         "posZ": -62.0,
-        "rotX": 6.16556054E-06,
-        "rotY": 0.0197254773,
-        "rotZ": 1.54945155E-06,
+        "rotX": 4.95671975E-06,
+        "rotY": 0.0197258033,
+        "rotZ": 1.57779243E-06,
         "scaleX": 1.125,
         "scaleY": 1.25,
         "scaleZ": 1.125
@@ -2256,9 +2263,9 @@
         "posX": 40.5,
         "posY": 1.76961946,
         "posZ": -62.5,
-        "rotX": -7.10479844E-06,
+        "rotX": -6.91571267E-06,
         "rotY": 180.016861,
-        "rotZ": -5.061644E-08,
+        "rotZ": -9.504301E-08,
         "scaleX": 2.251697,
         "scaleY": 0.185140461,
         "scaleZ": 1.9500258
@@ -2430,11 +2437,11 @@
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 73.5,
-        "posY": 1.77204752,
+        "posY": 1.77204764,
         "posZ": -51.5,
-        "rotX": -7.29934573E-06,
+        "rotX": -1.06894431E-05,
         "rotY": 165.017014,
-        "rotZ": 2.83479335E-06,
+        "rotZ": 5.33859429E-06,
         "scaleX": 1.33,
         "scaleY": 0.19,
         "scaleZ": 1.32681262
@@ -2608,9 +2615,9 @@
         "posX": 73.0,
         "posY": 2.32754517,
         "posZ": -62.0,
-        "rotX": -4.718465E-06,
+        "rotX": -4.679551E-06,
         "rotY": 180.025375,
-        "rotZ": 7.515053E-07,
+        "rotZ": 2.02322485E-06,
         "scaleX": 0.648885667,
         "scaleY": 0.6504957,
         "scaleZ": 0.648885667
@@ -2670,1175 +2677,15 @@
       "XmlUI": ""
     },
     {
-      "GUID": "6cd164",
-      "Name": "Custom_Model_Bag",
-      "Transform": {
-        "posX": -22.7182465,
-        "posY": 1.55,
-        "posZ": -67.17355,
-        "rotX": 1.09518862E-06,
-        "rotY": 251.650238,
-        "rotZ": 3.40991778E-06,
-        "scaleX": 1.7,
-        "scaleY": 1.0,
-        "scaleZ": 1.7
-      },
-      "Nickname": "[i]Petting Zoo[/i]",
-      "Description": "",
-      "GMNotes": "",
-      "AltLookAngle": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "LayoutGroupSortIndex": 0,
-      "Value": 0,
-      "Locked": false,
-      "Grid": true,
-      "Snap": true,
-      "IgnoreFoW": false,
-      "MeasureMovement": false,
-      "DragSelectable": true,
-      "Autoraise": true,
-      "Sticky": true,
-      "Tooltip": true,
-      "GridProjection": false,
-      "HideWhenFaceDown": false,
-      "Hands": false,
-      "MaterialIndex": -1,
-      "MeshIndex": -1,
-      "CustomMesh": {
-        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083462/C5B5E41E9CBC0E94FDF78F958FCCC7921445DC76/",
-        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083524/6E28705F345D222417C0649DF5DEE380DD03C284/",
-        "NormalURL": "",
-        "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083581/B504EEA2F8DB67614C728D4BF361FE71013A4607/",
-        "Convex": true,
-        "MaterialIndex": 3,
-        "TypeIndex": 6,
-        "CustomShader": {
-          "SpecularColor": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "SpecularIntensity": 0.0,
-          "SpecularSharpness": 2.0,
-          "FresnelStrength": 0.0
-        },
-        "CastShadows": true
-      },
-      "Bag": {
-        "Order": 0
-      },
-      "LuaScript": "",
-      "LuaScriptState": "",
-      "XmlUI": "",
-      "ContainedObjects": [
-        {
-          "GUID": "2dd0db",
-          "Name": "Custom_Model",
-          "Transform": {
-            "posX": -12.7740545,
-            "posY": 1.14601445,
-            "posZ": -10.3583183,
-            "rotX": -1.44070441E-06,
-            "rotY": 179.999985,
-            "rotZ": -1.196591E-06,
-            "scaleX": 1.7,
-            "scaleY": 1.0,
-            "scaleZ": 1.7
-          },
-          "Nickname": "",
-          "Description": "",
-          "GMNotes": "",
-          "AltLookAngle": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-          },
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "LayoutGroupSortIndex": 0,
-          "Value": 0,
-          "Locked": false,
-          "Grid": true,
-          "Snap": true,
-          "IgnoreFoW": false,
-          "MeasureMovement": false,
-          "DragSelectable": true,
-          "Autoraise": true,
-          "Sticky": true,
-          "Tooltip": true,
-          "GridProjection": false,
-          "HideWhenFaceDown": false,
-          "Hands": false,
-          "CustomMesh": {
-            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083462/C5B5E41E9CBC0E94FDF78F958FCCC7921445DC76/",
-            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083524/6E28705F345D222417C0649DF5DEE380DD03C284/",
-            "NormalURL": "",
-            "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083581/B504EEA2F8DB67614C728D4BF361FE71013A4607/",
-            "Convex": true,
-            "MaterialIndex": 3,
-            "TypeIndex": 0,
-            "CustomShader": {
-              "SpecularColor": {
-                "r": 1.0,
-                "g": 1.0,
-                "b": 1.0
-              },
-              "SpecularIntensity": 0.0,
-              "SpecularSharpness": 2.0,
-              "FresnelStrength": 0.0
-            },
-            "CastShadows": true
-          },
-          "LuaScript": "",
-          "LuaScriptState": "",
-          "XmlUI": "",
-          "AttachedSnapPoints": [
-            {
-              "Position": {
-                "x": -0.3685557,
-                "y": 0.0500006676,
-                "z": -0.421860725
-              },
-              "Rotation": {
-                "x": 9.428706E-07,
-                "y": -0.000614830758,
-                "z": -9.296685E-07
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.185779139,
-                "y": 0.05000019,
-                "z": -0.09164691
-              },
-              "Rotation": {
-                "x": -1.64884241E-05,
-                "y": -0.0005738496,
-                "z": 3.67291359E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.166053608,
-                "y": 0.0500001945,
-                "z": 0.503204048
-              },
-              "Rotation": {
-                "x": 1.65108268E-05,
-                "y": -0.000614830758,
-                "z": -3.59505248E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            }
-          ]
-        },
-        {
-          "GUID": "404b3f",
-          "Name": "Custom_Model",
-          "Transform": {
-            "posX": -9.580584,
-            "posY": 1.14601481,
-            "posZ": -22.1825085,
-            "rotX": -5.73825965E-09,
-            "rotY": 180.0,
-            "rotZ": 6.084479E-08,
-            "scaleX": 1.7,
-            "scaleY": 1.0,
-            "scaleZ": 1.7
-          },
-          "Nickname": "",
-          "Description": "",
-          "GMNotes": "",
-          "AltLookAngle": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-          },
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "LayoutGroupSortIndex": 0,
-          "Value": 0,
-          "Locked": false,
-          "Grid": true,
-          "Snap": true,
-          "IgnoreFoW": false,
-          "MeasureMovement": false,
-          "DragSelectable": true,
-          "Autoraise": true,
-          "Sticky": true,
-          "Tooltip": true,
-          "GridProjection": false,
-          "HideWhenFaceDown": false,
-          "Hands": false,
-          "CustomMesh": {
-            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083462/C5B5E41E9CBC0E94FDF78F958FCCC7921445DC76/",
-            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083524/6E28705F345D222417C0649DF5DEE380DD03C284/",
-            "NormalURL": "",
-            "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083581/B504EEA2F8DB67614C728D4BF361FE71013A4607/",
-            "Convex": true,
-            "MaterialIndex": 3,
-            "TypeIndex": 0,
-            "CustomShader": {
-              "SpecularColor": {
-                "r": 1.0,
-                "g": 1.0,
-                "b": 1.0
-              },
-              "SpecularIntensity": 0.0,
-              "SpecularSharpness": 2.0,
-              "FresnelStrength": 0.0
-            },
-            "CastShadows": true
-          },
-          "LuaScript": "",
-          "LuaScriptState": "",
-          "XmlUI": "",
-          "AttachedSnapPoints": [
-            {
-              "Position": {
-                "x": -0.3685557,
-                "y": 0.0500006676,
-                "z": -0.421860725
-              },
-              "Rotation": {
-                "x": 9.428706E-07,
-                "y": -0.000614830758,
-                "z": -9.296685E-07
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.185779139,
-                "y": 0.05000019,
-                "z": -0.09164691
-              },
-              "Rotation": {
-                "x": -1.64884241E-05,
-                "y": -0.0005738496,
-                "z": 3.67291359E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.166053608,
-                "y": 0.0500001945,
-                "z": 0.503204048
-              },
-              "Rotation": {
-                "x": 1.65108268E-05,
-                "y": -0.000614830758,
-                "z": -3.59505248E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            }
-          ]
-        },
-        {
-          "GUID": "988f8c",
-          "Name": "Custom_Model",
-          "Transform": {
-            "posX": -9.580584,
-            "posY": 1.14601481,
-            "posZ": -19.1825066,
-            "rotX": 7.863324E-08,
-            "rotY": 180.0,
-            "rotZ": -2.65924047E-08,
-            "scaleX": 1.7,
-            "scaleY": 1.0,
-            "scaleZ": 1.7
-          },
-          "Nickname": "",
-          "Description": "",
-          "GMNotes": "",
-          "AltLookAngle": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-          },
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "LayoutGroupSortIndex": 0,
-          "Value": 0,
-          "Locked": false,
-          "Grid": true,
-          "Snap": true,
-          "IgnoreFoW": false,
-          "MeasureMovement": false,
-          "DragSelectable": true,
-          "Autoraise": true,
-          "Sticky": true,
-          "Tooltip": true,
-          "GridProjection": false,
-          "HideWhenFaceDown": false,
-          "Hands": false,
-          "CustomMesh": {
-            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083462/C5B5E41E9CBC0E94FDF78F958FCCC7921445DC76/",
-            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083524/6E28705F345D222417C0649DF5DEE380DD03C284/",
-            "NormalURL": "",
-            "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083581/B504EEA2F8DB67614C728D4BF361FE71013A4607/",
-            "Convex": true,
-            "MaterialIndex": 3,
-            "TypeIndex": 0,
-            "CustomShader": {
-              "SpecularColor": {
-                "r": 1.0,
-                "g": 1.0,
-                "b": 1.0
-              },
-              "SpecularIntensity": 0.0,
-              "SpecularSharpness": 2.0,
-              "FresnelStrength": 0.0
-            },
-            "CastShadows": true
-          },
-          "LuaScript": "",
-          "LuaScriptState": "",
-          "XmlUI": "",
-          "AttachedSnapPoints": [
-            {
-              "Position": {
-                "x": -0.3685557,
-                "y": 0.0500006676,
-                "z": -0.421860725
-              },
-              "Rotation": {
-                "x": 9.428706E-07,
-                "y": -0.000614830758,
-                "z": -9.296685E-07
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.185779139,
-                "y": 0.05000019,
-                "z": -0.09164691
-              },
-              "Rotation": {
-                "x": -1.64884241E-05,
-                "y": -0.0005738496,
-                "z": 3.67291359E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.166053608,
-                "y": 0.0500001945,
-                "z": 0.503204048
-              },
-              "Rotation": {
-                "x": 1.65108268E-05,
-                "y": -0.000614830758,
-                "z": -3.59505248E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            }
-          ]
-        },
-        {
-          "GUID": "c890bc",
-          "Name": "Custom_Model",
-          "Transform": {
-            "posX": -9.580571,
-            "posY": 1.13588345,
-            "posZ": -16.1825085,
-            "rotX": 0.013964952,
-            "rotY": 179.996078,
-            "rotZ": 358.890961,
-            "scaleX": 1.7,
-            "scaleY": 1.0,
-            "scaleZ": 1.7
-          },
-          "Nickname": "",
-          "Description": "",
-          "GMNotes": "",
-          "AltLookAngle": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-          },
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "LayoutGroupSortIndex": 0,
-          "Value": 0,
-          "Locked": false,
-          "Grid": true,
-          "Snap": true,
-          "IgnoreFoW": false,
-          "MeasureMovement": false,
-          "DragSelectable": true,
-          "Autoraise": true,
-          "Sticky": true,
-          "Tooltip": true,
-          "GridProjection": false,
-          "HideWhenFaceDown": false,
-          "Hands": false,
-          "CustomMesh": {
-            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083462/C5B5E41E9CBC0E94FDF78F958FCCC7921445DC76/",
-            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083524/6E28705F345D222417C0649DF5DEE380DD03C284/",
-            "NormalURL": "",
-            "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083581/B504EEA2F8DB67614C728D4BF361FE71013A4607/",
-            "Convex": true,
-            "MaterialIndex": 3,
-            "TypeIndex": 0,
-            "CustomShader": {
-              "SpecularColor": {
-                "r": 1.0,
-                "g": 1.0,
-                "b": 1.0
-              },
-              "SpecularIntensity": 0.0,
-              "SpecularSharpness": 2.0,
-              "FresnelStrength": 0.0
-            },
-            "CastShadows": true
-          },
-          "LuaScript": "",
-          "LuaScriptState": "",
-          "XmlUI": "",
-          "AttachedSnapPoints": [
-            {
-              "Position": {
-                "x": -0.3685557,
-                "y": 0.0500006676,
-                "z": -0.421860725
-              },
-              "Rotation": {
-                "x": 9.428706E-07,
-                "y": -0.000614830758,
-                "z": -9.296685E-07
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.185779139,
-                "y": 0.05000019,
-                "z": -0.09164691
-              },
-              "Rotation": {
-                "x": -1.64884241E-05,
-                "y": -0.0005738496,
-                "z": 3.67291359E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.166053608,
-                "y": 0.0500001945,
-                "z": 0.503204048
-              },
-              "Rotation": {
-                "x": 1.65108268E-05,
-                "y": -0.000614830758,
-                "z": -3.59505248E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "GUID": "c7aafa",
-      "Name": "Custom_Model_Bag",
-      "Transform": {
-        "posX": -29.5432339,
-        "posY": 2.52204752,
-        "posZ": -66.67179,
-        "rotX": 89.97202,
-        "rotY": 356.852051,
-        "rotZ": 0.0,
-        "scaleX": 1.7,
-        "scaleY": 1.0,
-        "scaleZ": 1.7
-      },
-      "Nickname": "[i]Reptile House[/i]",
-      "Description": "",
-      "GMNotes": "",
-      "AltLookAngle": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "LayoutGroupSortIndex": 0,
-      "Value": 0,
-      "Locked": false,
-      "Grid": true,
-      "Snap": true,
-      "IgnoreFoW": false,
-      "MeasureMovement": false,
-      "DragSelectable": true,
-      "Autoraise": true,
-      "Sticky": true,
-      "Tooltip": true,
-      "GridProjection": false,
-      "HideWhenFaceDown": false,
-      "Hands": false,
-      "MaterialIndex": -1,
-      "MeshIndex": -1,
-      "CustomMesh": {
-        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083274/CD547867E7A470460846125C17BCF78B35D02A2C/",
-        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083348/E4AC73C303582CCCA2D1D565ECAB01ED59759FAB/",
-        "NormalURL": "",
-        "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083413/506CC1B688369D9FA2A621A32D471D4B0B25A70A/",
-        "Convex": true,
-        "MaterialIndex": 3,
-        "TypeIndex": 6,
-        "CustomShader": {
-          "SpecularColor": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "SpecularIntensity": 0.0,
-          "SpecularSharpness": 2.0,
-          "FresnelStrength": 0.0
-        },
-        "CastShadows": true
-      },
-      "Bag": {
-        "Order": 0
-      },
-      "LuaScript": "",
-      "LuaScriptState": "",
-      "XmlUI": "",
-      "ContainedObjects": [
-        {
-          "GUID": "2a51a8",
-          "Name": "Custom_Model",
-          "Transform": {
-            "posX": -9.3514185,
-            "posY": 1.14218152,
-            "posZ": -10.679265,
-            "rotX": -1.49950836E-06,
-            "rotY": 180.000076,
-            "rotZ": 2.70196051E-06,
-            "scaleX": 1.7,
-            "scaleY": 1.0,
-            "scaleZ": 1.7
-          },
-          "Nickname": "",
-          "Description": "",
-          "GMNotes": "",
-          "AltLookAngle": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-          },
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "LayoutGroupSortIndex": 0,
-          "Value": 0,
-          "Locked": false,
-          "Grid": true,
-          "Snap": true,
-          "IgnoreFoW": false,
-          "MeasureMovement": false,
-          "DragSelectable": true,
-          "Autoraise": true,
-          "Sticky": true,
-          "Tooltip": true,
-          "GridProjection": false,
-          "HideWhenFaceDown": false,
-          "Hands": false,
-          "CustomMesh": {
-            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083274/CD547867E7A470460846125C17BCF78B35D02A2C/",
-            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083348/E4AC73C303582CCCA2D1D565ECAB01ED59759FAB/",
-            "NormalURL": "",
-            "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083413/506CC1B688369D9FA2A621A32D471D4B0B25A70A/",
-            "Convex": true,
-            "MaterialIndex": 3,
-            "TypeIndex": 0,
-            "CustomShader": {
-              "SpecularColor": {
-                "r": 1.0,
-                "g": 1.0,
-                "b": 1.0
-              },
-              "SpecularIntensity": 0.0,
-              "SpecularSharpness": 2.0,
-              "FresnelStrength": 0.0
-            },
-            "CastShadows": true
-          },
-          "LuaScript": "",
-          "LuaScriptState": "",
-          "XmlUI": "",
-          "AttachedSnapPoints": [
-            {
-              "Position": {
-                "x": 0.5548023,
-                "y": 0.0500001758,
-                "z": -0.3262263
-              },
-              "Rotation": {
-                "x": 6.08014034E-06,
-                "y": 0.14348954,
-                "z": 1.55818379E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.544999957,
-                "y": 0.050000146,
-                "z": 0.310284257
-              },
-              "Rotation": {
-                "x": 8.721555E-06,
-                "y": 0.1435032,
-                "z": -5.61379636E-07
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.00311951735,
-                "y": 0.0500006676,
-                "z": 0.0238239933
-              },
-              "Rotation": {
-                "x": -7.948276E-06,
-                "y": 0.143421233,
-                "z": 1.65499623E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": -0.5512337,
-                "y": 0.0500001162,
-                "z": -0.3080701
-              },
-              "Rotation": {
-                "x": -6.97105952E-06,
-                "y": 0.143448561,
-                "z": -1.68876213E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": -0.5484105,
-                "y": 0.04999973,
-                "z": 0.31640473
-              },
-              "Rotation": {
-                "x": 1.490285E-05,
-                "y": 0.143475875,
-                "z": 5.781868E-06
-              },
-              "Tags": [
-                "cube"
-              ]
-            }
-          ]
-        },
-        {
-          "GUID": "c7f1dc",
-          "Name": "Custom_Model",
-          "Transform": {
-            "posX": -6.174877,
-            "posY": 1.71711636,
-            "posZ": -22.5049973,
-            "rotX": 357.772034,
-            "rotY": 179.501923,
-            "rotZ": 23.452879,
-            "scaleX": 1.7,
-            "scaleY": 1.0,
-            "scaleZ": 1.7
-          },
-          "Nickname": "",
-          "Description": "",
-          "GMNotes": "",
-          "AltLookAngle": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-          },
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "LayoutGroupSortIndex": 0,
-          "Value": 0,
-          "Locked": false,
-          "Grid": true,
-          "Snap": true,
-          "IgnoreFoW": false,
-          "MeasureMovement": false,
-          "DragSelectable": true,
-          "Autoraise": true,
-          "Sticky": true,
-          "Tooltip": true,
-          "GridProjection": false,
-          "HideWhenFaceDown": false,
-          "Hands": false,
-          "CustomMesh": {
-            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083274/CD547867E7A470460846125C17BCF78B35D02A2C/",
-            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083348/E4AC73C303582CCCA2D1D565ECAB01ED59759FAB/",
-            "NormalURL": "",
-            "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083413/506CC1B688369D9FA2A621A32D471D4B0B25A70A/",
-            "Convex": true,
-            "MaterialIndex": 3,
-            "TypeIndex": 0,
-            "CustomShader": {
-              "SpecularColor": {
-                "r": 1.0,
-                "g": 1.0,
-                "b": 1.0
-              },
-              "SpecularIntensity": 0.0,
-              "SpecularSharpness": 2.0,
-              "FresnelStrength": 0.0
-            },
-            "CastShadows": true
-          },
-          "LuaScript": "",
-          "LuaScriptState": "",
-          "XmlUI": "",
-          "AttachedSnapPoints": [
-            {
-              "Position": {
-                "x": 0.5548023,
-                "y": 0.0500001758,
-                "z": -0.3262263
-              },
-              "Rotation": {
-                "x": 6.08014034E-06,
-                "y": 0.14348954,
-                "z": 1.55818379E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.544999957,
-                "y": 0.050000146,
-                "z": 0.310284257
-              },
-              "Rotation": {
-                "x": 8.721555E-06,
-                "y": 0.1435032,
-                "z": -5.61379636E-07
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.00311951735,
-                "y": 0.0500006676,
-                "z": 0.0238239933
-              },
-              "Rotation": {
-                "x": -7.948276E-06,
-                "y": 0.143421233,
-                "z": 1.65499623E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": -0.5512337,
-                "y": 0.0500001162,
-                "z": -0.3080701
-              },
-              "Rotation": {
-                "x": -6.97105952E-06,
-                "y": 0.143448561,
-                "z": -1.68876213E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": -0.5484105,
-                "y": 0.04999973,
-                "z": 0.31640473
-              },
-              "Rotation": {
-                "x": 1.490285E-05,
-                "y": 0.143475875,
-                "z": 5.781868E-06
-              },
-              "Tags": [
-                "cube"
-              ]
-            }
-          ]
-        },
-        {
-          "GUID": "b62f88",
-          "Name": "Custom_Model",
-          "Transform": {
-            "posX": -6.1579504,
-            "posY": 1.14218187,
-            "posZ": -19.50348,
-            "rotX": 1.18928476E-07,
-            "rotY": 179.999908,
-            "rotZ": 2.62843656E-07,
-            "scaleX": 1.7,
-            "scaleY": 1.0,
-            "scaleZ": 1.7
-          },
-          "Nickname": "",
-          "Description": "",
-          "GMNotes": "",
-          "AltLookAngle": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-          },
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "LayoutGroupSortIndex": 0,
-          "Value": 0,
-          "Locked": false,
-          "Grid": true,
-          "Snap": true,
-          "IgnoreFoW": false,
-          "MeasureMovement": false,
-          "DragSelectable": true,
-          "Autoraise": true,
-          "Sticky": true,
-          "Tooltip": true,
-          "GridProjection": false,
-          "HideWhenFaceDown": false,
-          "Hands": false,
-          "CustomMesh": {
-            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083274/CD547867E7A470460846125C17BCF78B35D02A2C/",
-            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083348/E4AC73C303582CCCA2D1D565ECAB01ED59759FAB/",
-            "NormalURL": "",
-            "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083413/506CC1B688369D9FA2A621A32D471D4B0B25A70A/",
-            "Convex": true,
-            "MaterialIndex": 3,
-            "TypeIndex": 0,
-            "CustomShader": {
-              "SpecularColor": {
-                "r": 1.0,
-                "g": 1.0,
-                "b": 1.0
-              },
-              "SpecularIntensity": 0.0,
-              "SpecularSharpness": 2.0,
-              "FresnelStrength": 0.0
-            },
-            "CastShadows": true
-          },
-          "LuaScript": "",
-          "LuaScriptState": "",
-          "XmlUI": "",
-          "AttachedSnapPoints": [
-            {
-              "Position": {
-                "x": 0.5548023,
-                "y": 0.0500001758,
-                "z": -0.3262263
-              },
-              "Rotation": {
-                "x": 6.08014034E-06,
-                "y": 0.14348954,
-                "z": 1.55818379E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.544999957,
-                "y": 0.050000146,
-                "z": 0.310284257
-              },
-              "Rotation": {
-                "x": 8.721555E-06,
-                "y": 0.1435032,
-                "z": -5.61379636E-07
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.00311951735,
-                "y": 0.0500006676,
-                "z": 0.0238239933
-              },
-              "Rotation": {
-                "x": -7.948276E-06,
-                "y": 0.143421233,
-                "z": 1.65499623E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": -0.5512337,
-                "y": 0.0500001162,
-                "z": -0.3080701
-              },
-              "Rotation": {
-                "x": -6.97105952E-06,
-                "y": 0.143448561,
-                "z": -1.68876213E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": -0.5484105,
-                "y": 0.04999973,
-                "z": 0.31640473
-              },
-              "Rotation": {
-                "x": 1.490285E-05,
-                "y": 0.143475875,
-                "z": 5.781868E-06
-              },
-              "Tags": [
-                "cube"
-              ]
-            }
-          ]
-        },
-        {
-          "GUID": "3aa004",
-          "Name": "Custom_Model",
-          "Transform": {
-            "posX": -6.1579504,
-            "posY": 1.121015,
-            "posZ": -16.5034771,
-            "rotX": 2.731113,
-            "rotY": 180.020676,
-            "rotZ": 0.871705055,
-            "scaleX": 1.7,
-            "scaleY": 1.0,
-            "scaleZ": 1.7
-          },
-          "Nickname": "",
-          "Description": "",
-          "GMNotes": "",
-          "AltLookAngle": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-          },
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "LayoutGroupSortIndex": 0,
-          "Value": 0,
-          "Locked": false,
-          "Grid": true,
-          "Snap": true,
-          "IgnoreFoW": false,
-          "MeasureMovement": false,
-          "DragSelectable": true,
-          "Autoraise": true,
-          "Sticky": true,
-          "Tooltip": true,
-          "GridProjection": false,
-          "HideWhenFaceDown": false,
-          "Hands": false,
-          "CustomMesh": {
-            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083274/CD547867E7A470460846125C17BCF78B35D02A2C/",
-            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083348/E4AC73C303582CCCA2D1D565ECAB01ED59759FAB/",
-            "NormalURL": "",
-            "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/1750203778410083413/506CC1B688369D9FA2A621A32D471D4B0B25A70A/",
-            "Convex": true,
-            "MaterialIndex": 3,
-            "TypeIndex": 0,
-            "CustomShader": {
-              "SpecularColor": {
-                "r": 1.0,
-                "g": 1.0,
-                "b": 1.0
-              },
-              "SpecularIntensity": 0.0,
-              "SpecularSharpness": 2.0,
-              "FresnelStrength": 0.0
-            },
-            "CastShadows": true
-          },
-          "LuaScript": "",
-          "LuaScriptState": "",
-          "XmlUI": "",
-          "AttachedSnapPoints": [
-            {
-              "Position": {
-                "x": 0.5548023,
-                "y": 0.0500001758,
-                "z": -0.3262263
-              },
-              "Rotation": {
-                "x": 6.08014034E-06,
-                "y": 0.14348954,
-                "z": 1.55818379E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.544999957,
-                "y": 0.050000146,
-                "z": 0.310284257
-              },
-              "Rotation": {
-                "x": 8.721555E-06,
-                "y": 0.1435032,
-                "z": -5.61379636E-07
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": 0.00311951735,
-                "y": 0.0500006676,
-                "z": 0.0238239933
-              },
-              "Rotation": {
-                "x": -7.948276E-06,
-                "y": 0.143421233,
-                "z": 1.65499623E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": -0.5512337,
-                "y": 0.0500001162,
-                "z": -0.3080701
-              },
-              "Rotation": {
-                "x": -6.97105952E-06,
-                "y": 0.143448561,
-                "z": -1.68876213E-05
-              },
-              "Tags": [
-                "cube"
-              ]
-            },
-            {
-              "Position": {
-                "x": -0.5484105,
-                "y": 0.04999973,
-                "z": 0.31640473
-              },
-              "Rotation": {
-                "x": 1.490285E-05,
-                "y": 0.143475875,
-                "z": 5.781868E-06
-              },
-              "Tags": [
-                "cube"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "GUID": "d9ff5d",
       "Name": "Custom_Model_Bag",
       "Transform": {
         "posX": 19.5,
-        "posY": 1.77304924,
+        "posY": 1.77304912,
         "posZ": -61.5,
-        "rotX": -8.938395E-06,
+        "rotX": -8.94407E-06,
         "rotY": 180.003464,
-        "rotZ": 1.36558731E-06,
+        "rotZ": 1.19792771E-08,
         "scaleX": 3.26,
         "scaleY": 1.92,
         "scaleZ": 3.26
@@ -4488,9 +3335,9 @@
         "posX": 2.04886174,
         "posY": 1.77326846,
         "posZ": -58.7316933,
-        "rotX": -7.506391E-06,
+        "rotX": -7.051578E-06,
         "rotY": 180.025558,
-        "rotZ": -1.49698565E-07,
+        "rotZ": 5.492042E-07,
         "scaleX": 2.250464,
         "scaleY": 0.1924396,
         "scaleZ": 1.94895816
@@ -4664,9 +3511,9 @@
         "posX": 1.55721772,
         "posY": 1.76961946,
         "posZ": -62.05809,
-        "rotX": -9.352925E-06,
-        "rotY": 180.016556,
-        "rotZ": -1.64382939E-07,
+        "rotX": -1.0500994E-05,
+        "rotY": 180.016434,
+        "rotZ": -2.61890477E-07,
         "scaleX": 2.25169683,
         "scaleY": 0.185140461,
         "scaleZ": 1.95002592
@@ -4840,9 +3687,9 @@
         "posX": 59.0,
         "posY": 1.67704916,
         "posZ": -60.0,
-        "rotX": 8.64661E-06,
-        "rotY": 0.008155272,
-        "rotZ": -1.27220545E-07,
+        "rotX": 8.591486E-06,
+        "rotY": 0.008155275,
+        "rotZ": 1.12137847E-07,
         "scaleX": 4.06801176,
         "scaleY": 1.0,
         "scaleZ": 4.06801176
@@ -4948,9 +3795,9 @@
         "posX": 25.4999981,
         "posY": 1.67704034,
         "posZ": -8.5,
-        "rotX": 9.781755E-06,
+        "rotX": 9.781771E-06,
         "rotY": 359.9819,
-        "rotZ": 1.3371764E-06,
+        "rotZ": 1.33717845E-06,
         "scaleX": 12.3801613,
         "scaleY": 1.0,
         "scaleZ": 12.3801613
@@ -4964,9 +3811,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.20783636,
-        "g": 0.149012834,
-        "b": 0.109796785
+        "r": 0.207836092,
+        "g": 0.149012566,
+        "b": 0.1097965
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -5004,9 +3851,9 @@
       "Transform": {
         "posX": 66.03047,
         "posY": 2.81854773,
-        "posZ": -5.983843,
-        "rotX": 9.741535E-06,
-        "rotY": 0.008796011,
+        "posZ": -5.983847,
+        "rotX": 1.05788149E-05,
+        "rotY": 0.008798939,
         "rotZ": 180.0,
         "scaleX": 2.7,
         "scaleY": 1.0,
@@ -18256,9 +17103,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.20783633,
-        "g": 0.1490128,
-        "b": 0.109796755
+        "r": 0.207836062,
+        "g": 0.149012536,
+        "b": 0.109796472
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -18297,7 +17144,7 @@
             "z": -0.064563714
           },
           "Rotation": {
-            "x": -0.000434582325,
+            "x": -0.0004345826,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -18312,7 +17159,7 @@
             "z": 0.200987786
           },
           "Rotation": {
-            "x": -0.0004345823,
+            "x": -0.000434582558,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -18327,7 +17174,7 @@
             "z": -0.279275566
           },
           "Rotation": {
-            "x": -0.000434582325,
+            "x": -0.0004345826,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -18342,7 +17189,7 @@
             "z": -0.27632162
           },
           "Rotation": {
-            "x": -0.000434582325,
+            "x": -0.0004345826,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -18357,7 +17204,7 @@
             "z": 0.20634146
           },
           "Rotation": {
-            "x": -0.000434582325,
+            "x": -0.0004345826,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -18372,7 +17219,7 @@
             "z": -0.263887048
           },
           "Rotation": {
-            "x": -0.0004345823,
+            "x": -0.000434582558,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -18387,7 +17234,7 @@
             "z": 0.218242109
           },
           "Rotation": {
-            "x": -0.0004345823,
+            "x": -0.000434582558,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -18402,7 +17249,7 @@
             "z": 0.2153048
           },
           "Rotation": {
-            "x": -0.0004345823,
+            "x": -0.000434582558,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -18419,9 +17266,9 @@
         "posX": 73.0,
         "posY": 2.03704953,
         "posZ": -64.0,
-        "rotX": -1.21064022E-05,
+        "rotX": -8.201725E-06,
         "rotY": 180.000473,
-        "rotZ": 6.405164E-07,
+        "rotZ": 2.4003516E-06,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -18436,7 +17283,7 @@
       },
       "ColorDiffuse": {
         "r": 0.627,
-        "g": 0.124988787,
+        "g": 0.124988221,
         "b": 0.941
       },
       "LayoutGroupSortIndex": 0,
@@ -20472,9 +19319,9 @@
         "posX": -73.0,
         "posY": 1.81954789,
         "posZ": -54.0,
-        "rotX": 7.669708E-06,
-        "rotY": -0.000430127315,
-        "rotZ": 5.392629E-07,
+        "rotX": 7.750605E-06,
+        "rotY": -0.00042986084,
+        "rotZ": 3.98976425E-07,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -20599,9 +19446,9 @@
         "posX": -73.0,
         "posY": 1.81954741,
         "posZ": -51.0,
-        "rotX": 5.90408E-06,
-        "rotY": 0.00450716726,
-        "rotZ": 3.56275422E-07,
+        "rotX": 6.83711824E-06,
+        "rotY": 0.00450744061,
+        "rotZ": -1.16872684E-06,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -20726,9 +19573,9 @@
         "posX": -73.0,
         "posY": 1.81954837,
         "posZ": -57.0,
-        "rotX": 6.325884E-06,
-        "rotY": -7.890942E-05,
-        "rotZ": 7.85172347E-07,
+        "rotX": 6.7576716E-06,
+        "rotY": -7.86743549E-05,
+        "rotZ": 2.74459126E-07,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -20853,9 +19700,9 @@
         "posX": -73.0,
         "posY": 1.81954885,
         "posZ": -60.0,
-        "rotX": 1.07320584E-05,
-        "rotY": 0.007258856,
-        "rotZ": -3.20248972E-07,
+        "rotX": 1.00743136E-05,
+        "rotY": 0.00725907646,
+        "rotZ": -6.668669E-07,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -20980,9 +19827,9 @@
         "posX": -73.0,
         "posY": 1.81954932,
         "posZ": -63.0,
-        "rotX": 8.72773E-06,
-        "rotY": 0.0115983421,
-        "rotZ": 3.004025E-07,
+        "rotX": 8.332999E-06,
+        "rotY": 0.0115986457,
+        "rotZ": 2.86447175E-07,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -21107,9 +19954,9 @@
         "posX": -69.0,
         "posY": 1.78704894,
         "posZ": -60.0,
-        "rotX": 7.499327E-06,
-        "rotY": 0.0145062432,
-        "rotZ": 4.23666933E-08,
+        "rotX": 7.873035E-06,
+        "rotY": 0.0145065095,
+        "rotZ": 4.55680976E-07,
         "scaleX": 2.199999,
         "scaleY": 2.199999,
         "scaleZ": 2.199999
@@ -21219,11 +20066,11 @@
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": -69.0,
-        "posY": 1.78704929,
+        "posY": 1.78704941,
         "posZ": -63.0,
-        "rotX": 8.13623E-06,
+        "rotX": 5.3982576E-06,
         "rotY": 359.993439,
-        "rotZ": -5.23794981E-08,
+        "rotZ": -4.10944324E-07,
         "scaleX": 2.199999,
         "scaleY": 2.199999,
         "scaleZ": 2.199999
@@ -21335,9 +20182,9 @@
         "posX": -69.0,
         "posY": 1.78704846,
         "posZ": -57.0,
-        "rotX": 6.52980725E-06,
+        "rotX": 7.670518E-06,
         "rotY": 359.9934,
-        "rotZ": -1.18791729E-06,
+        "rotZ": 7.976285E-07,
         "scaleX": 2.199999,
         "scaleY": 2.199999,
         "scaleZ": 2.199999
@@ -21446,12 +20293,12 @@
       "GUID": "5e1d75",
       "Name": "Deck",
       "Transform": {
-        "posX": 66.9997559,
-        "posY": 1.8256408,
-        "posZ": -56.9995079,
-        "rotX": 1.50232518,
-        "rotY": 0.008522541,
-        "rotZ": -0.0005432078,
+        "posX": 66.99973,
+        "posY": 1.82562733,
+        "posZ": -56.9995,
+        "rotX": 1.50214517,
+        "rotY": 0.008874901,
+        "rotZ": -0.00053135,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -21758,12 +20605,12 @@
       "GUID": "118109",
       "Name": "Deck",
       "Transform": {
-        "posX": 66.99983,
-        "posY": 1.717429,
-        "posZ": -60.0000648,
-        "rotX": 0.001208581,
-        "rotY": 359.98938,
-        "rotZ": -0.00205623382,
+        "posX": 66.9997559,
+        "posY": 1.71743107,
+        "posZ": -60.00012,
+        "rotX": 0.0012177102,
+        "rotY": 359.9885,
+        "rotZ": -0.00207975227,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -22071,11 +20918,11 @@
       "Name": "Deck",
       "Transform": {
         "posX": 66.99998,
-        "posY": 1.82775033,
-        "posZ": -50.99997,
-        "rotX": 1.53206742,
+        "posY": 1.82775021,
+        "posZ": -50.9999771,
+        "rotX": 1.53209913,
         "rotY": 359.9851,
-        "rotZ": 0.000115904048,
+        "rotZ": 0.000173447377,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -22382,12 +21229,12 @@
       "GUID": "071284",
       "Name": "Deck",
       "Transform": {
-        "posX": 66.99986,
-        "posY": 1.82707977,
-        "posZ": -53.9985962,
-        "rotX": 1.52259791,
-        "rotY": 0.0181345772,
-        "rotZ": -8.82189852E-05,
+        "posX": 66.99987,
+        "posY": 1.8271,
+        "posZ": -53.9986,
+        "rotX": 1.52285314,
+        "rotY": 0.0182267353,
+        "rotZ": -0.000138507923,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -22695,11 +21542,11 @@
       "Name": "Deck",
       "Transform": {
         "posX": 67.0000153,
-        "posY": 1.82779145,
-        "posZ": -48.00061,
-        "rotX": 1.532578,
-        "rotY": 0.01216666,
-        "rotZ": 1.66703776E-05,
+        "posY": 1.82779646,
+        "posZ": -48.0006065,
+        "rotX": 1.53265107,
+        "rotY": 0.0119101014,
+        "rotZ": 2.144576E-05,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -26282,7 +25129,7 @@
         "posX": -58.00113,
         "posY": 1.67704916,
         "posZ": -61.9999962,
-        "rotX": -6.77069465E-06,
+        "rotX": -6.770711E-06,
         "rotY": 225.010223,
         "rotZ": -3.69642385E-06,
         "scaleX": 0.02,
@@ -26623,9 +25470,9 @@
         "posX": 85.0,
         "posY": 1.67704868,
         "posZ": -59.0,
-        "rotX": 1.53356013E-05,
+        "rotX": 1.1026581E-05,
         "rotY": 359.983643,
-        "rotZ": 5.99229054E-07,
+        "rotZ": -2.117339E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -26639,9 +25486,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.250979751,
-        "g": 0.250979751,
-        "b": 0.250979751
+        "r": 0.2509792,
+        "g": 0.2509792,
+        "b": 0.2509792
       },
       "Tags": [
         "assist"
@@ -26691,9 +25538,9 @@
         "posX": 85.0,
         "posY": 2.13310218,
         "posZ": -55.0,
-        "rotX": -7.545437E-06,
+        "rotX": -2.09419886E-06,
         "rotY": 180.038025,
-        "rotZ": 1.36566393E-06,
+        "rotZ": -2.30316869E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -26707,9 +25554,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.250979751,
-        "g": 0.250979751,
-        "b": 0.250979751
+        "r": 0.2509792,
+        "g": 0.2509792,
+        "b": 0.2509792
       },
       "Tags": [
         "fame"
@@ -26749,9 +25596,9 @@
         "posX": 85.0,
         "posY": 2.13310266,
         "posZ": -57.0,
-        "rotX": -1.33176736E-05,
+        "rotX": -1.22516485E-05,
         "rotY": 180.027634,
-        "rotZ": 6.381683E-07,
+        "rotZ": 8.398293E-07,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -26765,9 +25612,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.250979751,
-        "g": 0.250979751,
-        "b": 0.250979751
+        "r": 0.2509792,
+        "g": 0.2509792,
+        "b": 0.2509792
       },
       "Tags": [
         "fame"
@@ -26807,9 +25654,9 @@
         "posX": 85.0,
         "posY": 2.03704953,
         "posZ": -63.9999924,
-        "rotX": -1.40619368E-05,
+        "rotX": -3.29505156E-06,
         "rotY": 179.9969,
-        "rotZ": 1.03992534E-06,
+        "rotZ": 3.92231232E-06,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -26823,9 +25670,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.250979751,
-        "g": 0.250979751,
-        "b": 0.250979751
+        "r": 0.2509792,
+        "g": 0.2509792,
+        "b": 0.2509792
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -26924,9 +25771,9 @@
         "posX": 85.0,
         "posY": 2.133102,
         "posZ": -53.0,
-        "rotX": -3.32671152E-06,
+        "rotX": -5.3576955E-06,
         "rotY": 180.0005,
-        "rotZ": -1.05599327E-06,
+        "rotZ": -2.294457E-07,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -26940,9 +25787,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.250979751,
-        "g": 0.250979751,
-        "b": 0.250979751
+        "r": 0.2509792,
+        "g": 0.2509792,
+        "b": 0.2509792
       },
       "Tags": [
         "fame"
@@ -26980,11 +25827,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 85.0,
-        "posY": 1.67704892,
+        "posY": 1.67704868,
         "posZ": -60.0,
-        "rotX": 1.208113E-05,
+        "rotX": 1.03777311E-05,
         "rotY": 359.983673,
-        "rotZ": -6.757856E-08,
+        "rotZ": 2.80340743E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -26998,9 +25845,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.250979751,
-        "g": 0.250979751,
-        "b": 0.250979751
+        "r": 0.2509792,
+        "g": 0.2509792,
+        "b": 0.2509792
       },
       "Tags": [
         "assist"
@@ -27050,9 +25897,9 @@
         "posX": 85.0,
         "posY": 1.67704916,
         "posZ": -62.0,
-        "rotX": 1.7221766E-05,
+        "rotX": 1.4892018E-05,
         "rotY": 359.983734,
-        "rotZ": -4.524242E-07,
+        "rotZ": 5.07749E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27066,9 +25913,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.250979751,
-        "g": 0.250979751,
-        "b": 0.250979751
+        "r": 0.2509792,
+        "g": 0.2509792,
+        "b": 0.2509792
       },
       "Tags": [
         "assist"
@@ -27116,11 +25963,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 85.0,
-        "posY": 1.67704868,
+        "posY": 1.67704916,
         "posZ": -61.0,
-        "rotX": -7.74675E-07,
+        "rotX": -3.57115664E-06,
         "rotY": 359.983734,
-        "rotZ": 8.3281094E-07,
+        "rotZ": 2.77789979E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27134,9 +25981,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.250979751,
-        "g": 0.250979751,
-        "b": 0.250979751
+        "r": 0.2509792,
+        "g": 0.2509792,
+        "b": 0.2509792
       },
       "Tags": [
         "assist"
@@ -27186,9 +26033,9 @@
         "posX": 82.0,
         "posY": 2.13310218,
         "posZ": -55.0,
-        "rotX": -6.47558636E-06,
+        "rotX": -8.669337E-06,
         "rotY": 180.03804,
-        "rotZ": -8.51815457E-07,
+        "rotZ": 5.955276E-07,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -27204,7 +26051,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172548383
+        "b": 0.172547847
       },
       "Tags": [
         "fame"
@@ -27244,9 +26091,9 @@
         "posX": 82.0,
         "posY": 2.133102,
         "posZ": -53.0,
-        "rotX": -6.05755531E-06,
+        "rotX": -3.75036279E-06,
         "rotY": 180.0005,
-        "rotZ": 3.204678E-08,
+        "rotZ": 1.68331287E-08,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -27262,7 +26109,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172548383
+        "b": 0.172547847
       },
       "Tags": [
         "fame"
@@ -27302,9 +26149,9 @@
         "posX": 82.0,
         "posY": 2.13310266,
         "posZ": -57.0,
-        "rotX": -1.34881866E-05,
+        "rotX": -1.445624E-05,
         "rotY": 180.027634,
-        "rotZ": 8.404624E-07,
+        "rotZ": 1.38211692E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -27320,7 +26167,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172548383
+        "b": 0.172547847
       },
       "Tags": [
         "fame"
@@ -27358,11 +26205,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 82.0,
-        "posY": 1.67704868,
+        "posY": 1.67704844,
         "posZ": -59.0,
-        "rotX": 1.52425928E-05,
+        "rotX": 1.25143279E-05,
         "rotY": 359.983643,
-        "rotZ": 5.68083635E-07,
+        "rotZ": -4.030395E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27378,7 +26225,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172548383
+        "b": 0.172547847
       },
       "Tags": [
         "assist"
@@ -27426,11 +26273,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 82.0,
-        "posY": 1.67704868,
+        "posY": 1.6770488,
         "posZ": -60.0000076,
-        "rotX": 1.52755474E-05,
-        "rotY": 0.000231633938,
-        "rotZ": 2.95825089E-08,
+        "rotX": 1.66266491E-05,
+        "rotY": 0.000231284488,
+        "rotZ": 9.02629651E-08,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27446,7 +26293,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172548383
+        "b": 0.172547847
       },
       "Tags": [
         "assist"
@@ -27494,11 +26341,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 81.99999,
-        "posY": 1.67704892,
+        "posY": 1.677049,
         "posZ": -60.9987869,
-        "rotX": -1.915907E-06,
-        "rotY": 0.000383053382,
-        "rotZ": -9.689861E-07,
+        "rotX": -2.429458E-06,
+        "rotY": 0.0003821543,
+        "rotZ": 3.64665766E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27514,7 +26361,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172548383
+        "b": 0.172547847
       },
       "Tags": [
         "assist"
@@ -27562,11 +26409,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 82.0,
-        "posY": 1.67704916,
+        "posY": 1.67704892,
         "posZ": -62.0,
-        "rotX": 1.39155491E-05,
+        "rotX": 1.16908768E-05,
         "rotY": 359.983765,
-        "rotZ": -5.311898E-08,
+        "rotZ": 1.09744246E-06,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27582,7 +26429,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172548383
+        "b": 0.172547847
       },
       "Tags": [
         "assist"
@@ -27632,9 +26479,9 @@
         "posX": 82.0,
         "posY": 2.03704953,
         "posZ": -64.0,
-        "rotX": -7.763016E-06,
+        "rotX": -8.746135E-06,
         "rotY": 179.996841,
-        "rotZ": -4.44550051E-06,
+        "rotZ": 2.54530551E-06,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -27650,7 +26497,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172542423
+        "b": 0.172541887
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -27749,9 +26596,9 @@
         "posX": 79.0,
         "posY": 2.13310218,
         "posZ": -55.0,
-        "rotX": -4.07614471E-06,
+        "rotX": -7.212424E-06,
         "rotY": 180.0379,
-        "rotZ": 1.55032649E-06,
+        "rotZ": -1.594279E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -27766,8 +26613,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.09803861,
-        "b": 0.09411699
+        "g": 0.09803813,
+        "b": 0.09411646
       },
       "Tags": [
         "fame"
@@ -27807,9 +26654,9 @@
         "posX": 79.0,
         "posY": 2.133102,
         "posZ": -53.0,
-        "rotX": -6.639378E-06,
+        "rotX": -8.503467E-06,
         "rotY": 180.000549,
-        "rotZ": -1.1663567E-06,
+        "rotZ": -1.57442355E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -27824,8 +26671,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.09803861,
-        "b": 0.09411699
+        "g": 0.09803813,
+        "b": 0.09411646
       },
       "Tags": [
         "fame"
@@ -27865,9 +26712,9 @@
         "posX": 79.0,
         "posY": 2.13310266,
         "posZ": -57.0,
-        "rotX": -1.58421535E-05,
+        "rotX": -1.53441833E-05,
         "rotY": 180.027512,
-        "rotZ": 2.93056644E-07,
+        "rotZ": -2.33018454E-07,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -27882,8 +26729,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.09803861,
-        "b": 0.09411699
+        "g": 0.09803813,
+        "b": 0.09411646
       },
       "Tags": [
         "fame"
@@ -27921,11 +26768,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 79.0,
-        "posY": 1.67704844,
+        "posY": 1.67704868,
         "posZ": -59.0,
-        "rotX": 1.45510367E-05,
+        "rotX": 1.63593359E-05,
         "rotY": 359.983643,
-        "rotZ": -5.682948E-07,
+        "rotZ": 1.04121227E-06,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27940,8 +26787,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.09803861,
-        "b": 0.09411699
+        "g": 0.09803813,
+        "b": 0.09411646
       },
       "Tags": [
         "assist"
@@ -27991,9 +26838,9 @@
         "posX": 79.0,
         "posY": 1.67704868,
         "posZ": -60.0,
-        "rotX": 1.34997681E-05,
+        "rotX": 1.37504294E-05,
         "rotY": 359.983734,
-        "rotZ": -6.949707E-07,
+        "rotZ": 9.124445E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -28008,8 +26855,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.09803861,
-        "b": 0.09411699
+        "g": 0.09803813,
+        "b": 0.09411646
       },
       "Tags": [
         "assist"
@@ -28059,9 +26906,9 @@
         "posX": 79.0,
         "posY": 1.67704916,
         "posZ": -61.0,
-        "rotX": -2.72672332E-06,
+        "rotX": -1.24171311E-06,
         "rotY": 359.983734,
-        "rotZ": -4.41500646E-07,
+        "rotZ": 9.954016E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -28076,8 +26923,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.09803861,
-        "b": 0.09411699
+        "g": 0.09803813,
+        "b": 0.09411646
       },
       "Tags": [
         "assist"
@@ -28127,9 +26974,9 @@
         "posX": 79.0,
         "posY": 1.67704916,
         "posZ": -62.0,
-        "rotX": 1.18196176E-05,
+        "rotX": 1.31651477E-05,
         "rotY": 359.983765,
-        "rotZ": 3.48723432E-07,
+        "rotZ": 1.51816812E-06,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -28144,8 +26991,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.09803861,
-        "b": 0.09411699
+        "g": 0.09803813,
+        "b": 0.09411646
       },
       "Tags": [
         "assist"
@@ -28195,9 +27042,9 @@
         "posX": 79.0,
         "posY": 2.03704953,
         "posZ": -64.0,
-        "rotX": -9.40286E-06,
+        "rotX": -9.52692E-06,
         "rotY": 179.9969,
-        "rotZ": 8.60699629E-07,
+        "rotZ": -8.432206E-07,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -28212,8 +27059,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.09803861,
-        "b": 0.09411699
+        "g": 0.09803813,
+        "b": 0.09411646
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -28312,9 +27159,9 @@
         "posX": 76.0,
         "posY": 2.13310218,
         "posZ": -55.0,
-        "rotX": -3.88228455E-06,
+        "rotX": -7.18499723E-06,
         "rotY": 180.03801,
-        "rotZ": 6.28599139E-07,
+        "rotZ": -1.60912532E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -28328,7 +27175,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117646389,
+        "r": 0.117645822,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -28370,9 +27217,9 @@
         "posX": 76.0,
         "posY": 2.133102,
         "posZ": -53.0,
-        "rotX": -6.506661E-06,
+        "rotX": -2.4202734E-06,
         "rotY": 180.000519,
-        "rotZ": -2.054048E-07,
+        "rotZ": 8.351081E-08,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -28386,7 +27233,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117646389,
+        "r": 0.117645822,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -28428,9 +27275,9 @@
         "posX": 76.0,
         "posY": 2.13310266,
         "posZ": -57.0,
-        "rotX": -1.161861E-05,
+        "rotX": -1.38865E-05,
         "rotY": 180.02771,
-        "rotZ": 1.16233025E-06,
+        "rotZ": 1.38642781E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -28444,7 +27291,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117646389,
+        "r": 0.117645822,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -28486,9 +27333,9 @@
         "posX": 76.0,
         "posY": 1.67704868,
         "posZ": -59.0,
-        "rotX": 8.37076E-06,
+        "rotX": 8.847502E-06,
         "rotY": 359.983673,
-        "rotZ": 9.987775E-07,
+        "rotZ": 5.584833E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -28502,7 +27349,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117646389,
+        "r": 0.117645822,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -28554,9 +27401,9 @@
         "posX": 76.0,
         "posY": 1.67704892,
         "posZ": -60.0,
-        "rotX": 1.13979522E-05,
+        "rotX": 1.81977666E-05,
         "rotY": 359.983765,
-        "rotZ": -7.1934295E-07,
+        "rotZ": -3.5446385E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -28570,7 +27417,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117646389,
+        "r": 0.117645822,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -28620,11 +27467,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 76.0,
-        "posY": 1.67704868,
+        "posY": 1.67704892,
         "posZ": -61.0,
-        "rotX": -5.01943441E-06,
+        "rotX": -4.26591942E-06,
         "rotY": 359.983643,
-        "rotZ": -6.156283E-07,
+        "rotZ": -2.63126623E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -28638,7 +27485,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117646389,
+        "r": 0.117645822,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -28688,11 +27535,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 76.0,
-        "posY": 1.67704916,
+        "posY": 1.6770494,
         "posZ": -62.0,
-        "rotX": 1.46254824E-05,
+        "rotX": 1.802417E-05,
         "rotY": 359.9837,
-        "rotZ": 2.01454412E-07,
+        "rotZ": 2.98321567E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -28706,7 +27553,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117646389,
+        "r": 0.117645822,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -28758,9 +27605,9 @@
         "posX": 76.0,
         "posY": 2.03704953,
         "posZ": -64.0,
-        "rotX": -8.76560352E-06,
+        "rotX": -9.881953E-06,
         "rotY": 179.996841,
-        "rotZ": -2.947301E-06,
+        "rotZ": 1.57098077E-06,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -28774,7 +27621,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117646389,
+        "r": 0.117645822,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -28873,11 +27720,11 @@
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 24.0,
-        "posY": 1.74745679,
+        "posY": 1.74745667,
         "posZ": -61.0,
-        "rotX": 6.63947958E-07,
+        "rotX": 1.025717E-06,
         "rotY": 269.982666,
-        "rotZ": -1.015085E-05,
+        "rotZ": -9.536831E-06,
         "scaleX": 2.39092469,
         "scaleY": 1.4081521,
         "scaleZ": 2.39092469
@@ -29013,11 +27860,11 @@
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 29.0,
-        "posY": 1.77407253,
+        "posY": 1.77407241,
         "posZ": -61.0,
-        "rotX": -4.75822435E-06,
+        "rotX": -4.697527E-06,
         "rotY": 119.980263,
-        "rotZ": 7.07794743E-06,
+        "rotZ": 7.3385E-06,
         "scaleX": 2.51158261,
         "scaleY": 1.94046736,
         "scaleZ": 2.51158261
@@ -29149,9 +27996,9 @@
         "posX": 33.5,
         "posY": 1.77477634,
         "posZ": -61.5,
-        "rotX": 8.991972E-06,
+        "rotX": 8.064571E-06,
         "rotY": 30.02818,
-        "rotZ": 2.58475E-06,
+        "rotZ": 5.93079E-06,
         "scaleX": 3.3227253,
         "scaleY": 1.95454431,
         "scaleZ": 3.3227253
@@ -29281,11 +28128,11 @@
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 37.5,
-        "posY": 1.77307189,
+        "posY": 1.77307177,
         "posZ": -61.5,
-        "rotX": -9.28544E-06,
+        "rotX": -8.171914E-06,
         "rotY": 180.010056,
-        "rotZ": -6.50997254E-06,
+        "rotZ": -4.349135E-06,
         "scaleX": 3.26477075,
         "scaleY": 1.92045343,
         "scaleZ": 3.26477075
@@ -29415,11 +28262,11 @@
       "Name": "Custom_Model_Bag",
       "Transform": {
         "posX": 13.9795418,
-        "posY": 1.77307236,
+        "posY": 1.77307177,
         "posZ": -61.1099052,
-        "rotX": 1.19511715E-05,
+        "rotX": -1.19870947E-06,
         "rotY": 89.98416,
-        "rotZ": 1.18835169E-05,
+        "rotZ": 8.29763849E-06,
         "scaleX": 3.26477075,
         "scaleY": 1.92045343,
         "scaleZ": 3.26477075
@@ -30054,12 +28901,12 @@
       "GUID": "d20da2",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 9.561414,
-        "posY": 1.77477586,
+        "posX": 9.56141949,
+        "posY": 1.77477837,
         "posZ": -60.5920067,
-        "rotX": 2.171733E-05,
+        "rotX": 0.0001644828,
         "rotY": 330.009247,
-        "rotZ": 2.40991244E-06,
+        "rotZ": 0.000184171877,
         "scaleX": 3.32272553,
         "scaleY": 1.95454431,
         "scaleZ": 3.32272553
@@ -30574,12 +29421,12 @@
       "GUID": "6be1bc",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 6.337863,
-        "posY": 1.857399,
+        "posX": 6.33786726,
+        "posY": 1.85742044,
         "posZ": -59.3995857,
-        "rotX": 1.311323,
-        "rotY": 330.0626,
-        "rotZ": 2.295051,
+        "rotX": 1.3116616,
+        "rotY": 330.062775,
+        "rotZ": 2.29549527,
         "scaleX": 2.511363,
         "scaleY": 1.47727239,
         "scaleZ": 2.511363
@@ -31661,6 +30508,231 @@
           "XmlUI": ""
         }
       ]
+    },
+    {
+      "GUID": "aaeb0d",
+      "Name": "Checker_red",
+      "Transform": {
+        "posX": 65.0,
+        "posY": 0.0326259,
+        "posZ": 48.0,
+        "rotX": -8.161647E-06,
+        "rotY": 179.999939,
+        "rotZ": 180.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "White PZ",
+      "Description": "",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": false,
+      "Autoraise": false,
+      "Sticky": false,
+      "Tooltip": false,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "7efeef",
+      "Name": "Checker_red",
+      "Transform": {
+        "posX": 65.0,
+        "posY": 0.0,
+        "posZ": 63.0,
+        "rotX": -1.27262829E-05,
+        "rotY": 180.0,
+        "rotZ": 180.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "White PZ Anchor",
+      "Description": "",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "ColorDiffuse": {
+        "r": 0.8156863,
+        "g": 0.8156863,
+        "b": 0.8156863
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": false,
+      "Sticky": false,
+      "Tooltip": false,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\nrequire(\"ArkNova.State\")\r\n\r\nfunction onLoad()\r\nend\r\n\r\nfunction anchorSetup(params)\r\n  color = params[\"color\"]\r\n  player_ready = false\r\n  setColorState(color, \"ready\", false)\r\n  self.UI.setAttribute(color..\"SetupBtn\", \"active\", true)\r\n\r\n  table = getObjectFromGUID(TABLE)\r\n  table.call(\"readyPlayer\", {color = color, ready = player_ready})\r\nend\r\n\r\nfunction ready()\r\n  log(\"Ready clicked! \" .. color)\r\n  player_ready = not player_ready\r\n  table.call(\"readyPlayer\", {color = color, ready = player_ready})\r\n  setColorState(color, \"ready\", player_ready)\r\n  if player_ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.State\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- TODO This will be the state manager for the game. It's commented out currently because it doesn't work soz\r\n\r\nfunction setState(key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- log(state)\r\n  -- state[key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction setColorState(color, key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- state[color][key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction getStateValue(color, key)\r\n  -- return Global.getVar(\"GLOBAL_STATE\")[color][key]\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nGAME_STATE = {\r\n  setup = false,\r\n  white = {},\r\n  yellow = {},\r\n  red = {},\r\n  blue = {}\r\n}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScriptState": "",
+      "XmlUI": "<button\r\n  id=\"whiteSetupBtn\"\r\n  onClick=\"ready\"\r\n  position=\"0 250 200\"\r\n  width=\"1000\"\r\n  height=\"500\"\r\n  fontSize=\"150\"\r\n  fontStyle=\"bold\"\r\n  rotation=\"0 180 0\"\r\n  color=\"#d0d0d0\"\r\n  active=\"false\">\r\n    Ready\r\n</button>"
+    },
+    {
+      "GUID": "7380ea",
+      "Name": "Checker_red",
+      "Transform": {
+        "posX": 21.5,
+        "posY": 0.0,
+        "posZ": 63.5,
+        "rotX": -8.375598E-06,
+        "rotY": 180.0,
+        "rotZ": 180.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Yellow PZ Anchor",
+      "Description": "",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 0.925650358,
+        "b": 0.0
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": false,
+      "Sticky": false,
+      "Tooltip": false,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\nrequire(\"ArkNova.State\")\r\n\r\nfunction onLoad()\r\nend\r\n\r\nfunction anchorSetup(params)\r\n  color = params[\"color\"]\r\n  player_ready = false\r\n  setColorState(color, \"ready\", false)\r\n  self.UI.setAttribute(color..\"SetupBtn\", \"active\", true)\r\n\r\n  table = getObjectFromGUID(TABLE)\r\n  table.call(\"readyPlayer\", {color = color, ready = player_ready})\r\nend\r\n\r\nfunction ready()\r\n  log(\"Ready clicked! \" .. color)\r\n  player_ready = not player_ready\r\n  table.call(\"readyPlayer\", {color = color, ready = player_ready})\r\n  setColorState(color, \"ready\", player_ready)\r\n  if player_ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.State\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- TODO This will be the state manager for the game. It's commented out currently because it doesn't work soz\r\n\r\nfunction setState(key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- log(state)\r\n  -- state[key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction setColorState(color, key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- state[color][key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction getStateValue(color, key)\r\n  -- return Global.getVar(\"GLOBAL_STATE\")[color][key]\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nGAME_STATE = {\r\n  setup = false,\r\n  white = {},\r\n  yellow = {},\r\n  red = {},\r\n  blue = {}\r\n}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScriptState": "",
+      "XmlUI": "<button\r\n  id=\"yellowSetupBtn\"\r\n  onClick=\"ready\"\r\n  position=\"0 250 200\"\r\n  width=\"1000\"\r\n  height=\"500\"\r\n  fontSize=\"150\"\r\n  fontStyle=\"bold\"\r\n  rotation=\"0 180 0\"\r\n  color=\"#E7E52C\"\r\n  active=\"false\">\r\n    Ready\r\n</button>"
+    },
+    {
+      "GUID": "0366a9",
+      "Name": "Checker_red",
+      "Transform": {
+        "posX": -21.9459362,
+        "posY": 0.0,
+        "posZ": 63.19,
+        "rotX": -9.924189E-06,
+        "rotY": 179.999985,
+        "rotZ": 180.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Red PZ Anchor",
+      "Description": "",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 0.05576156,
+        "b": 0.0
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": false,
+      "Sticky": false,
+      "Tooltip": false,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\nrequire(\"ArkNova.State\")\r\n\r\nfunction onLoad()\r\nend\r\n\r\nfunction anchorSetup(params)\r\n  color = params[\"color\"]\r\n  player_ready = false\r\n  setColorState(color, \"ready\", false)\r\n  self.UI.setAttribute(color..\"SetupBtn\", \"active\", true)\r\n\r\n  table = getObjectFromGUID(TABLE)\r\n  table.call(\"readyPlayer\", {color = color, ready = player_ready})\r\nend\r\n\r\nfunction ready()\r\n  log(\"Ready clicked! \" .. color)\r\n  player_ready = not player_ready\r\n  table.call(\"readyPlayer\", {color = color, ready = player_ready})\r\n  setColorState(color, \"ready\", player_ready)\r\n  if player_ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.State\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- TODO This will be the state manager for the game. It's commented out currently because it doesn't work soz\r\n\r\nfunction setState(key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- log(state)\r\n  -- state[key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction setColorState(color, key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- state[color][key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction getStateValue(color, key)\r\n  -- return Global.getVar(\"GLOBAL_STATE\")[color][key]\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nGAME_STATE = {\r\n  setup = false,\r\n  white = {},\r\n  yellow = {},\r\n  red = {},\r\n  blue = {}\r\n}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScriptState": "",
+      "XmlUI": "<button\r\n  id=\"redSetupBtn\"\r\n  onClick=\"ready\"\r\n  position=\"0 250 200\"\r\n  width=\"1000\"\r\n  height=\"500\"\r\n  fontSize=\"150\"\r\n  fontStyle=\"bold\"\r\n  rotation=\"0 180 0\"\r\n  color=\"#DA1918\"\r\n  active=\"false\">\r\n    Ready\r\n</button>"
+    },
+    {
+      "GUID": "dacc52",
+      "Name": "Checker_red",
+      "Transform": {
+        "posX": -66.0147247,
+        "posY": 0.0,
+        "posZ": 63.3803062,
+        "rotX": -1.13277129E-05,
+        "rotY": 180.000092,
+        "rotZ": 180.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Blue PZ Anchor",
+      "Description": "",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "ColorDiffuse": {
+        "r": 0.0,
+        "g": 0.174720526,
+        "b": 1.0
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": false,
+      "Sticky": false,
+      "Tooltip": false,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\nrequire(\"ArkNova.State\")\r\n\r\nfunction onLoad()\r\nend\r\n\r\nfunction anchorSetup(params)\r\n  color = params[\"color\"]\r\n  player_ready = false\r\n  setColorState(color, \"ready\", false)\r\n  self.UI.setAttribute(color..\"SetupBtn\", \"active\", true)\r\n\r\n  table = getObjectFromGUID(TABLE)\r\n  table.call(\"readyPlayer\", {color = color, ready = player_ready})\r\nend\r\n\r\nfunction ready()\r\n  log(\"Ready clicked! \" .. color)\r\n  player_ready = not player_ready\r\n  table.call(\"readyPlayer\", {color = color, ready = player_ready})\r\n  setColorState(color, \"ready\", player_ready)\r\n  if player_ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.State\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- TODO This will be the state manager for the game. It's commented out currently because it doesn't work soz\r\n\r\nfunction setState(key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- log(state)\r\n  -- state[key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction setColorState(color, key, value)\r\n  -- local state = Global.getVar(\"GLOBAL_STATE\")\r\n  -- state[color][key] = value\r\n  -- Global.setVar(\"GLOBAL_STATE\", state)\r\nend\r\n\r\nfunction getStateValue(color, key)\r\n  -- return Global.getVar(\"GLOBAL_STATE\")[color][key]\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nGAME_STATE = {\r\n  setup = false,\r\n  white = {},\r\n  yellow = {},\r\n  red = {},\r\n  blue = {}\r\n}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScriptState": "",
+      "XmlUI": "<button\r\n  id=\"blueSetupBtn\"\r\n  onClick=\"ready\"\r\n  position=\"0 250 200\"\r\n  width=\"1000\"\r\n  height=\"500\"\r\n  fontSize=\"150\"\r\n  fontStyle=\"bold\"\r\n  rotation=\"0 180 0\"\r\n  color=\"#1E87FF\"\r\n  active=\"false\">\r\n    Ready\r\n</button>"
     }
   ]
 }
