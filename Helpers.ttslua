@@ -1,3 +1,55 @@
 function toLowerCase(str)
   return string.lower(str)
 end
+
+function filterArray(arr, val)
+  toReturn = {}
+  for _,v in pairs(items) do
+    if v == val then
+        toReturn[1] = v
+        break
+      break
+    end
+  end
+  return toReturn
+end
+
+function removeItem(arr, val)
+  toReturn = {}
+  for i,v in pairs(arr) do
+    if v != val then
+        toReturn[i] = v
+      break
+    end
+  end
+  return toReturn
+end
+
+function boolToString(b)
+  if b then
+    return 'true'
+  else
+    return 'false'
+  end
+end
+
+function ternary (cond , T, F)
+    if cond then return T else return F end
+end
+
+function pluralize(str, num)
+  if num < 2 then
+    return str
+  else
+    return str + "s"
+  end
+end
+
+function getPlayer(color)
+  players = Player.getPlayers()
+  for _, player in ipairs(players) do
+    if string.lower(color) == string.lower(player.color) then
+      return player
+    end
+  end
+end

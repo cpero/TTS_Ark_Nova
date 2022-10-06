@@ -1,20 +1,9 @@
 require('ArkNova.Constants')
-require("ArkNova.State")
 
 --                        Global Event Handlers
-Global.setVar("GLOBAL_STATE", GLOBAL_STATE)
 
 function onLoad(saved_data)
-    if saved_data ~= "" then
-        GLOBAL_STATE = JSON.decode(saved_data)
-        print("Loaded game!")
-    else
-        print("Welcome to Ark Nova!")
-        print("Please use the buttons on the board to get started.")
-        setState("setup", true)
-        local table = getObjectFromGUID(TABLE)
-        table.call("initFreshGame")
-    end
+
 end
 
 function onSave()

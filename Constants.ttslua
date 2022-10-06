@@ -2,13 +2,9 @@
 -- Anything defined in this block will be available to all sub-scripts. Use
 -- with caution!
 
-GAME_STATE = {
-  setup = false,
-  white = {},
-  yellow = {},
-  red = {},
-  blue = {}
-}
+STATE_KEY = "GLOBAL_STATE"
+
+ALL_COLORS = {"white", "yellow", "red", "blue"}
 
 PIECES = {
   white = {
@@ -20,7 +16,8 @@ PIECES = {
     appeal_token = "026dd5",
     conservation_token = "b9390c",
     rep_token = "a3ee65",
-    zone = "d8acd6"
+    zone = "d8acd6",
+    border = "08c4e3"
   },
   yellow = {
     bag = "e0309b",
@@ -31,7 +28,8 @@ PIECES = {
     appeal_token = "6aa00c",
     conservation_token = "641bf4",
     rep_token = "fb9207",
-    zone = "8ad9db"
+    zone = "8ad9db",
+    border = "c9b2f6"
   },
   red = {
     bag = "32df13",
@@ -42,7 +40,8 @@ PIECES = {
     appeal_token = "c8c287",
     conservation_token = "62fc61",
     rep_token = "1ae25a",
-    zone = "85538c"
+    zone = "85538c",
+    border = "a6fac9"
   },
   blue = {
     bag = "acea32",
@@ -53,7 +52,8 @@ PIECES = {
     appeal_token = "92c2c3",
     conservation_token = "d00422",
     rep_token = "e3ec08",
-    zone = "d5294d"
+    zone = "d5294d",
+    border = "af1cfe"
   }
 }
 

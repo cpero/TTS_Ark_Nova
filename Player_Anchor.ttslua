@@ -1,31 +1,120 @@
 -- This file is an "object" implementation of the anchors. It should have
--- passable params and be reusable
+-- passable params and be reusable for every player anchor
 
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
-require("ArkNova.State")
 
-function onLoad()
-end
+local MAP_ROTATION = {"A", "O", "Misc"}
+local MAP_INDEX = 1
 
-function anchorSetup(params)
+local table = getObjectFromGUID(TABLE)
+local map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)
+local map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)
+local map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)
+
+function handleSetup(params)
   color = params["color"]
-  player_ready = false
-  setColorState(color, "ready", false)
-  self.UI.setAttribute(color.."SetupBtn", "active", true)
+  self_pos = self.getPosition()
 
-  table = getObjectFromGUID(TABLE)
-  table.call("readyPlayer", {color = color, ready = player_ready})
+  initBorder()
+  self.UI.setAttributes(color.."ActiveZone", {active = true})
+  self.UI.setAttributes(color.."SetupLayout", {active = true})
+  self.UI.setAttributes(color.."SetupBtn", { color = color})
+
+  map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+  map.locked = true
+  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[1] .. "Title", { active = true })
+  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[1] .. "Subtitle", { active = true })
+
+  table.call("readyPlayer", {color = color, ready = false})
 end
 
-function ready()
-  log("Ready clicked! " .. color)
-  player_ready = not player_ready
-  table.call("readyPlayer", {color = color, ready = player_ready})
-  setColorState(color, "ready", player_ready)
-  if player_ready then
+function onClickReady()
+  local ready_color = self.UI.getAttribute(color.."SetupBtn", "color")
+  local ready = ready_color ~= "#00ff00"
+
+  log(color .. " is " .. ternary(ready, "", "not ") .. "ready")
+
+  table.call("readyPlayer", {color = color, ready = ready})
+
+  if ready then
     self.UI.setAttribute(color.."SetupBtn", "color", "#00ff00")
+    self.UI.setAttributes(color.."NextBtn", {interactable = false})
+    self.UI.setAttributes(color.."BackBtn", {interactable = false})
   else
     self.UI.setAttribute(color.."SetupBtn", "color", color)
+    self.UI.setAttributes(color.."NextBtn", {interactable = true})
+    self.UI.setAttributes(color.."BackBtn", {interactable = true})
   end
+end
+
+debounce_map = false
+
+function onClickNextMap()
+  if debounce_map then
+    return
+  end
+  debounce_map = true;
+  local curr_index = MAP_INDEX
+  MAP_INDEX = MAP_INDEX + 1
+  if MAP_INDEX > #MAP_ROTATION then
+    MAP_INDEX = 1
+  end
+
+  moveMap(curr_index)
+end
+
+function onClickBackMap()
+  if debounce_map then
+    return
+  end
+  debounce_map = true;
+  local curr_index = MAP_INDEX
+  MAP_INDEX = MAP_INDEX - 1
+  if MAP_INDEX < 1 then
+    MAP_INDEX = 3
+  end
+
+  moveMap(curr_index)
+end
+
+function moveMap(curr_index)
+  -- Handle the existing map before spawning a new one
+  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[curr_index] .. "Title", { active = false })
+  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[curr_index] .. "Subtitle", { active = false })
+  if MAP_ROTATION[curr_index] == "A" then
+    map.setPositionSmooth(map_a_bag.getPosition(), false, true)
+    Wait.frames(function() map.destroy() end, 30)
+  elseif MAP_ROTATION[curr_index] == "O" then
+    map.setPositionSmooth(map_o_bag.getPosition(), false, true)
+    Wait.frames(function() map.destroy() end, 30)
+  else
+    map.setPositionSmooth(map_misc_bag.getPosition(), false, true)
+    Wait.frames(function() map_misc_bag.putObject(map) end, 30)
+  end
+
+  if MAP_ROTATION[MAP_INDEX] == "A" then
+    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+  elseif MAP_ROTATION[MAP_INDEX] == "O" then
+    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+  else
+    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+  end
+
+  new_map.locked = true
+  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[MAP_INDEX] .. "Title", { active = true })
+  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[MAP_INDEX] .. "Subtitle", { active = true })
+  Wait.frames(function()
+    map = new_map
+    debounce_map = false
+  end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted
+end
+
+function initBorder()
+  border = getObjectFromGUID(PIECES[color]["border"])
+
+  border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)
+  border.interactable = false
+  border.locked = true
+  border.setColorTint(getPlayer(color).color)
 end

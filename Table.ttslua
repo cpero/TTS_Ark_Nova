@@ -1,26 +1,57 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
-function initFreshGame()
-  self.UI.setAttribute("setupBtn", "active", true)
-  ready_players = {}
+function onLoad(s)
+  local state = JSON.decode(s)
+  for _,color in ipairs(ALL_COLORS) do
+    local b = getObjectFromGUID(PIECES[color]["border"])
+    b.interactable = false
+    b.locked = true
+  end
+
+  if s["setup"] == "true" then
+    log("Setup state from load detected.")
+    self.UI.setAttribute("setupBtn", "active", false)
+  else
+    self.UI.setAttribute("setupBtn", "active", true)
+  end
+end
+
+function onSave()
+  local state = {
+    setup = Global.getVar("setup")
+  }
+  return JSON.encode(state)
 end
 
 function setup()
   log("Setup button clicked")
   self.UI.setAttribute("setupBtn", "active", false)
+  Global.setVar("setup", "true")
+
+  ready_players = {}
 
   local players = Player.getPlayers()
   for _, player in ipairs(players) do
     local color = toLowerCase(player.color)
     log("Now processing " .. color)
     local anchor = getObjectFromGUID(ANCHORS[color])
-    anchor.call("anchorSetup", {color = color})
+    anchor.call("handleSetup", {color = color})
   end
 end
 
 function readyPlayer(params)
   local color = params["color"]
   local ready = params["ready"]
-  ready_players[color] = ready
+
+  if ready then
+    ready_players = table.insert(ready_players, color)
+  else
+    ready_players = removeItem(ready_players, color)
+  end
+
+  if #ready_players == #getSeatedPlayers() then
+    log("All "..#ready_players.." players are ready!")
+    broadcastToAll("All " .. #ready_players .. " players are ready!")
+  end
 end
