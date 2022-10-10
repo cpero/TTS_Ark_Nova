@@ -1,7 +1,7 @@
 {
   "SaveName": "v1",
-  "EpochTime": 1665100141,
-  "Date": "10/6/2022 7:49:01 PM",
+  "EpochTime": 1665444906,
+  "Date": "10/10/2022 7:35:06 PM",
   "VersionNumber": "v13.2.2",
   "GameMode": "Ark Nova",
   "GameType": "Game",
@@ -364,19 +364,19 @@
       "Size": 1.0
     }
   ],
-  "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Global\")\nend)\n__bundle_register(\"ArkNova.Global\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Constants\")\n\n--                        Global Event Handlers\n\nfunction onLoad(saved_data)\n\nend\n\nfunction onSave()\n\nend\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
-  "LuaScriptState": "",
+  "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Global\")\nend)\n__bundle_register(\"ArkNova.Global\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Constants\")\n\n--  Global Event Handlers\nfunction onLoad(saved_data)\n  -- if not saved_data then\n  --   createGame()\n  --   return\n  -- end\n  --\n  -- createGame()\nend\n\nfunction onSave()\n\nend\n\n-- Helpers\n\nfunction loadGame(state)\n  log('Global loaded state: '..JSON.encode(state))\nend\n\n-- If a game is not found, a new game will be started\nfunction createGame()\n  -- table = getObjectFromGUID(TABLE)\n  -- table.call(\"createGame\")\nend\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+  "LuaScriptState": "[]",
   "XmlUI": "<!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->",
   "CustomUIAssets": [
     {
       "Type": 0,
-      "Name": "RightArrowIcon",
-      "URL": "http://cloud-3.steamusercontent.com/ugc/1840307935388061695/28489D8B77C472166B57C0782CCC277F85CCD4B7/"
+      "Name": "Arrow",
+      "URL": "http://cloud-3.steamusercontent.com/ugc/1840307935398117083/A5CA5D8D4B46E04279A5F9C34EDCC568600A33CB/"
     },
     {
       "Type": 0,
-      "Name": "LeftArrowIcon",
-      "URL": "http://cloud-3.steamusercontent.com/ugc/1840307935388062520/4A209CCCEA134FE37836001F3EAE61E77C2235AE/"
+      "Name": "SetupGame",
+      "URL": "http://cloud-3.steamusercontent.com/ugc/1840307935398117962/088C344D2067A201A73E834F5CA9672C4B44FD1C/"
     }
   ],
   "ObjectStates": [
@@ -452,7 +452,7 @@
       "ColorDiffuse": {
         "r": 0.602941155,
         "g": 0.519287646,
-        "b": 0.443332523
+        "b": 0.4433315
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -540,9 +540,9 @@
         },
         "CastShadows": true
       },
-      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Table\")\nend)\n__bundle_register(\"ArkNova.Table\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nfunction onLoad(s)\r\n  local state = JSON.decode(s)\r\n  for _,color in ipairs(ALL_COLORS) do\r\n    local b = getObjectFromGUID(PIECES[color][\"border\"])\r\n    b.interactable = false\r\n    b.locked = true\r\n  end\r\n\r\n  if s[\"setup\"] == \"true\" then\r\n    log(\"Setup state from load detected.\")\r\n    self.UI.setAttribute(\"setupBtn\", \"active\", false)\r\n  else\r\n    self.UI.setAttribute(\"setupBtn\", \"active\", true)\r\n  end\r\nend\r\n\r\nfunction onSave()\r\n  local state = {\r\n    setup = Global.getVar(\"setup\")\r\n  }\r\n  return JSON.encode(state)\r\nend\r\n\r\nfunction setup()\r\n  log(\"Setup button clicked\")\r\n  self.UI.setAttribute(\"setupBtn\", \"active\", false)\r\n  Global.setVar(\"setup\", \"true\")\r\n\r\n  ready_players = {}\r\n\r\n  local players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    local color = toLowerCase(player.color)\r\n    log(\"Now processing \" .. color)\r\n    local anchor = getObjectFromGUID(ANCHORS[color])\r\n    anchor.call(\"handleSetup\", {color = color})\r\n  end\r\nend\r\n\r\nfunction readyPlayer(params)\r\n  local color = params[\"color\"]\r\n  local ready = params[\"ready\"]\r\n\r\n  if ready then\r\n    ready_players = table.insert(ready_players, color)\r\n  else\r\n    ready_players = removeItem(ready_players, color)\r\n  end\r\n\r\n  if #ready_players == #getSeatedPlayers() then\r\n    log(\"All \"..#ready_players..\" players are ready!\")\r\n    broadcastToAll(\"All \" .. #ready_players .. \" players are ready!\")\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
-      "LuaScriptState": "[]",
-      "XmlUI": "<button\r\n  id=\"setupBtn\"\r\n  active=\"true\"\r\n  onClick=\"setup\"\r\n  position=\"-175 180 -1000\"\r\n  rotation=\"180 180 0\"\r\n  width=\"5000\"\r\n  height=\"2000\"\r\n  fontSize=\"250\"\r\n  fontStyle=\"bold\">\r\n    Setup Game\r\n</button>"
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Table\")\nend)\n__bundle_register(\"ArkNova.Table\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nfunction onLoad(script_state)\r\n  for _,color in ipairs(ALL_COLORS) do\r\n    local b = getObjectFromGUID(PIECES[color][\"border\"])\r\n    b.interactable = false\r\n    b.locked = true\r\n  end\r\n\r\n  local state = JSON.decode(script_state)\r\n  log(\"Table onLoad: \")\r\n  log(state)\r\n  gameStarted = state[\"gameStarted\"]\r\n  Global.setVar(\"white_active\", state[\"white_active\"])\r\n  Global.setVar(\"yellow_active\", state[\"yelow_active\"])\r\n  Global.setVar(\"red_active\", state[\"red_active\"])\r\n  Global.setVar(\"blue_active\", state[\"blue_active\"])\r\n\r\n  self.UI.setAttribute(\"setupBtn\", \"active\", not gameStarted)\r\nend\r\n\r\nfunction onSave()\r\n  local state = {\r\n    gameStarted = gameStarted,\r\n    white_active = Global.getVar(\"white_active\"),\r\n    yellow_active = Global.getVar(\"yellow_active\"),\r\n    red_active = Global.getVar(\"red_active\"),\r\n    blue_active = Global.getVar(\"blue_active\"),\r\n  }\r\n  log(\"Table onSave: \")\r\n  log(state)\r\n  local state_str = JSON.encode(state)\r\n  return state_str\r\nend\r\n\r\nfunction setup()\r\n  log(\"Setup button clicked\")\r\n  self.UI.setAttribute(\"setupBtn\", \"active\", false)\r\n  ready_players = {}\r\n\r\n  local players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    local color = toLowerCase(player.color)\r\n    log(\"Now processing \" .. color)\r\n    local anchor = getObjectFromGUID(ANCHORS[color])\r\n    anchor.call(\"handleSetup\", {color = color})\r\n  end\r\nend\r\n\r\nfunction readyPlayer(params)\r\n  local color = params[\"color\"]\r\n  local ready = params[\"ready\"]\r\n\r\n  if ready then\r\n    ready_players = table.insert(ready_players, color)\r\n  else\r\n    ready_players = removeItem(ready_players, color)\r\n  end\r\n\r\n  if #ready_players == #getSeatedPlayers() then\r\n    log(\"All \"..#ready_players..\" players are ready!\")\r\n    broadcastToAll(\"All \" .. #ready_players .. \" players are ready!\")\r\n    self.UI.setAttribute(\"allReadyBtn\", \"active\", true)\r\n  end\r\nend\r\n\r\nfunction gameInit()\r\n  self.UI.setAttribute(\"allReadyBtn\", \"active\", false)\r\n  gameStarted = true\r\n\r\n  for _,color in ipairs(getSeatedPlayers()) do\r\n    Global.setVar(toLowerCase(color)..\"_active\", true)\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScriptState": "{\"gameStarted\":false}",
+      "XmlUI": "<button\r\n  id=\"setupBtn\"\r\n  active=\"false\"\r\n  onClick=\"setup\"\r\n  position=\"-175 180 -1000\"\r\n  rotation=\"180 180 0\"\r\n  width=\"5000\"\r\n  height=\"2000\"\r\n  fontSize=\"250\"\r\n  fontStyle=\"bold\">\r\n    Setup Game\r\n</button>\r\n<button\r\n  id=\"allReadyBtn\"\r\n  active=\"false\"\r\n  onClick=\"gameInit\"\r\n  position=\"-175 180 -1000\"\r\n  rotation=\"180 180 0\"\r\n  width=\"5000\"\r\n  height=\"2000\"\r\n  fontSize=\"250\"\r\n  fontStyle=\"bold\">\r\n    Click here when all players are ready!\r\n</button>"
     },
     {
       "GUID": "64950f",
@@ -651,11 +651,11 @@
       "Name": "Custom_Model_Bag",
       "Transform": {
         "posX": -82.49181,
-        "posY": 1.76488721,
+        "posY": 1.76488709,
         "posZ": -61.8210945,
-        "rotX": 8.502917E-06,
-        "rotY": 0.00534365745,
-        "rotZ": -2.61779775E-07,
+        "rotX": 8.216131E-06,
+        "rotY": 0.0053441003,
+        "rotZ": -2.340325E-08,
         "scaleX": 3.02162123,
         "scaleY": 1.75675666,
         "scaleZ": 3.02162123
@@ -1337,9 +1337,9 @@
         "posX": 73.5,
         "posY": 1.78454781,
         "posZ": -53.5,
-        "rotX": -1.14577606E-05,
+        "rotX": -7.926308E-06,
         "rotY": 179.999619,
-        "rotZ": 4.463958E-07,
+        "rotZ": 1.884677E-07,
         "scaleX": 2.14999914,
         "scaleY": 2.14999914,
         "scaleZ": 2.14999914
@@ -1471,9 +1471,9 @@
         "posX": 73.0,
         "posY": 1.77204871,
         "posZ": -59.0,
-        "rotX": -1.09893626E-05,
+        "rotX": -1.00232519E-05,
         "rotY": 165.0165,
-        "rotZ": 4.25354847E-06,
+        "rotZ": 1.68795225E-06,
         "scaleX": 1.89999938,
         "scaleY": 1.89999938,
         "scaleZ": 1.89999938
@@ -1605,9 +1605,9 @@
         "posX": 73.0,
         "posY": 1.77204823,
         "posZ": -56.0,
-        "rotX": -1.136122E-05,
+        "rotX": -1.18320331E-05,
         "rotY": 179.992752,
-        "rotZ": -5.2328204E-07,
+        "rotZ": 1.43853515E-06,
         "scaleX": 1.89999926,
         "scaleY": 1.89999926,
         "scaleZ": 1.89999926
@@ -1739,9 +1739,9 @@
         "posX": -77.0,
         "posY": 1.73954916,
         "posZ": -62.0,
-        "rotX": 7.736186E-06,
-        "rotY": 0.01972662,
-        "rotZ": -2.06026834E-06,
+        "rotX": 5.953007E-06,
+        "rotY": 0.0197269358,
+        "rotZ": -6.755662E-08,
         "scaleX": 1.125,
         "scaleY": 1.25,
         "scaleZ": 1.125
@@ -1873,9 +1873,9 @@
         "posX": -78.0,
         "posY": 1.73954916,
         "posZ": -62.0,
-        "rotX": 3.72981549E-06,
-        "rotY": 0.0197264161,
-        "rotZ": -8.898539E-07,
+        "rotX": 3.83300767E-06,
+        "rotY": 0.01972667,
+        "rotZ": 8.133236E-07,
         "scaleX": 1.125,
         "scaleY": 1.25,
         "scaleZ": 1.125
@@ -2007,9 +2007,9 @@
         "posX": -79.0,
         "posY": 1.73954916,
         "posZ": -62.0,
-        "rotX": 7.198874E-06,
-        "rotY": 0.0197264254,
-        "rotZ": -1.30379772E-06,
+        "rotX": 1.12543967E-05,
+        "rotY": 0.0197267421,
+        "rotZ": -1.03866626E-06,
         "scaleX": 1.125,
         "scaleY": 1.25,
         "scaleZ": 1.125
@@ -2141,9 +2141,9 @@
         "posX": -80.0,
         "posY": 1.73954916,
         "posZ": -62.0,
-        "rotX": 1.2573777E-05,
-        "rotY": 0.01972691,
-        "rotZ": -2.08864478E-07,
+        "rotX": 1.07008746E-05,
+        "rotY": 0.0197272412,
+        "rotZ": -1.37097516E-06,
         "scaleX": 1.125,
         "scaleY": 1.25,
         "scaleZ": 1.125
@@ -2275,9 +2275,9 @@
         "posX": 40.5,
         "posY": 1.76961946,
         "posZ": -62.5,
-        "rotX": -6.61367676E-06,
+        "rotX": -6.72461374E-06,
         "rotY": 180.016861,
-        "rotZ": -2.04706424E-07,
+        "rotZ": 5.469322E-07,
         "scaleX": 2.251697,
         "scaleY": 0.185140461,
         "scaleZ": 1.9500258
@@ -2449,11 +2449,11 @@
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 73.5,
-        "posY": 1.77204752,
+        "posY": 1.77204764,
         "posZ": -51.5,
-        "rotX": -1.29836681E-05,
+        "rotX": -8.669999E-06,
         "rotY": 165.017014,
-        "rotZ": 3.71969213E-06,
+        "rotZ": 4.19859225E-06,
         "scaleX": 1.33,
         "scaleY": 0.19,
         "scaleZ": 1.32681262
@@ -2627,9 +2627,9 @@
         "posX": 73.0,
         "posY": 2.32754517,
         "posZ": -62.0,
-        "rotX": -6.209836E-06,
+        "rotX": -6.73094E-06,
         "rotY": 180.025375,
-        "rotZ": 1.85126487E-06,
+        "rotZ": -1.77338677E-06,
         "scaleX": 0.648885667,
         "scaleY": 0.6504957,
         "scaleZ": 0.648885667
@@ -2693,11 +2693,11 @@
       "Name": "Custom_Model_Bag",
       "Transform": {
         "posX": 19.5,
-        "posY": 1.77304912,
+        "posY": 1.77304924,
         "posZ": -61.5,
-        "rotX": -9.119994E-06,
+        "rotX": -9.90554E-06,
         "rotY": 180.003464,
-        "rotZ": -1.667724E-07,
+        "rotZ": 7.58169847E-07,
         "scaleX": 3.26,
         "scaleY": 1.92,
         "scaleZ": 3.26
@@ -3347,9 +3347,9 @@
         "posX": 2.04886174,
         "posY": 1.77326846,
         "posZ": -58.7316933,
-        "rotX": -7.54559642E-06,
+        "rotX": -6.975269E-06,
         "rotY": 180.025558,
-        "rotZ": -1.82477351E-07,
+        "rotZ": 1.81215967E-07,
         "scaleX": 2.250464,
         "scaleY": 0.1924396,
         "scaleZ": 1.94895816
@@ -3523,9 +3523,9 @@
         "posX": 1.55721772,
         "posY": 1.76961946,
         "posZ": -62.05809,
-        "rotX": -1.14300492E-05,
+        "rotX": -1.13972383E-05,
         "rotY": 180.016434,
-        "rotZ": 7.699948E-07,
+        "rotZ": 7.20237949E-07,
         "scaleX": 2.25169683,
         "scaleY": 0.185140461,
         "scaleZ": 1.95002592
@@ -3699,9 +3699,9 @@
         "posX": 59.0,
         "posY": 1.67704916,
         "posZ": -60.0,
-        "rotX": 8.582537E-06,
-        "rotY": 0.008155277,
-        "rotZ": -1.54482635E-07,
+        "rotX": 8.089758E-06,
+        "rotY": 0.008155278,
+        "rotZ": 3.09411519E-08,
         "scaleX": 4.06801176,
         "scaleY": 1.0,
         "scaleZ": 4.06801176
@@ -3809,7 +3809,7 @@
         "posZ": -8.5,
         "rotX": 9.78179651E-06,
         "rotY": 359.9819,
-        "rotZ": 1.33718709E-06,
+        "rotZ": 1.33719072E-06,
         "scaleX": 12.3801613,
         "scaleY": 1.0,
         "scaleZ": 12.3801613
@@ -3823,9 +3823,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.207834959,
-        "g": 0.149011433,
-        "b": 0.10979531
+        "r": 0.207834482,
+        "g": 0.149010956,
+        "b": 0.1097948
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -3863,9 +3863,9 @@
       "Transform": {
         "posX": 66.03047,
         "posY": 2.81854773,
-        "posZ": -5.98386335,
-        "rotX": 1.07799888E-05,
-        "rotY": 0.008836335,
+        "posZ": -5.98387,
+        "rotX": 9.96358E-06,
+        "rotY": 0.008836303,
         "rotZ": 180.0,
         "scaleX": 2.7,
         "scaleY": 1.0,
@@ -17115,9 +17115,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.207834929,
-        "g": 0.1490114,
-        "b": 0.10979528
+        "r": 0.207834452,
+        "g": 0.149010926,
+        "b": 0.109794773
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -17156,7 +17156,7 @@
             "z": -0.064563714
           },
           "Rotation": {
-            "x": -0.0004345837,
+            "x": -0.000434584159,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -17171,7 +17171,7 @@
             "z": 0.200987786
           },
           "Rotation": {
-            "x": -0.000434583664,
+            "x": -0.00043458413,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -17186,7 +17186,7 @@
             "z": -0.279275566
           },
           "Rotation": {
-            "x": -0.0004345837,
+            "x": -0.000434584159,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -17201,7 +17201,7 @@
             "z": -0.27632162
           },
           "Rotation": {
-            "x": -0.0004345837,
+            "x": -0.000434584159,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -17216,7 +17216,7 @@
             "z": 0.20634146
           },
           "Rotation": {
-            "x": -0.0004345837,
+            "x": -0.000434584159,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -17231,7 +17231,7 @@
             "z": -0.263887048
           },
           "Rotation": {
-            "x": -0.000434583664,
+            "x": -0.00043458413,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -17246,7 +17246,7 @@
             "z": 0.218242109
           },
           "Rotation": {
-            "x": -0.000434583664,
+            "x": -0.00043458413,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -17261,7 +17261,7 @@
             "z": 0.2153048
           },
           "Rotation": {
-            "x": -0.000434583664,
+            "x": -0.00043458413,
             "y": 359.85968,
             "z": 0.00100437982
           },
@@ -17278,9 +17278,9 @@
         "posX": 73.0,
         "posY": 2.03704953,
         "posZ": -64.0,
-        "rotX": -9.853858E-06,
+        "rotX": -9.700782E-06,
         "rotY": 180.000473,
-        "rotZ": -7.655829E-07,
+        "rotZ": 1.20164191E-06,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -17295,7 +17295,7 @@
       },
       "ColorDiffuse": {
         "r": 0.627,
-        "g": 0.124985836,
+        "g": 0.124984823,
         "b": 0.941
       },
       "LayoutGroupSortIndex": 0,
@@ -19331,9 +19331,9 @@
         "posX": -73.0,
         "posY": 1.81954789,
         "posZ": -54.0,
-        "rotX": 8.067088E-06,
-        "rotY": -0.000428742031,
-        "rotZ": -1.92477629E-07,
+        "rotX": 7.10937638E-06,
+        "rotY": -0.000428269734,
+        "rotZ": 5.732274E-07,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -19458,9 +19458,9 @@
         "posX": -73.0,
         "posY": 1.81954741,
         "posZ": -51.0,
-        "rotX": 6.859826E-06,
-        "rotY": 0.004508635,
-        "rotZ": -2.47175024E-07,
+        "rotX": 7.343303E-06,
+        "rotY": 0.00450913562,
+        "rotZ": 4.79174844E-07,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -19585,9 +19585,9 @@
         "posX": -73.0,
         "posY": 1.81954837,
         "posZ": -57.0,
-        "rotX": 7.2175585E-06,
-        "rotY": -7.754145E-05,
-        "rotZ": 4.21818982E-07,
+        "rotX": 7.717285E-06,
+        "rotY": -7.707837E-05,
+        "rotZ": 7.48868956E-07,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -19712,9 +19712,9 @@
         "posX": -73.0,
         "posY": 1.81954885,
         "posZ": -60.0,
-        "rotX": 9.831327E-06,
-        "rotY": 0.007260122,
-        "rotZ": -1.817294E-07,
+        "rotX": 8.821466E-06,
+        "rotY": 0.007260582,
+        "rotZ": 1.14919075E-07,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -19839,9 +19839,9 @@
         "posX": -73.0,
         "posY": 1.81954932,
         "posZ": -63.0,
-        "rotX": 1.08088E-05,
-        "rotY": 0.0115998583,
-        "rotZ": -6.97105065E-07,
+        "rotX": 9.489133E-06,
+        "rotY": 0.0116003416,
+        "rotZ": -2.27168471E-07,
         "scaleX": 2.84999871,
         "scaleY": 2.84999871,
         "scaleZ": 2.84999871
@@ -19966,9 +19966,9 @@
         "posX": -69.0,
         "posY": 1.78704894,
         "posZ": -60.0,
-        "rotX": 5.33725324E-06,
-        "rotY": 0.0145079726,
-        "rotZ": -2.69169533E-07,
+        "rotX": 7.18255933E-06,
+        "rotY": 0.0145084662,
+        "rotZ": 1.7284458E-07,
         "scaleX": 2.199999,
         "scaleY": 2.199999,
         "scaleZ": 2.199999
@@ -20078,11 +20078,11 @@
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": -69.0,
-        "posY": 1.78704953,
+        "posY": 1.78704941,
         "posZ": -63.0,
-        "rotX": 8.920624E-06,
+        "rotX": 6.03998569E-06,
         "rotY": 359.993439,
-        "rotZ": -5.00641931E-07,
+        "rotZ": -1.1186404E-07,
         "scaleX": 2.199999,
         "scaleY": 2.199999,
         "scaleZ": 2.199999
@@ -20194,9 +20194,9 @@
         "posX": -69.0,
         "posY": 1.78704846,
         "posZ": -57.0,
-        "rotX": 7.79367E-06,
+        "rotX": 8.411058E-06,
         "rotY": 359.9934,
-        "rotZ": -4.76609983E-07,
+        "rotZ": -4.527863E-07,
         "scaleX": 2.199999,
         "scaleY": 2.199999,
         "scaleZ": 2.199999
@@ -20305,12 +20305,12 @@
       "GUID": "5e1d75",
       "Name": "Deck",
       "Transform": {
-        "posX": 66.99966,
-        "posY": 1.82578421,
-        "posZ": -56.99944,
-        "rotX": 1.50419927,
-        "rotY": 0.0102544017,
-        "rotZ": -0.000694384449,
+        "posX": 66.99961,
+        "posY": 1.82578242,
+        "posZ": -56.9994278,
+        "rotX": 1.50417423,
+        "rotY": 0.0107437214,
+        "rotZ": -0.0006950524,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -20617,12 +20617,12 @@
       "GUID": "118109",
       "Name": "Deck",
       "Transform": {
-        "posX": 66.9994659,
-        "posY": 1.71741974,
-        "posZ": -60.00033,
-        "rotX": 0.00114355492,
-        "rotY": 359.985535,
-        "rotZ": -0.001965305,
+        "posX": 66.99935,
+        "posY": 1.71741986,
+        "posZ": -60.0004044,
+        "rotX": 0.00114438031,
+        "rotY": 359.984344,
+        "rotZ": -0.00196564547,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -20930,11 +20930,11 @@
       "Name": "Deck",
       "Transform": {
         "posX": 66.99998,
-        "posY": 1.82736421,
-        "posZ": -51.0000153,
-        "rotX": 1.52663851,
-        "rotY": 359.984436,
-        "rotZ": 1.07112246E-05,
+        "posY": 1.82736409,
+        "posZ": -51.0000229,
+        "rotX": 1.52663147,
+        "rotY": 359.984131,
+        "rotZ": 6.760012E-06,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -21242,11 +21242,11 @@
       "Name": "Deck",
       "Transform": {
         "posX": 66.99986,
-        "posY": 1.827132,
-        "posZ": -53.9986,
-        "rotX": 1.52351522,
-        "rotY": 0.0187621079,
-        "rotZ": 0.000168005077,
+        "posY": 1.82713127,
+        "posZ": -53.9985962,
+        "rotX": 1.523512,
+        "rotY": 0.0189799555,
+        "rotZ": 0.000175012581,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -21554,11 +21554,11 @@
       "Name": "Deck",
       "Transform": {
         "posX": 67.0000153,
-        "posY": 1.82755554,
-        "posZ": -48.0006,
-        "rotX": 1.5293082,
-        "rotY": 0.0110318121,
-        "rotZ": 2.33581723E-05,
+        "posY": 1.8275553,
+        "posZ": -48.00059,
+        "rotX": 1.52930319,
+        "rotY": 0.0106811374,
+        "rotZ": 2.31503127E-05,
         "scaleX": 2.7,
         "scaleY": 1.0,
         "scaleZ": 2.7
@@ -25480,11 +25480,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 85.0,
-        "posY": 1.67704868,
+        "posY": 1.67704844,
         "posZ": -59.0,
-        "rotX": 1.04983128E-05,
+        "rotX": 1.01372689E-05,
         "rotY": 359.983643,
-        "rotZ": 8.163081E-07,
+        "rotZ": 8.23735832E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -25498,9 +25498,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.2509768,
-        "g": 0.2509768,
-        "b": 0.2509768
+        "r": 0.2509758,
+        "g": 0.2509758,
+        "b": 0.2509758
       },
       "Tags": [
         "assist"
@@ -25550,9 +25550,9 @@
         "posX": 85.0,
         "posY": 2.13310218,
         "posZ": -55.0,
-        "rotX": -4.92407753E-06,
+        "rotX": -6.82308041E-07,
         "rotY": 180.038025,
-        "rotZ": 3.92857714E-07,
+        "rotZ": -1.665904E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -25566,9 +25566,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.2509768,
-        "g": 0.2509768,
-        "b": 0.2509768
+        "r": 0.2509758,
+        "g": 0.2509758,
+        "b": 0.2509758
       },
       "Tags": [
         "fame"
@@ -25608,9 +25608,9 @@
         "posX": 85.0,
         "posY": 2.13310266,
         "posZ": -57.0,
-        "rotX": -1.26458044E-05,
+        "rotX": -1.51362565E-05,
         "rotY": 180.027634,
-        "rotZ": 7.01611555E-07,
+        "rotZ": -1.36357141E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -25624,9 +25624,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.2509768,
-        "g": 0.2509768,
-        "b": 0.2509768
+        "r": 0.2509758,
+        "g": 0.2509758,
+        "b": 0.2509758
       },
       "Tags": [
         "fame"
@@ -25666,9 +25666,9 @@
         "posX": 85.0,
         "posY": 2.03704953,
         "posZ": -63.9999924,
-        "rotX": -1.30035178E-05,
+        "rotX": -8.745302E-06,
         "rotY": 179.9969,
-        "rotZ": -1.24790027E-08,
+        "rotZ": 2.171929E-06,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -25682,9 +25682,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.2509768,
-        "g": 0.2509768,
-        "b": 0.2509768
+        "r": 0.2509758,
+        "g": 0.2509758,
+        "b": 0.2509758
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -25783,9 +25783,9 @@
         "posX": 85.0,
         "posY": 2.133102,
         "posZ": -53.0,
-        "rotX": -4.632348E-06,
+        "rotX": -7.260824E-06,
         "rotY": 180.0005,
-        "rotZ": -8.785063E-07,
+        "rotZ": -1.33132016E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -25799,9 +25799,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.2509768,
-        "g": 0.2509768,
-        "b": 0.2509768
+        "r": 0.2509758,
+        "g": 0.2509758,
+        "b": 0.2509758
       },
       "Tags": [
         "fame"
@@ -25839,11 +25839,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 85.0,
-        "posY": 1.67704892,
+        "posY": 1.67704868,
         "posZ": -60.0,
-        "rotX": 8.895804E-06,
+        "rotX": 1.13658152E-05,
         "rotY": 359.983673,
-        "rotZ": 3.71630676E-07,
+        "rotZ": 9.25679046E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -25857,9 +25857,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.2509768,
-        "g": 0.2509768,
-        "b": 0.2509768
+        "r": 0.2509758,
+        "g": 0.2509758,
+        "b": 0.2509758
       },
       "Tags": [
         "assist"
@@ -25909,9 +25909,9 @@
         "posX": 85.0,
         "posY": 1.67704916,
         "posZ": -62.0,
-        "rotX": 1.2116936E-05,
+        "rotX": 9.72077E-06,
         "rotY": 359.983734,
-        "rotZ": 2.28227876E-07,
+        "rotZ": -6.512379E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -25925,9 +25925,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.2509768,
-        "g": 0.2509768,
-        "b": 0.2509768
+        "r": 0.2509758,
+        "g": 0.2509758,
+        "b": 0.2509758
       },
       "Tags": [
         "assist"
@@ -25975,11 +25975,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 85.0,
-        "posY": 1.67704916,
+        "posY": 1.67704868,
         "posZ": -61.0,
-        "rotX": -1.24186545E-06,
+        "rotX": 4.921246E-07,
         "rotY": 359.983734,
-        "rotZ": -9.34783543E-07,
+        "rotZ": -8.86331463E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -25993,9 +25993,9 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.2509768,
-        "g": 0.2509768,
-        "b": 0.2509768
+        "r": 0.2509758,
+        "g": 0.2509758,
+        "b": 0.2509758
       },
       "Tags": [
         "assist"
@@ -26045,9 +26045,9 @@
         "posX": 82.0,
         "posY": 2.13310218,
         "posZ": -55.0,
-        "rotX": -7.538348E-06,
+        "rotX": -5.283733E-06,
         "rotY": 180.03804,
-        "rotZ": -2.15056517E-07,
+        "rotZ": 1.68894223E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -26063,7 +26063,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172545582
+        "b": 0.172544628
       },
       "Tags": [
         "fame"
@@ -26103,9 +26103,9 @@
         "posX": 82.0,
         "posY": 2.133102,
         "posZ": -53.0,
-        "rotX": -2.49761661E-06,
+        "rotX": -4.63725E-06,
         "rotY": 180.0005,
-        "rotZ": 2.91978813E-06,
+        "rotZ": 9.194548E-07,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -26121,7 +26121,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172545582
+        "b": 0.172544628
       },
       "Tags": [
         "fame"
@@ -26161,9 +26161,9 @@
         "posX": 82.0,
         "posY": 2.13310266,
         "posZ": -57.0,
-        "rotX": -1.27378689E-05,
+        "rotX": -1.16589817E-05,
         "rotY": 180.027634,
-        "rotZ": -1.55925775E-07,
+        "rotZ": -2.45973581E-07,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -26179,7 +26179,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172545582
+        "b": 0.172544628
       },
       "Tags": [
         "fame"
@@ -26217,11 +26217,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 82.0,
-        "posY": 1.67704868,
+        "posY": 1.67704844,
         "posZ": -59.0,
-        "rotX": 1.09085659E-05,
+        "rotX": 1.68442548E-05,
         "rotY": 359.983643,
-        "rotZ": -7.194682E-07,
+        "rotZ": -8.11495056E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -26237,7 +26237,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172545582
+        "b": 0.172544628
       },
       "Tags": [
         "assist"
@@ -26285,11 +26285,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 82.0,
-        "posY": 1.67704916,
+        "posY": 1.6770488,
         "posZ": -60.0000076,
-        "rotX": 1.21183484E-05,
-        "rotY": 0.000229099489,
-        "rotZ": -7.59202862E-07,
+        "rotX": 1.31633724E-05,
+        "rotY": 0.000228138655,
+        "rotZ": -1.02068941E-06,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -26305,7 +26305,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172545582
+        "b": 0.172544628
       },
       "Tags": [
         "assist"
@@ -26353,11 +26353,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 81.99999,
-        "posY": 1.677049,
+        "posY": 1.67704928,
         "posZ": -60.9987869,
-        "rotX": -6.087723E-06,
-        "rotY": 0.0003769053,
-        "rotZ": -7.911003E-07,
+        "rotX": 1.50815174E-06,
+        "rotY": 0.0003750435,
+        "rotZ": -9.31873842E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -26373,7 +26373,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172545582
+        "b": 0.172544628
       },
       "Tags": [
         "assist"
@@ -26423,9 +26423,9 @@
         "posX": 82.0,
         "posY": 1.67704916,
         "posZ": -62.0,
-        "rotX": 1.1353457E-05,
+        "rotX": 1.16475348E-05,
         "rotY": 359.983765,
-        "rotZ": -4.14687236E-07,
+        "rotZ": 1.27314229E-06,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -26441,7 +26441,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172545582
+        "b": 0.172544628
       },
       "Tags": [
         "assist"
@@ -26491,9 +26491,9 @@
         "posX": 82.0,
         "posY": 2.03704953,
         "posZ": -64.0,
-        "rotX": -5.63833873E-06,
+        "rotX": -1.324678E-05,
         "rotY": 179.996841,
-        "rotZ": -1.0407432E-06,
+        "rotZ": -2.59724175E-06,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -26509,7 +26509,7 @@
       "ColorDiffuse": {
         "r": 0.905882359,
         "g": 0.8980392,
-        "b": 0.172539622
+        "b": 0.172538668
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -26608,9 +26608,9 @@
         "posX": 79.0,
         "posY": 2.13310218,
         "posZ": -55.0,
-        "rotX": -6.429649E-06,
+        "rotX": -6.54165751E-06,
         "rotY": 180.0379,
-        "rotZ": 1.34705158E-06,
+        "rotZ": -1.7279649E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -26625,8 +26625,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.0980359837,
-        "b": 0.09411415
+        "g": 0.0980350748,
+        "b": 0.09411318
       },
       "Tags": [
         "fame"
@@ -26666,9 +26666,9 @@
         "posX": 79.0,
         "posY": 2.133102,
         "posZ": -53.0,
-        "rotX": -3.13105647E-06,
+        "rotX": -7.231276E-06,
         "rotY": 180.000549,
-        "rotZ": -1.311352E-06,
+        "rotZ": -7.10635959E-07,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -26683,8 +26683,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.0980359837,
-        "b": 0.09411415
+        "g": 0.0980350748,
+        "b": 0.09411318
       },
       "Tags": [
         "fame"
@@ -26724,9 +26724,9 @@
         "posX": 79.0,
         "posY": 2.13310266,
         "posZ": -57.0,
-        "rotX": -1.58875137E-05,
+        "rotX": -1.4203938E-05,
         "rotY": 180.027512,
-        "rotZ": -1.03149728E-06,
+        "rotZ": 1.75549147E-07,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -26741,8 +26741,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.0980359837,
-        "b": 0.09411415
+        "g": 0.0980350748,
+        "b": 0.09411318
       },
       "Tags": [
         "fame"
@@ -26780,11 +26780,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 79.0,
-        "posY": 1.67704844,
+        "posY": 1.67704868,
         "posZ": -59.0,
-        "rotX": 1.00803636E-05,
+        "rotX": 1.29925684E-05,
         "rotY": 359.983643,
-        "rotZ": -9.154299E-07,
+        "rotZ": -6.92508365E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -26799,8 +26799,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.0980359837,
-        "b": 0.09411415
+        "g": 0.0980350748,
+        "b": 0.09411318
       },
       "Tags": [
         "assist"
@@ -26848,11 +26848,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 79.0,
-        "posY": 1.67704868,
+        "posY": 1.67704892,
         "posZ": -60.0,
-        "rotX": 1.02475242E-05,
+        "rotX": 1.37083489E-05,
         "rotY": 359.983734,
-        "rotZ": -3.56636775E-07,
+        "rotZ": 5.84142128E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -26867,8 +26867,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.0980359837,
-        "b": 0.09411415
+        "g": 0.0980350748,
+        "b": 0.09411318
       },
       "Tags": [
         "assist"
@@ -26916,11 +26916,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 79.0,
-        "posY": 1.67704916,
+        "posY": 1.67704892,
         "posZ": -61.0,
-        "rotX": -3.7730515E-06,
+        "rotX": -3.960416E-06,
         "rotY": 359.983734,
-        "rotZ": -1.25513657E-06,
+        "rotZ": -8.341175E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -26935,8 +26935,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.0980359837,
-        "b": 0.09411415
+        "g": 0.0980350748,
+        "b": 0.09411318
       },
       "Tags": [
         "assist"
@@ -26984,11 +26984,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 79.0,
-        "posY": 1.67704916,
+        "posY": 1.67704892,
         "posZ": -62.0,
-        "rotX": 1.08137147E-05,
+        "rotX": 1.43309226E-05,
         "rotY": 359.983765,
-        "rotZ": 5.61266347E-07,
+        "rotZ": -7.71454E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27003,8 +27003,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.0980359837,
-        "b": 0.09411415
+        "g": 0.0980350748,
+        "b": 0.09411318
       },
       "Tags": [
         "assist"
@@ -27054,9 +27054,9 @@
         "posX": 79.0,
         "posY": 2.03704953,
         "posZ": -64.0,
-        "rotX": -5.491685E-06,
+        "rotX": -8.083412E-06,
         "rotY": 179.9969,
-        "rotZ": 7.245835E-07,
+        "rotZ": 5.296613E-06,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -27071,8 +27071,8 @@
       },
       "ColorDiffuse": {
         "r": 0.854901969,
-        "g": 0.0980359837,
-        "b": 0.09411415
+        "g": 0.0980350748,
+        "b": 0.09411318
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -27171,9 +27171,9 @@
         "posX": 76.0,
         "posY": 2.13310218,
         "posZ": -55.0,
-        "rotX": -5.29263434E-06,
+        "rotX": -6.97708E-06,
         "rotY": 180.03801,
-        "rotZ": -3.216909E-07,
+        "rotZ": -1.39992119E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -27187,7 +27187,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117643438,
+        "r": 0.117642425,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -27229,9 +27229,9 @@
         "posX": 76.0,
         "posY": 2.133102,
         "posZ": -53.0,
-        "rotX": -4.79298137E-07,
+        "rotX": -6.72743954E-06,
         "rotY": 180.000519,
-        "rotZ": 5.8566917E-07,
+        "rotZ": 1.409448E-06,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -27245,7 +27245,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117643438,
+        "r": 0.117642425,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -27287,9 +27287,9 @@
         "posX": 76.0,
         "posY": 2.13310266,
         "posZ": -57.0,
-        "rotX": -1.21151779E-05,
+        "rotX": -1.16306346E-05,
         "rotY": 180.02771,
-        "rotZ": 2.55520177E-07,
+        "rotZ": -4.24724277E-07,
         "scaleX": 2.545149,
         "scaleY": 9.12108,
         "scaleZ": 2.545149
@@ -27303,7 +27303,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117643438,
+        "r": 0.117642425,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -27343,11 +27343,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 76.0,
-        "posY": 1.67704844,
+        "posY": 1.67704868,
         "posZ": -59.0,
-        "rotX": 1.09846651E-05,
+        "rotX": 7.797592E-06,
         "rotY": 359.983673,
-        "rotZ": 1.2455331E-06,
+        "rotZ": -2.9728352E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27361,7 +27361,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117643438,
+        "r": 0.117642425,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -27411,11 +27411,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 76.0,
-        "posY": 1.67704892,
+        "posY": 1.67704868,
         "posZ": -60.0,
-        "rotX": 1.26713676E-05,
+        "rotX": 1.315615E-05,
         "rotY": 359.983765,
-        "rotZ": -8.275147E-07,
+        "rotZ": 4.62280866E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27429,7 +27429,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117643438,
+        "r": 0.117642425,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -27479,11 +27479,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 76.0,
-        "posY": 1.67704916,
+        "posY": 1.67704868,
         "posZ": -61.0,
-        "rotX": -4.081751E-06,
+        "rotX": -3.92717266E-06,
         "rotY": 359.983643,
-        "rotZ": -7.25681957E-07,
+        "rotZ": 4.29328622E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27497,7 +27497,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117643438,
+        "r": 0.117642425,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -27547,11 +27547,11 @@
       "Name": "Custom_Model",
       "Transform": {
         "posX": 76.0,
-        "posY": 1.67704916,
+        "posY": 1.67704892,
         "posZ": -62.0,
-        "rotX": 1.41565069E-05,
+        "rotX": 1.18263706E-05,
         "rotY": 359.9837,
-        "rotZ": -1.02631577E-06,
+        "rotZ": -5.73806744E-07,
         "scaleX": 0.977407,
         "scaleY": 0.7518516,
         "scaleZ": 1.31574035
@@ -27565,7 +27565,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117643438,
+        "r": 0.117642425,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -27617,9 +27617,9 @@
         "posX": 76.0,
         "posY": 2.03704953,
         "posZ": -64.0,
-        "rotX": -5.37157257E-06,
+        "rotX": -1.41854734E-05,
         "rotY": 179.996841,
-        "rotZ": 2.324229E-06,
+        "rotZ": -1.98224825E-06,
         "scaleX": 0.72,
         "scaleY": 0.72,
         "scaleZ": 0.72
@@ -27633,7 +27633,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117643438,
+        "r": 0.117642425,
         "g": 0.5294118,
         "b": 1.0
       },
@@ -27734,9 +27734,9 @@
         "posX": 24.0,
         "posY": 1.74745667,
         "posZ": -61.0,
-        "rotX": -1.99230357E-07,
+        "rotX": 1.96263932E-06,
         "rotY": 269.982666,
-        "rotZ": -8.857547E-06,
+        "rotZ": -8.755344E-06,
         "scaleX": 2.39092469,
         "scaleY": 1.4081521,
         "scaleZ": 2.39092469
@@ -27872,11 +27872,11 @@
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 29.0,
-        "posY": 1.77407241,
+        "posY": 1.77407253,
         "posZ": -61.0,
-        "rotX": -5.030307E-06,
+        "rotX": -2.33421679E-06,
         "rotY": 119.980263,
-        "rotZ": 6.09362542E-06,
+        "rotZ": 5.90438049E-06,
         "scaleX": 2.51158261,
         "scaleY": 1.94046736,
         "scaleZ": 2.51158261
@@ -28008,9 +28008,9 @@
         "posX": 33.5,
         "posY": 1.77477634,
         "posZ": -61.5,
-        "rotX": 6.83606459E-06,
+        "rotX": 6.85480745E-06,
         "rotY": 30.02818,
-        "rotZ": 3.23598738E-06,
+        "rotZ": 3.54206963E-06,
         "scaleX": 3.3227253,
         "scaleY": 1.95454431,
         "scaleZ": 3.3227253
@@ -28142,9 +28142,9 @@
         "posX": 37.5,
         "posY": 1.77307177,
         "posZ": -61.5,
-        "rotX": -8.765587E-06,
+        "rotX": -7.812015E-06,
         "rotY": 180.010056,
-        "rotZ": 4.493697E-06,
+        "rotZ": -3.96456016E-07,
         "scaleX": 3.26477075,
         "scaleY": 1.92045343,
         "scaleZ": 3.26477075
@@ -28276,9 +28276,9 @@
         "posX": 13.9795418,
         "posY": 1.77307177,
         "posZ": -61.1099052,
-        "rotX": -1.67364533E-06,
-        "rotY": 89.984314,
-        "rotZ": 8.389616E-06,
+        "rotX": 5.6861154E-07,
+        "rotY": 89.98443,
+        "rotZ": 8.13640054E-06,
         "scaleX": 3.26477075,
         "scaleY": 1.92045343,
         "scaleZ": 3.26477075
@@ -28913,12 +28913,12 @@
       "GUID": "d20da2",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 9.56143,
-        "posY": 1.77477586,
+        "posX": 9.561432,
+        "posY": 1.77477515,
         "posZ": -60.5920067,
-        "rotX": 5.41782829E-05,
-        "rotY": 330.009338,
-        "rotZ": 4.81423267E-05,
+        "rotX": 4.65715821E-05,
+        "rotY": 330.009277,
+        "rotZ": 0.000136348885,
         "scaleX": 3.32272553,
         "scaleY": 1.95454431,
         "scaleZ": 3.32272553
@@ -29433,12 +29433,12 @@
       "GUID": "6be1bc",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 6.33789349,
-        "posY": 1.8574177,
-        "posZ": -59.3995934,
-        "rotX": 1.31161392,
-        "rotY": 330.06366,
-        "rotZ": 2.29543257,
+        "posX": 6.337901,
+        "posY": 1.85742009,
+        "posZ": -59.3996048,
+        "rotX": 1.31164467,
+        "rotY": 330.063934,
+        "rotZ": 2.2954874,
         "scaleX": 2.511363,
         "scaleY": 1.47727239,
         "scaleZ": 2.511363
@@ -30607,7 +30607,7 @@
       "GridProjection": false,
       "HideWhenFaceDown": false,
       "Hands": false,
-      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable for every player anchor\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nlocal MAP_ROTATION = {\"A\", \"O\", \"Misc\"}\r\nlocal MAP_INDEX = 1\r\n\r\nlocal table = getObjectFromGUID(TABLE)\r\nlocal map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)\r\nlocal map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)\r\nlocal map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)\r\n\r\nfunction handleSetup(params)\r\n  color = params[\"color\"]\r\n  self_pos = self.getPosition()\r\n\r\n  initBorder()\r\n  self.UI.setAttributes(color..\"ActiveZone\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupLayout\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupBtn\", { color = color})\r\n\r\n  map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Subtitle\", { active = true })\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = false})\r\nend\r\n\r\nfunction onClickReady()\r\n  local ready_color = self.UI.getAttribute(color..\"SetupBtn\", \"color\")\r\n  local ready = ready_color ~= \"#00ff00\"\r\n\r\n  log(color .. \" is \" .. ternary(ready, \"\", \"not \") .. \"ready\")\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = ready})\r\n\r\n  if ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = false})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = false})\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = true})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = true})\r\n  end\r\nend\r\n\r\ndebounce_map = false\r\n\r\nfunction onClickNextMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX + 1\r\n  if MAP_INDEX > #MAP_ROTATION then\r\n    MAP_INDEX = 1\r\n  end\r\n\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction onClickBackMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX - 1\r\n  if MAP_INDEX < 1 then\r\n    MAP_INDEX = 3\r\n  end\r\n\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction moveMap(curr_index)\r\n  -- Handle the existing map before spawning a new one\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Title\", { active = false })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Subtitle\", { active = false })\r\n  if MAP_ROTATION[curr_index] == \"A\" then\r\n    map.setPositionSmooth(map_a_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  elseif MAP_ROTATION[curr_index] == \"O\" then\r\n    map.setPositionSmooth(map_o_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  else\r\n    map.setPositionSmooth(map_misc_bag.getPosition(), false, true)\r\n    Wait.frames(function() map_misc_bag.putObject(map) end, 30)\r\n  end\r\n\r\n  if MAP_ROTATION[MAP_INDEX] == \"A\" then\r\n    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  elseif MAP_ROTATION[MAP_INDEX] == \"O\" then\r\n    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  else\r\n    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  end\r\n\r\n  new_map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Subtitle\", { active = true })\r\n  Wait.frames(function()\r\n    map = new_map\r\n    debounce_map = false\r\n  end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted\r\nend\r\n\r\nfunction initBorder()\r\n  border = getObjectFromGUID(PIECES[color][\"border\"])\r\n\r\n  border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)\r\n  border.interactable = false\r\n  border.locked = true\r\n  border.setColorTint(getPlayer(color).color)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable for every player anchor\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nlocal MAP_ROTATION = {\"A\", \"O\", \"Misc\"}\r\nlocal MAP_INDEX = 1\r\n\r\nlocal table = getObjectFromGUID(TABLE)\r\nlocal map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)\r\nlocal map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)\r\nlocal map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)\r\n\r\nfunction handleSetup(params)\r\n  color = params[\"color\"]\r\n  self_pos = self.getPosition()\r\n\r\n  initBorder()\r\n  self.UI.setAttributes(color..\"ActiveZone\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupLayout\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupBtn\", { color = color})\r\n\r\n  if not Global.getVar(color..\"_map_guid\") then\r\n    map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n    map.locked = true\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Title\", { active = true })\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Subtitle\", { active = true })\r\n    Global.setVar(color..\"_map_index\", 1)\r\n    Global.setVar(color..\"_map_guid\", map.getGUID())\r\n  else\r\n    map = getObjectFromGUID(Global.getVar(color..\"_map_guid\"))\r\n    map.locked = true\r\n    local map_index = getObjectFromGUID(Global.getVar(color..\"_map_index\"))\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[map_index] .. \"Title\", { active = true })\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[map_index] .. \"Subtitle\", { active = true })\r\n    MAP_INDEX = map_index\r\n  end\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = false})\r\nend\r\n\r\nfunction onClickReady()\r\n  local ready_color = self.UI.getAttribute(color..\"SetupBtn\", \"color\")\r\n  local ready = ready_color ~= \"#00ff00\"\r\n\r\n  log(color .. \" is \" .. ternary(ready, \"\", \"not \") .. \"ready\")\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = ready})\r\n\r\n  if ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = false})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = false})\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = true})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = true})\r\n  end\r\nend\r\n\r\ndebounce_map = false\r\n\r\nfunction onClickNextMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX + 1\r\n  if MAP_INDEX > #MAP_ROTATION then\r\n    MAP_INDEX = 1\r\n  end\r\n\r\n  Global.setVar(color..\"_map_index\", MAP_INDEX)\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction onClickBackMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX - 1\r\n  if MAP_INDEX < 1 then\r\n    MAP_INDEX = 3\r\n  end\r\n\r\n  Global.setVar(color..\"_map_index\", MAP_INDEX)\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction moveMap(curr_index)\r\n  -- Handle the existing map before spawning a new one\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Title\", { active = false })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Subtitle\", { active = false })\r\n  if MAP_ROTATION[curr_index] == \"A\" then\r\n    map.setPositionSmooth(map_a_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  elseif MAP_ROTATION[curr_index] == \"O\" then\r\n    map.setPositionSmooth(map_o_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  else\r\n    map.setPositionSmooth(map_misc_bag.getPosition(), false, true)\r\n    Wait.frames(function() map_misc_bag.putObject(map) end, 30)\r\n  end\r\n\r\n  if MAP_ROTATION[MAP_INDEX] == \"A\" then\r\n    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  elseif MAP_ROTATION[MAP_INDEX] == \"O\" then\r\n    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  else\r\n    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  end\r\n\r\n  new_map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Subtitle\", { active = true })\r\n  Wait.frames(function()\r\n    map = new_map\r\n    debounce_map = false\r\n  end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted\r\nend\r\n\r\nfunction initBorder()\r\n  border = getObjectFromGUID(PIECES[color][\"border\"])\r\n\r\n  if not Global.getVar(color..\"_border\") then\r\n    border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)\r\n    border.interactable = false\r\n    border.locked = true\r\n    border.setColorTint(getPlayer(color).color)\r\n\r\n     Global.setVar(color..\"_border\", true)\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
       "LuaScriptState": "null",
       "XmlUI": "<Panel id=\"whiteActiveZone\" rotation=\"0 180 0\" position=\"-50 2500 200\" width=\"4000\" height=\"5000\" active=\"false\">\r\n  <Panel id=\"whiteSetupLayout\" active=\"false\">\r\n    <button\r\n      id=\"whiteSetupBtn\"\r\n      onClick=\"ready\"\r\n      width=\"1000\"\r\n      height=\"500\"\r\n      fontSize=\"150\"\r\n      fontStyle=\"bold\"\r\n      position=\"350 250 -200\">\r\n        Ready\r\n    </button>\r\n  </Panel>\r\n</Panel>"
     },
@@ -30652,7 +30652,7 @@
       "GridProjection": false,
       "HideWhenFaceDown": false,
       "Hands": false,
-      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable for every player anchor\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nlocal MAP_ROTATION = {\"A\", \"O\", \"Misc\"}\r\nlocal MAP_INDEX = 1\r\n\r\nlocal table = getObjectFromGUID(TABLE)\r\nlocal map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)\r\nlocal map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)\r\nlocal map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)\r\n\r\nfunction handleSetup(params)\r\n  color = params[\"color\"]\r\n  self_pos = self.getPosition()\r\n\r\n  initBorder()\r\n  self.UI.setAttributes(color..\"ActiveZone\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupLayout\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupBtn\", { color = color})\r\n\r\n  map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Subtitle\", { active = true })\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = false})\r\nend\r\n\r\nfunction onClickReady()\r\n  local ready_color = self.UI.getAttribute(color..\"SetupBtn\", \"color\")\r\n  local ready = ready_color ~= \"#00ff00\"\r\n\r\n  log(color .. \" is \" .. ternary(ready, \"\", \"not \") .. \"ready\")\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = ready})\r\n\r\n  if ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = false})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = false})\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = true})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = true})\r\n  end\r\nend\r\n\r\ndebounce_map = false\r\n\r\nfunction onClickNextMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX + 1\r\n  if MAP_INDEX > #MAP_ROTATION then\r\n    MAP_INDEX = 1\r\n  end\r\n\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction onClickBackMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX - 1\r\n  if MAP_INDEX < 1 then\r\n    MAP_INDEX = 3\r\n  end\r\n\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction moveMap(curr_index)\r\n  -- Handle the existing map before spawning a new one\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Title\", { active = false })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Subtitle\", { active = false })\r\n  if MAP_ROTATION[curr_index] == \"A\" then\r\n    map.setPositionSmooth(map_a_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  elseif MAP_ROTATION[curr_index] == \"O\" then\r\n    map.setPositionSmooth(map_o_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  else\r\n    map.setPositionSmooth(map_misc_bag.getPosition(), false, true)\r\n    Wait.frames(function() map_misc_bag.putObject(map) end, 30)\r\n  end\r\n\r\n  if MAP_ROTATION[MAP_INDEX] == \"A\" then\r\n    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  elseif MAP_ROTATION[MAP_INDEX] == \"O\" then\r\n    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  else\r\n    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  end\r\n\r\n  new_map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Subtitle\", { active = true })\r\n  Wait.frames(function()\r\n    map = new_map\r\n    debounce_map = false\r\n  end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted\r\nend\r\n\r\nfunction initBorder()\r\n  border = getObjectFromGUID(PIECES[color][\"border\"])\r\n\r\n  border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)\r\n  border.interactable = false\r\n  border.locked = true\r\n  border.setColorTint(getPlayer(color).color)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable for every player anchor\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nlocal MAP_ROTATION = {\"A\", \"O\", \"Misc\"}\r\nlocal MAP_INDEX = 1\r\n\r\nlocal table = getObjectFromGUID(TABLE)\r\nlocal map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)\r\nlocal map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)\r\nlocal map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)\r\n\r\nfunction handleSetup(params)\r\n  color = params[\"color\"]\r\n  self_pos = self.getPosition()\r\n\r\n  initBorder()\r\n  self.UI.setAttributes(color..\"ActiveZone\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupLayout\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupBtn\", { color = color})\r\n\r\n  if not Global.getVar(color..\"_map_guid\") then\r\n    map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n    map.locked = true\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Title\", { active = true })\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Subtitle\", { active = true })\r\n    Global.setVar(color..\"_map_index\", 1)\r\n    Global.setVar(color..\"_map_guid\", map.getGUID())\r\n  else\r\n    map = getObjectFromGUID(Global.getVar(color..\"_map_guid\"))\r\n    map.locked = true\r\n    local map_index = getObjectFromGUID(Global.getVar(color..\"_map_index\"))\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[map_index] .. \"Title\", { active = true })\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[map_index] .. \"Subtitle\", { active = true })\r\n    MAP_INDEX = map_index\r\n  end\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = false})\r\nend\r\n\r\nfunction onClickReady()\r\n  local ready_color = self.UI.getAttribute(color..\"SetupBtn\", \"color\")\r\n  local ready = ready_color ~= \"#00ff00\"\r\n\r\n  log(color .. \" is \" .. ternary(ready, \"\", \"not \") .. \"ready\")\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = ready})\r\n\r\n  if ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = false})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = false})\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = true})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = true})\r\n  end\r\nend\r\n\r\ndebounce_map = false\r\n\r\nfunction onClickNextMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX + 1\r\n  if MAP_INDEX > #MAP_ROTATION then\r\n    MAP_INDEX = 1\r\n  end\r\n\r\n  Global.setVar(color..\"_map_index\", MAP_INDEX)\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction onClickBackMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX - 1\r\n  if MAP_INDEX < 1 then\r\n    MAP_INDEX = 3\r\n  end\r\n\r\n  Global.setVar(color..\"_map_index\", MAP_INDEX)\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction moveMap(curr_index)\r\n  -- Handle the existing map before spawning a new one\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Title\", { active = false })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Subtitle\", { active = false })\r\n  if MAP_ROTATION[curr_index] == \"A\" then\r\n    map.setPositionSmooth(map_a_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  elseif MAP_ROTATION[curr_index] == \"O\" then\r\n    map.setPositionSmooth(map_o_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  else\r\n    map.setPositionSmooth(map_misc_bag.getPosition(), false, true)\r\n    Wait.frames(function() map_misc_bag.putObject(map) end, 30)\r\n  end\r\n\r\n  if MAP_ROTATION[MAP_INDEX] == \"A\" then\r\n    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  elseif MAP_ROTATION[MAP_INDEX] == \"O\" then\r\n    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  else\r\n    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  end\r\n\r\n  new_map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Subtitle\", { active = true })\r\n  Wait.frames(function()\r\n    map = new_map\r\n    debounce_map = false\r\n  end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted\r\nend\r\n\r\nfunction initBorder()\r\n  border = getObjectFromGUID(PIECES[color][\"border\"])\r\n\r\n  if not Global.getVar(color..\"_border\") then\r\n    border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)\r\n    border.interactable = false\r\n    border.locked = true\r\n    border.setColorTint(getPlayer(color).color)\r\n\r\n     Global.setVar(color..\"_border\", true)\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
       "LuaScriptState": "null",
       "XmlUI": "<Panel id=\"yellowActiveZone\" rotation=\"0 180 0\" position=\"-50 2500 250\" width=\"4000\" height=\"5000\" active=\"false\">\r\n  <Panel id=\"yellowSetupLayout\" active=\"false\">\r\n    <Text color=\"yellow\" position=\"0 2000 0\" fontSize=\"300\" fontStyle=\"bold\">\r\n      Choose your map\r\n    </Text>\r\n    <Text color=\"yellow\" position=\"0 -2200 0\" fontSize=\"70\" fontStyle=\"bold\">\r\n      Use the buttons on either side of the map to make your selection\r\n    </Text>\r\n    <Panel position=\"0 1500 0\" fontStyle=\"bold\">\r\n      <Text id=\"yellowMapATitle\" color=\"yellow\" fontSize=\"300\" active=\"false\">Map A</Text>\r\n      <Text id=\"yellowMapOTitle\" color=\"yellow\" fontSize=\"300\" active=\"false\">Map 0</Text>\r\n      <Text id=\"yellowMapMiscTitle\" color=\"yellow\" fontSize=\"300\" active=\"false\">Maps 1-10</Text>\r\n    </Panel>\r\n    <Panel position=\"0 1100 0\" fontStyle=\"italic\">\r\n      <Text id=\"yellowMapASubtitle\" color=\"yellow\" fontSize=\"200\" active=\"false\">Perfect for first time players!</Text>\r\n      <Text id=\"yellowMapOSubtitle\" color=\"yellow\" fontSize=\"200\" active=\"false\">A great choice for your second game.</Text>\r\n      <Text id=\"yellowMapMiscSubtitle\" color=\"yellow\" fontSize=\"150\" active=\"false\">The standard collection of maps for experienced players. Your map will be randomized at the start.</Text>\r\n    </Panel>\r\n    <Button\r\n      id=\"yellowBackBtn\"\r\n      onClick=\"onClickBackMap\"\r\n      width=\"150\"\r\n      height=\"1800\"\r\n      position=\"-1800 0 0\"\r\n      fontSize=\"300\"\r\n      color=\"yellow\"\r\n      outline=\"black\">\r\n      &lt;\r\n    </Button>\r\n    <Button\r\n      id=\"yellowNextBtn\"\r\n      onClick=\"onClickNextMap\"\r\n      width=\"150\"\r\n      height=\"1800\"\r\n      position=\"1800 0 0\"\r\n      fontSize=\"300\"\r\n      color=\"yellow\"\r\n      outline=\"black\">\r\n      &gt;\r\n    </Button>\r\n    <Button\r\n      id=\"yellowSetupBtn\"\r\n      onClick=\"onClickReady\"\r\n      width=\"1000\"\r\n      height=\"500\"\r\n      fontSize=\"150\"\r\n      fontStyle=\"bold\"\r\n      position=\"0 -1800 0\">\r\n        Ready\r\n    </Button>\r\n  </Panel>\r\n</Panel>"
     },
@@ -30680,7 +30680,7 @@
       },
       "ColorDiffuse": {
         "r": 1.0,
-        "g": 0.05576074,
+        "g": 0.05576039,
         "b": 0.0
       },
       "LayoutGroupSortIndex": 0,
@@ -30697,7 +30697,7 @@
       "GridProjection": false,
       "HideWhenFaceDown": false,
       "Hands": false,
-      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable for every player anchor\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nlocal MAP_ROTATION = {\"A\", \"O\", \"Misc\"}\r\nlocal MAP_INDEX = 1\r\n\r\nlocal table = getObjectFromGUID(TABLE)\r\nlocal map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)\r\nlocal map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)\r\nlocal map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)\r\n\r\nfunction handleSetup(params)\r\n  color = params[\"color\"]\r\n  self_pos = self.getPosition()\r\n\r\n  initBorder()\r\n  self.UI.setAttributes(color..\"ActiveZone\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupLayout\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupBtn\", { color = color})\r\n\r\n  map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Subtitle\", { active = true })\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = false})\r\nend\r\n\r\nfunction onClickReady()\r\n  local ready_color = self.UI.getAttribute(color..\"SetupBtn\", \"color\")\r\n  local ready = ready_color ~= \"#00ff00\"\r\n\r\n  log(color .. \" is \" .. ternary(ready, \"\", \"not \") .. \"ready\")\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = ready})\r\n\r\n  if ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = false})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = false})\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = true})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = true})\r\n  end\r\nend\r\n\r\ndebounce_map = false\r\n\r\nfunction onClickNextMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX + 1\r\n  if MAP_INDEX > #MAP_ROTATION then\r\n    MAP_INDEX = 1\r\n  end\r\n\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction onClickBackMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX - 1\r\n  if MAP_INDEX < 1 then\r\n    MAP_INDEX = 3\r\n  end\r\n\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction moveMap(curr_index)\r\n  -- Handle the existing map before spawning a new one\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Title\", { active = false })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Subtitle\", { active = false })\r\n  if MAP_ROTATION[curr_index] == \"A\" then\r\n    map.setPositionSmooth(map_a_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  elseif MAP_ROTATION[curr_index] == \"O\" then\r\n    map.setPositionSmooth(map_o_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  else\r\n    map.setPositionSmooth(map_misc_bag.getPosition(), false, true)\r\n    Wait.frames(function() map_misc_bag.putObject(map) end, 30)\r\n  end\r\n\r\n  if MAP_ROTATION[MAP_INDEX] == \"A\" then\r\n    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  elseif MAP_ROTATION[MAP_INDEX] == \"O\" then\r\n    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  else\r\n    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  end\r\n\r\n  new_map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Subtitle\", { active = true })\r\n  Wait.frames(function()\r\n    map = new_map\r\n    debounce_map = false\r\n  end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted\r\nend\r\n\r\nfunction initBorder()\r\n  border = getObjectFromGUID(PIECES[color][\"border\"])\r\n\r\n  border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)\r\n  border.interactable = false\r\n  border.locked = true\r\n  border.setColorTint(getPlayer(color).color)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable for every player anchor\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nlocal MAP_ROTATION = {\"A\", \"O\", \"Misc\"}\r\nlocal MAP_INDEX = 1\r\n\r\nlocal table = getObjectFromGUID(TABLE)\r\nlocal map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)\r\nlocal map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)\r\nlocal map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)\r\n\r\nfunction handleSetup(params)\r\n  color = params[\"color\"]\r\n  self_pos = self.getPosition()\r\n\r\n  initBorder()\r\n  self.UI.setAttributes(color..\"ActiveZone\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupLayout\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupBtn\", { color = color})\r\n\r\n  if not Global.getVar(color..\"_map_guid\") then\r\n    map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n    map.locked = true\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Title\", { active = true })\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Subtitle\", { active = true })\r\n    Global.setVar(color..\"_map_index\", 1)\r\n    Global.setVar(color..\"_map_guid\", map.getGUID())\r\n  else\r\n    map = getObjectFromGUID(Global.getVar(color..\"_map_guid\"))\r\n    map.locked = true\r\n    local map_index = getObjectFromGUID(Global.getVar(color..\"_map_index\"))\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[map_index] .. \"Title\", { active = true })\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[map_index] .. \"Subtitle\", { active = true })\r\n    MAP_INDEX = map_index\r\n  end\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = false})\r\nend\r\n\r\nfunction onClickReady()\r\n  local ready_color = self.UI.getAttribute(color..\"SetupBtn\", \"color\")\r\n  local ready = ready_color ~= \"#00ff00\"\r\n\r\n  log(color .. \" is \" .. ternary(ready, \"\", \"not \") .. \"ready\")\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = ready})\r\n\r\n  if ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = false})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = false})\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = true})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = true})\r\n  end\r\nend\r\n\r\ndebounce_map = false\r\n\r\nfunction onClickNextMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX + 1\r\n  if MAP_INDEX > #MAP_ROTATION then\r\n    MAP_INDEX = 1\r\n  end\r\n\r\n  Global.setVar(color..\"_map_index\", MAP_INDEX)\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction onClickBackMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX - 1\r\n  if MAP_INDEX < 1 then\r\n    MAP_INDEX = 3\r\n  end\r\n\r\n  Global.setVar(color..\"_map_index\", MAP_INDEX)\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction moveMap(curr_index)\r\n  -- Handle the existing map before spawning a new one\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Title\", { active = false })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Subtitle\", { active = false })\r\n  if MAP_ROTATION[curr_index] == \"A\" then\r\n    map.setPositionSmooth(map_a_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  elseif MAP_ROTATION[curr_index] == \"O\" then\r\n    map.setPositionSmooth(map_o_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  else\r\n    map.setPositionSmooth(map_misc_bag.getPosition(), false, true)\r\n    Wait.frames(function() map_misc_bag.putObject(map) end, 30)\r\n  end\r\n\r\n  if MAP_ROTATION[MAP_INDEX] == \"A\" then\r\n    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  elseif MAP_ROTATION[MAP_INDEX] == \"O\" then\r\n    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  else\r\n    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  end\r\n\r\n  new_map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Subtitle\", { active = true })\r\n  Wait.frames(function()\r\n    map = new_map\r\n    debounce_map = false\r\n  end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted\r\nend\r\n\r\nfunction initBorder()\r\n  border = getObjectFromGUID(PIECES[color][\"border\"])\r\n\r\n  if not Global.getVar(color..\"_border\") then\r\n    border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)\r\n    border.interactable = false\r\n    border.locked = true\r\n    border.setColorTint(getPlayer(color).color)\r\n\r\n     Global.setVar(color..\"_border\", true)\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
       "LuaScriptState": "null",
       "XmlUI": "<button\r\n  id=\"redSetupBtn\"\r\n  onClick=\"ready\"\r\n  position=\"0 250 200\"\r\n  width=\"1000\"\r\n  height=\"500\"\r\n  fontSize=\"150\"\r\n  fontStyle=\"bold\"\r\n  rotation=\"0 180 0\"\r\n  color=\"#DA1918\"\r\n  active=\"false\">\r\n    Ready\r\n</button>"
     },
@@ -30725,7 +30725,7 @@
       },
       "ColorDiffuse": {
         "r": 0.0,
-        "g": 0.1747194,
+        "g": 0.174718916,
         "b": 1.0
       },
       "LayoutGroupSortIndex": 0,
@@ -30742,7 +30742,7 @@
       "GridProjection": false,
       "HideWhenFaceDown": false,
       "Hands": false,
-      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable for every player anchor\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nlocal MAP_ROTATION = {\"A\", \"O\", \"Misc\"}\r\nlocal MAP_INDEX = 1\r\n\r\nlocal table = getObjectFromGUID(TABLE)\r\nlocal map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)\r\nlocal map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)\r\nlocal map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)\r\n\r\nfunction handleSetup(params)\r\n  color = params[\"color\"]\r\n  self_pos = self.getPosition()\r\n\r\n  initBorder()\r\n  self.UI.setAttributes(color..\"ActiveZone\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupLayout\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupBtn\", { color = color})\r\n\r\n  map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Subtitle\", { active = true })\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = false})\r\nend\r\n\r\nfunction onClickReady()\r\n  local ready_color = self.UI.getAttribute(color..\"SetupBtn\", \"color\")\r\n  local ready = ready_color ~= \"#00ff00\"\r\n\r\n  log(color .. \" is \" .. ternary(ready, \"\", \"not \") .. \"ready\")\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = ready})\r\n\r\n  if ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = false})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = false})\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = true})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = true})\r\n  end\r\nend\r\n\r\ndebounce_map = false\r\n\r\nfunction onClickNextMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX + 1\r\n  if MAP_INDEX > #MAP_ROTATION then\r\n    MAP_INDEX = 1\r\n  end\r\n\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction onClickBackMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX - 1\r\n  if MAP_INDEX < 1 then\r\n    MAP_INDEX = 3\r\n  end\r\n\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction moveMap(curr_index)\r\n  -- Handle the existing map before spawning a new one\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Title\", { active = false })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Subtitle\", { active = false })\r\n  if MAP_ROTATION[curr_index] == \"A\" then\r\n    map.setPositionSmooth(map_a_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  elseif MAP_ROTATION[curr_index] == \"O\" then\r\n    map.setPositionSmooth(map_o_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  else\r\n    map.setPositionSmooth(map_misc_bag.getPosition(), false, true)\r\n    Wait.frames(function() map_misc_bag.putObject(map) end, 30)\r\n  end\r\n\r\n  if MAP_ROTATION[MAP_INDEX] == \"A\" then\r\n    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  elseif MAP_ROTATION[MAP_INDEX] == \"O\" then\r\n    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  else\r\n    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  end\r\n\r\n  new_map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Subtitle\", { active = true })\r\n  Wait.frames(function()\r\n    map = new_map\r\n    debounce_map = false\r\n  end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted\r\nend\r\n\r\nfunction initBorder()\r\n  border = getObjectFromGUID(PIECES[color][\"border\"])\r\n\r\n  border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)\r\n  border.interactable = false\r\n  border.locked = true\r\n  border.setColorTint(getPlayer(color).color)\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
+      "LuaScript": "-- Bundled by luabundle {\"version\":\"1.6.0\"}\nlocal __bundle_require, __bundle_loaded, __bundle_register, __bundle_modules = (function(superRequire)\n\tlocal loadingPlaceholder = {[{}] = true}\n\n\tlocal register\n\tlocal modules = {}\n\n\tlocal require\n\tlocal loaded = {}\n\n\tregister = function(name, body)\n\t\tif not modules[name] then\n\t\t\tmodules[name] = body\n\t\tend\n\tend\n\n\trequire = function(name)\n\t\tlocal loadedModule = loaded[name]\n\n\t\tif loadedModule then\n\t\t\tif loadedModule == loadingPlaceholder then\n\t\t\t\treturn nil\n\t\t\tend\n\t\telse\n\t\t\tif not modules[name] then\n\t\t\t\tif not superRequire then\n\t\t\t\t\tlocal identifier = type(name) == 'string' and '\\\"' .. name .. '\\\"' or tostring(name)\n\t\t\t\t\terror('Tried to require ' .. identifier .. ', but no such module has been registered')\n\t\t\t\telse\n\t\t\t\t\treturn superRequire(name)\n\t\t\t\tend\n\t\t\tend\n\n\t\t\tloaded[name] = loadingPlaceholder\n\t\t\tloadedModule = modules[name](require, loaded, register, modules)\n\t\t\tloaded[name] = loadedModule\n\t\tend\n\n\t\treturn loadedModule\n\tend\n\n\treturn require, loaded, register, modules\nend)(nil)\n__bundle_register(\"__root\", function(require, _LOADED, __bundle_register, __bundle_modules)\nrequire(\"ArkNova.Player_Anchor\")\nend)\n__bundle_register(\"ArkNova.Player_Anchor\", function(require, _LOADED, __bundle_register, __bundle_modules)\n-- This file is an \"object\" implementation of the anchors. It should have\r\n-- passable params and be reusable for every player anchor\r\n\r\nrequire(\"ArkNova.Constants\")\r\nrequire(\"ArkNova.Helpers\")\r\n\r\nlocal MAP_ROTATION = {\"A\", \"O\", \"Misc\"}\r\nlocal MAP_INDEX = 1\r\n\r\nlocal table = getObjectFromGUID(TABLE)\r\nlocal map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)\r\nlocal map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)\r\nlocal map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)\r\n\r\nfunction handleSetup(params)\r\n  color = params[\"color\"]\r\n  self_pos = self.getPosition()\r\n\r\n  initBorder()\r\n  self.UI.setAttributes(color..\"ActiveZone\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupLayout\", {active = true})\r\n  self.UI.setAttributes(color..\"SetupBtn\", { color = color})\r\n\r\n  if not Global.getVar(color..\"_map_guid\") then\r\n    map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n    map.locked = true\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Title\", { active = true })\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[1] .. \"Subtitle\", { active = true })\r\n    Global.setVar(color..\"_map_index\", 1)\r\n    Global.setVar(color..\"_map_guid\", map.getGUID())\r\n  else\r\n    map = getObjectFromGUID(Global.getVar(color..\"_map_guid\"))\r\n    map.locked = true\r\n    local map_index = getObjectFromGUID(Global.getVar(color..\"_map_index\"))\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[map_index] .. \"Title\", { active = true })\r\n    self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[map_index] .. \"Subtitle\", { active = true })\r\n    MAP_INDEX = map_index\r\n  end\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = false})\r\nend\r\n\r\nfunction onClickReady()\r\n  local ready_color = self.UI.getAttribute(color..\"SetupBtn\", \"color\")\r\n  local ready = ready_color ~= \"#00ff00\"\r\n\r\n  log(color .. \" is \" .. ternary(ready, \"\", \"not \") .. \"ready\")\r\n\r\n  table.call(\"readyPlayer\", {color = color, ready = ready})\r\n\r\n  if ready then\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", \"#00ff00\")\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = false})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = false})\r\n  else\r\n    self.UI.setAttribute(color..\"SetupBtn\", \"color\", color)\r\n    self.UI.setAttributes(color..\"NextBtn\", {interactable = true})\r\n    self.UI.setAttributes(color..\"BackBtn\", {interactable = true})\r\n  end\r\nend\r\n\r\ndebounce_map = false\r\n\r\nfunction onClickNextMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX + 1\r\n  if MAP_INDEX > #MAP_ROTATION then\r\n    MAP_INDEX = 1\r\n  end\r\n\r\n  Global.setVar(color..\"_map_index\", MAP_INDEX)\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction onClickBackMap()\r\n  if debounce_map then\r\n    return\r\n  end\r\n  debounce_map = true;\r\n  local curr_index = MAP_INDEX\r\n  MAP_INDEX = MAP_INDEX - 1\r\n  if MAP_INDEX < 1 then\r\n    MAP_INDEX = 3\r\n  end\r\n\r\n  Global.setVar(color..\"_map_index\", MAP_INDEX)\r\n  moveMap(curr_index)\r\nend\r\n\r\nfunction moveMap(curr_index)\r\n  -- Handle the existing map before spawning a new one\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Title\", { active = false })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[curr_index] .. \"Subtitle\", { active = false })\r\n  if MAP_ROTATION[curr_index] == \"A\" then\r\n    map.setPositionSmooth(map_a_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  elseif MAP_ROTATION[curr_index] == \"O\" then\r\n    map.setPositionSmooth(map_o_bag.getPosition(), false, true)\r\n    Wait.frames(function() map.destroy() end, 30)\r\n  else\r\n    map.setPositionSmooth(map_misc_bag.getPosition(), false, true)\r\n    Wait.frames(function() map_misc_bag.putObject(map) end, 30)\r\n  end\r\n\r\n  if MAP_ROTATION[MAP_INDEX] == \"A\" then\r\n    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  elseif MAP_ROTATION[MAP_INDEX] == \"O\" then\r\n    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  else\r\n    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})\r\n  end\r\n\r\n  new_map.locked = true\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Title\", { active = true })\r\n  self.UI.setAttributes(color..\"Map\" .. MAP_ROTATION[MAP_INDEX] .. \"Subtitle\", { active = true })\r\n  Wait.frames(function()\r\n    map = new_map\r\n    debounce_map = false\r\n  end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted\r\nend\r\n\r\nfunction initBorder()\r\n  border = getObjectFromGUID(PIECES[color][\"border\"])\r\n\r\n  if not Global.getVar(color..\"_border\") then\r\n    border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)\r\n    border.interactable = false\r\n    border.locked = true\r\n    border.setColorTint(getPlayer(color).color)\r\n\r\n     Global.setVar(color..\"_border\", true)\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Helpers\", function(require, _LOADED, __bundle_register, __bundle_modules)\nfunction toLowerCase(str)\r\n  return string.lower(str)\r\nend\r\n\r\nfunction filterArray(arr, val)\r\n  toReturn = {}\r\n  for _,v in pairs(items) do\r\n    if v == val then\r\n        toReturn[1] = v\r\n        break\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction removeItem(arr, val)\r\n  toReturn = {}\r\n  for i,v in pairs(arr) do\r\n    if v != val then\r\n        toReturn[i] = v\r\n      break\r\n    end\r\n  end\r\n  return toReturn\r\nend\r\n\r\nfunction boolToString(b)\r\n  if b then\r\n    return 'true'\r\n  else\r\n    return 'false'\r\n  end\r\nend\r\n\r\nfunction ternary (cond , T, F)\r\n    if cond then return T else return F end\r\nend\r\n\r\nfunction pluralize(str, num)\r\n  if num < 2 then\r\n    return str\r\n  else\r\n    return str + \"s\"\r\n  end\r\nend\r\n\r\nfunction getPlayer(color)\r\n  players = Player.getPlayers()\r\n  for _, player in ipairs(players) do\r\n    if string.lower(color) == string.lower(player.color) then\r\n      return player\r\n    end\r\n  end\r\nend\r\n\nend)\n__bundle_register(\"ArkNova.Constants\", function(require, _LOADED, __bundle_register, __bundle_modules)\n--                        Global Parameters\r\n-- Anything defined in this block will be available to all sub-scripts. Use\r\n-- with caution!\r\n\r\nSTATE_KEY = \"GLOBAL_STATE\"\r\n\r\nALL_COLORS = {\"white\", \"yellow\", \"red\", \"blue\"}\r\n\r\nPIECES = {\r\n  white = {\r\n    bag = \"911ef6\",\r\n    agent1 = \"8226c6\",\r\n    agent2 = \"76e12b\",\r\n    agent3 = \"fc5be3\",\r\n    agent4 = \"82f92d\",\r\n    appeal_token = \"026dd5\",\r\n    conservation_token = \"b9390c\",\r\n    rep_token = \"a3ee65\",\r\n    zone = \"d8acd6\",\r\n    border = \"08c4e3\"\r\n  },\r\n  yellow = {\r\n    bag = \"e0309b\",\r\n    agent1 = \"9edac5\",\r\n    agent2 = \"731ac3\",\r\n    agent3 = \"5c010f\",\r\n    agent4 = \"8876a6\",\r\n    appeal_token = \"6aa00c\",\r\n    conservation_token = \"641bf4\",\r\n    rep_token = \"fb9207\",\r\n    zone = \"8ad9db\",\r\n    border = \"c9b2f6\"\r\n  },\r\n  red = {\r\n    bag = \"32df13\",\r\n    agent1 = \"53910d\",\r\n    agent2 = \"484be4\",\r\n    agent3 = \"a106d9\",\r\n    agent4 = \"ffc547\",\r\n    appeal_token = \"c8c287\",\r\n    conservation_token = \"62fc61\",\r\n    rep_token = \"1ae25a\",\r\n    zone = \"85538c\",\r\n    border = \"a6fac9\"\r\n  },\r\n  blue = {\r\n    bag = \"acea32\",\r\n    agent1 = \"273ceb\",\r\n    agent2 = \"6b8fa0\",\r\n    agent3 = \"a2bda7\",\r\n    agent4 = \"a08017\",\r\n    appeal_token = \"92c2c3\",\r\n    conservation_token = \"d00422\",\r\n    rep_token = \"e3ec08\",\r\n    zone = \"d5294d\",\r\n    border = \"af1cfe\"\r\n  }\r\n}\r\n\r\n-- These are centered in front of the player zones for easier button spawning/manipulation\r\nANCHORS = {\r\n  white = \"7efeef\",\r\n  yellow = \"7380ea\",\r\n  red = \"0366a9\",\r\n  blue = \"dacc52\"\r\n}\r\n\r\nEXTRA_MARKERS = \"669758\"\r\nBREAK_TOKEN = \"bbf4bd\"\r\nCONSTRICT_TOKENS = \"902d46\"\r\nVENOM_TOKENS = \"81cd3e\"\r\nX_TOKENS = \"e2af64\" -- This represents the black \"X\" tokens\r\nTWO_X_TOKENS = \"1bd7f1\" -- This represents the \"2x\" tokens. Name is slightly misleading\r\n\r\nTABLE = \"d7b6e1\"\r\n\r\nASSOCIATION_DECK = \"118109\"\r\nANIMALS_DECK = \"5e1d75\"\r\nBUILD_DECK = \"071284\"\r\nSPONSORS_DECK = \"50c25f\"\r\nCARDS_DECK = \"14c118\"\r\n\r\nSINGLE_PLAYER_CARD = \"1e5455\"\r\n\r\nENCLOSURES = {\"b89493\", \"a23b67\", \"1fd2c8\", \"33b7eb\", \"d15fab\"}\r\nAVIARY = \"d9ff5d\"\r\nREPTILE_HOUSE = \"3cd044\"\r\nPETTING_ZOO = \"d20da2\"\r\nSPECIAL_ENCLOSURES = \"6be1bc\"\r\nKIOSK = \"f95ecc\"\r\nPAVILLION = \"de5f43\"\r\n\r\nGLOBE_MISC_MAPS = \"c142e2\"\r\nGLOBE_A_MAPS = \"9c19ae\"\r\nGLOBE_O_MAPS = \"64b055\"\r\n\r\nUNIVERSITIES = {\"ab7510\", \"246917\", \"c1f153\"}\r\nPARTNERSHIPS = {\"8478da\", \"f1ef52\", \"160086\", \"1fa074\", \"92c212\"}\r\n\r\nCONSERVATION_BONUSES = \"1c73d4\"\r\nMAIN_BOARD = \"1b01e6\"\r\nPROJECT_DECK = \"27f70f\"\r\nSIDE_BOARD = \"21492c\"\r\nCONSERVATION_DECK = \"853c1f\"\r\nOBJECTIVE_DECK = \"bd92ce\"\r\n\nend)\nreturn __bundle_require(\"__root\")",
       "LuaScriptState": "null",
       "XmlUI": "<button\r\n  id=\"blueSetupBtn\"\r\n  onClick=\"ready\"\r\n  position=\"0 250 200\"\r\n  width=\"1000\"\r\n  height=\"500\"\r\n  fontSize=\"150\"\r\n  fontStyle=\"bold\"\r\n  rotation=\"0 180 0\"\r\n  color=\"#1E87FF\"\r\n  active=\"false\">\r\n    Ready\r\n</button>"
     },
@@ -30828,7 +30828,7 @@
       "ColorDiffuse": {
         "r": 0.905,
         "g": 0.898,
-        "b": 0.171999872
+        "b": 0.1719994
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -30884,8 +30884,8 @@
       },
       "ColorDiffuse": {
         "r": 0.856,
-        "g": 0.09999988,
-        "b": 0.0939998552
+        "g": 0.0999993756,
+        "b": 0.09399938
       },
       "LayoutGroupSortIndex": 0,
       "Value": 0,
@@ -30940,7 +30940,7 @@
         "z": 0.0
       },
       "ColorDiffuse": {
-        "r": 0.117999889,
+        "r": 0.117999382,
         "g": 0.53,
         "b": 1.0
       },
@@ -30981,9 +30981,9 @@
         "posX": -25.5001411,
         "posY": 2.24228573,
         "posZ": -7.49978,
-        "rotX": 7.24692427E-06,
+        "rotX": 7.02613443E-06,
         "rotY": 359.980621,
-        "rotZ": -1.6978712E-06,
+        "rotZ": 4.153081E-07,
         "scaleX": 8.150012,
         "scaleY": 8.150012,
         "scaleZ": 8.150012
@@ -31023,8 +31023,7 @@
         "LoopingEffectIndex": 0
       },
       "LuaScript": "function playBellSound()\n    print(\"Hurry up!\")\n\n    self.AssetBundle.playTriggerEffect(0)\nend\n\nfunction onLoad()\n    local pos = self.getPosition()\r\n    params = {\r\n        click_function = \"playBellSound\",\r\n        function_owner = self,\r\r\n        position       = {0, -0.07, 0},\r\n        rotation       = {0, 180, 0},\r\n        width          = 128,\r\n        height         = 128,\r\n        font_size      = 340,\r\n        color          = {0, 0, 0},\r\n        font_color     = {1, 1, 1}\r\n    }\r\n    self.createButton(params)\r\nend",
-      "LuaScriptState": "",
-      "XmlUI": ""
+      "LuaScriptState": ""
     }
   ]
 }

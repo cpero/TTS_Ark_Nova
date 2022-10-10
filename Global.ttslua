@@ -1,11 +1,27 @@
 require('ArkNova.Constants')
 
---                        Global Event Handlers
-
+--  Global Event Handlers
 function onLoad(saved_data)
-
+  -- if not saved_data then
+  --   createGame()
+  --   return
+  -- end
+  --
+  -- createGame()
 end
 
 function onSave()
 
+end
+
+-- Helpers
+
+function loadGame(state)
+  log('Global loaded state: '..JSON.encode(state))
+end
+
+-- If a game is not found, a new game will be started
+function createGame()
+  -- table = getObjectFromGUID(TABLE)
+  -- table.call("createGame")
 end

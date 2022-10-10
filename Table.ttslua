@@ -1,34 +1,42 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
-function onLoad(s)
-  local state = JSON.decode(s)
+function onLoad(script_state)
   for _,color in ipairs(ALL_COLORS) do
     local b = getObjectFromGUID(PIECES[color]["border"])
     b.interactable = false
     b.locked = true
   end
 
-  if s["setup"] == "true" then
-    log("Setup state from load detected.")
-    self.UI.setAttribute("setupBtn", "active", false)
-  else
-    self.UI.setAttribute("setupBtn", "active", true)
-  end
+  local state = JSON.decode(script_state)
+  log("Table onLoad: ")
+  log(state)
+  gameStarted = state["gameStarted"]
+  Global.setVar("white_active", state["white_active"])
+  Global.setVar("yellow_active", state["yelow_active"])
+  Global.setVar("red_active", state["red_active"])
+  Global.setVar("blue_active", state["blue_active"])
+
+  self.UI.setAttribute("setupBtn", "active", not gameStarted)
 end
 
 function onSave()
   local state = {
-    setup = Global.getVar("setup")
+    gameStarted = gameStarted,
+    white_active = Global.getVar("white_active"),
+    yellow_active = Global.getVar("yellow_active"),
+    red_active = Global.getVar("red_active"),
+    blue_active = Global.getVar("blue_active"),
   }
-  return JSON.encode(state)
+  log("Table onSave: ")
+  log(state)
+  local state_str = JSON.encode(state)
+  return state_str
 end
 
 function setup()
   log("Setup button clicked")
   self.UI.setAttribute("setupBtn", "active", false)
-  Global.setVar("setup", "true")
-
   ready_players = {}
 
   local players = Player.getPlayers()
@@ -53,5 +61,15 @@ function readyPlayer(params)
   if #ready_players == #getSeatedPlayers() then
     log("All "..#ready_players.." players are ready!")
     broadcastToAll("All " .. #ready_players .. " players are ready!")
+    self.UI.setAttribute("allReadyBtn", "active", true)
+  end
+end
+
+function gameInit()
+  self.UI.setAttribute("allReadyBtn", "active", false)
+  gameStarted = true
+
+  for _,color in ipairs(getSeatedPlayers()) do
+    Global.setVar(toLowerCase(color).."_active", true)
   end
 end

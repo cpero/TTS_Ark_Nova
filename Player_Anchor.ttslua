@@ -21,10 +21,21 @@ function handleSetup(params)
   self.UI.setAttributes(color.."SetupLayout", {active = true})
   self.UI.setAttributes(color.."SetupBtn", { color = color})
 
-  map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
-  map.locked = true
-  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[1] .. "Title", { active = true })
-  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[1] .. "Subtitle", { active = true })
+  if not Global.getVar(color.."_map_guid") then
+    map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+    map.locked = true
+    self.UI.setAttributes(color.."Map" .. MAP_ROTATION[1] .. "Title", { active = true })
+    self.UI.setAttributes(color.."Map" .. MAP_ROTATION[1] .. "Subtitle", { active = true })
+    Global.setVar(color.."_map_index", 1)
+    Global.setVar(color.."_map_guid", map.getGUID())
+  else
+    map = getObjectFromGUID(Global.getVar(color.."_map_guid"))
+    map.locked = true
+    local map_index = getObjectFromGUID(Global.getVar(color.."_map_index"))
+    self.UI.setAttributes(color.."Map" .. MAP_ROTATION[map_index] .. "Title", { active = true })
+    self.UI.setAttributes(color.."Map" .. MAP_ROTATION[map_index] .. "Subtitle", { active = true })
+    MAP_INDEX = map_index
+  end
 
   table.call("readyPlayer", {color = color, ready = false})
 end
@@ -61,6 +72,7 @@ function onClickNextMap()
     MAP_INDEX = 1
   end
 
+  Global.setVar(color.."_map_index", MAP_INDEX)
   moveMap(curr_index)
 end
 
@@ -75,6 +87,7 @@ function onClickBackMap()
     MAP_INDEX = 3
   end
 
+  Global.setVar(color.."_map_index", MAP_INDEX)
   moveMap(curr_index)
 end
 
@@ -113,8 +126,12 @@ end
 function initBorder()
   border = getObjectFromGUID(PIECES[color]["border"])
 
-  border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)
-  border.interactable = false
-  border.locked = true
-  border.setColorTint(getPlayer(color).color)
+  if not Global.getVar(color.."_border") then
+    border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)
+    border.interactable = false
+    border.locked = true
+    border.setColorTint(getPlayer(color).color)
+
+     Global.setVar(color.."_border", true)
+  end
 end

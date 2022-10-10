@@ -1,0 +1,21 @@
+require("ArkNova.Constants")
+
+function onLoad(state)
+
+end
+
+function initBorder(color)
+  border = getObjectFromGUID(PIECES[color]["border"])
+  anchor = getObjectFromGUID(ANCHORS[color])
+  player_color = color
+
+  border.setPositionSmooth(anchor.getPosition(), false, true)
+  border.interactable = false
+  border.locked = true
+  border.setColorTint(getPlayer(color).color)
+  Global.setVar(color.."_border_enabled", true)
+end
+
+function onSave()
+
+end
