@@ -2,12 +2,9 @@ require('ArkNova.Constants')
 
 --  Global Event Handlers
 function onLoad(saved_data)
-  -- if not saved_data then
-  --   createGame()
-  --   return
-  -- end
-  --
-  -- createGame()
+  for _,color in ipairs(ALL_COLORS) do
+
+  end
 end
 
 function onSave()

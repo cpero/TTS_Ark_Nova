@@ -1,0 +1,69 @@
+require("ArkNova.Constants")
+
+local state = {
+  color = "",
+  score = 0
+}
+
+
+function onLoad(save)
+  local s = JSON.decode(save)
+  -- state["initScale"] = self.getScale()
+  -- state["initPosition"] = self.getPosition()
+  --
+  -- self.setScale({0, 0 ,0})
+  if next(s) == not nil then
+    state["color"] = s["color"]
+    state["score"] = s["score"]
+
+    initCounter({color = state["color"], score = state["score"]})
+  end
+end
+
+function onSave()
+  local state_str = JSON.encode(state)
+  return state_str
+end
+
+function initCounter(params)
+  local color = params["color"]
+  local score = params["score"]
+
+  -- self.setScale(state["initScale"])
+  -- self.setPosition(state["initPosition"])
+  -- self.setRotation({0, 180 ,0})
+
+  counter = getObjectFromGUID(PLAYER_COUNTER[color]["counter"])
+  counter.setColorTint(Color.fromString(color))
+  counter.setValue(score)
+end
+
+function handleAddOne()
+  state["score"] = state["score"] + 1
+  counter.setValue(score)
+end
+
+function handleAddFive()
+  state["score"] = state["score"] + 5
+  counter.setValue(score)
+end
+
+function handleAddTen()
+  state["score"] = state["score"] + 10
+  counter.setValue(score)
+end
+
+function handleSubOne()
+  state["score"] = state["score"] - 1
+  counter.setValue(score)
+end
+
+function handleSubFive()
+  state["score"] = state["score"] - 5
+  counter.setValue(score)
+end
+
+function handleSubTen()
+  state["score"] = state["score"] - 10
+  counter.setValue(score)
+end

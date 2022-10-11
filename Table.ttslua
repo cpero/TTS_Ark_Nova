@@ -1,17 +1,21 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
+local DEBUG = true
+
 function onLoad(script_state)
   for _,color in ipairs(ALL_COLORS) do
     local b = getObjectFromGUID(PIECES[color]["border"])
     b.interactable = false
     b.locked = true
+
+    local anchor = getObjectFromGUID(ANCHORS[color])
+    anchor.call("initAnchor", {color = color})
   end
 
   local state = JSON.decode(script_state)
-  log("Table onLoad: ")
-  log(state)
   gameStarted = state["gameStarted"]
+
   Global.setVar("white_active", state["white_active"])
   Global.setVar("yellow_active", state["yelow_active"])
   Global.setVar("red_active", state["red_active"])
@@ -21,17 +25,15 @@ function onLoad(script_state)
 end
 
 function onSave()
-  local state = {
-    gameStarted = gameStarted,
-    white_active = Global.getVar("white_active"),
-    yellow_active = Global.getVar("yellow_active"),
-    red_active = Global.getVar("red_active"),
-    blue_active = Global.getVar("blue_active"),
-  }
-  log("Table onSave: ")
-  log(state)
-  local state_str = JSON.encode(state)
-  return state_str
+  -- local state = {
+  --   gameStarted = gameStarted,
+  --   white_active = Global.getVar("white_active"),
+  --   yellow_active = Global.getVar("yellow_active"),
+  --   red_active = Global.getVar("red_active"),
+  --   blue_active = Global.getVar("blue_active"),
+  -- }
+  -- local state_str = JSON.encode(state)
+  -- return state_str
 end
 
 function setup()
@@ -39,13 +41,23 @@ function setup()
   self.UI.setAttribute("setupBtn", "active", false)
   ready_players = {}
 
-  local players = Player.getPlayers()
-  for _, player in ipairs(players) do
-    local color = toLowerCase(player.color)
-    log("Now processing " .. color)
-    local anchor = getObjectFromGUID(ANCHORS[color])
-    anchor.call("handleSetup", {color = color})
+  if DEBUG then
+    for _,color in ipairs(ALL_COLORS) do
+      log("Now processing " .. color)
+      local anchor = getObjectFromGUID(ANCHORS[color])
+      anchor.call("handleSetup", {color = color})
+    end
+  else
+    local players = Player.getPlayers()
+    for _, player in ipairs(players) do
+      local color = toLowerCase(player.color)
+      log("Now processing " .. color)
+      local anchor = getObjectFromGUID(ANCHORS[color])
+      anchor.call("initAnchor", {color = color})
+      anchor.call("handleSetup", {color = color})
+    end
   end
+
 end
 
 function readyPlayer(params)
@@ -58,10 +70,16 @@ function readyPlayer(params)
     ready_players = removeItem(ready_players, color)
   end
 
-  if #ready_players == #getSeatedPlayers() then
+  if DEBUG and #ready_players == 4 then
     log("All "..#ready_players.." players are ready!")
     broadcastToAll("All " .. #ready_players .. " players are ready!")
     self.UI.setAttribute("allReadyBtn", "active", true)
+  elseif not DEBUG and #ready_players == #getSeatedPlayers() then
+    log("All "..#ready_players.." players are ready!")
+    broadcastToAll("All " .. #ready_players .. " players are ready!")
+    self.UI.setAttribute("allReadyBtn", "active", true)
+  else
+    self.UI.setAttribute("allReadyBtn", "active", false)
   end
 end
 
@@ -69,7 +87,19 @@ function gameInit()
   self.UI.setAttribute("allReadyBtn", "active", false)
   gameStarted = true
 
-  for _,color in ipairs(getSeatedPlayers()) do
-    Global.setVar(toLowerCase(color).."_active", true)
+  if DEBUG then
+    for _,color in ipairs(ALL_COLORS) do
+      local c = toLowerCase(color)
+      Global.setVar(c.."_active", true)
+      local anchor = getObjectFromGUID(ANCHORS[c])
+      anchor.call("gameInit", {color = c})
+    end
+  else
+    for _,color in ipairs(getSeatedPlayers()) do
+      local c = toLowerCase(color)
+      Global.setVar(c.."_active", true)
+      local anchor = getObjectFromGUID(ANCHORS[c])
+      anchor.call("gameInit", {color = c})
+    end
   end
 end

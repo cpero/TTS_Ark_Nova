@@ -2,7 +2,7 @@
 -- Anything defined in this block will be available to all sub-scripts. Use
 -- with caution!
 
-STATE_KEY = "GLOBAL_STATE"
+STATE = "7bcf06"
 
 ALL_COLORS = {"white", "yellow", "red", "blue"}
 
@@ -63,6 +63,126 @@ ANCHORS = {
   yellow = "7380ea",
   red = "0366a9",
   blue = "dacc52"
+}
+
+TAGS = {
+  white = {
+    state = "824008",
+    AMERICA = "05a8e2",
+    AFRICA = "447060",
+    EUROPE = "1b2192",
+    ASIA = "974af4",
+    AUSTRALIA = "dd46f5",
+    MICROSCOPE = "a24d40",
+    PRIMATE = "d5b59f",
+    HERBIVORE = "9713a6",
+    PREDATOR = "8a3461",
+    BIRD = "d8064d",
+    REPTILE = "382fa1",
+    PETTING = "5d9661",
+    BEAR = "6e3500",
+    WATER = "f157e3",
+    ROCK = "7bad5d",
+    WILD = "747031"
+  },
+  yellow = {
+    state = "6658f2",
+    AMERICA = "bb282b",
+    AFRICA = "974321",
+    EUROPE = "59077b",
+    ASIA = "6669b7",
+    AUSTRALIA = "6472c1",
+    MICROSCOPE = "3d6504",
+    PRIMATE = "cf1888",
+    HERBIVORE = "fe32b0",
+    PREDATOR = "5a1dac",
+    BIRD = "cdb435",
+    REPTILE = "265bb8",
+    PETTING = "5326bf",
+    BEAR = "8fe386",
+    WATER = "70ff7d",
+    ROCK = "a6377e",
+    WILD = "632c6a"
+  },
+  red = {
+    state = "9aa495",
+    AMERICA = "daebf5",
+    AFRICA = "dbda9f",
+    EUROPE = "6ebfa6",
+    ASIA = "88b067",
+    AUSTRALIA = "707eda",
+    MICROSCOPE = "5abfab",
+    PRIMATE = "34770d",
+    HERBIVORE = "328a89",
+    PREDATOR = "0e2e2b",
+    BIRD = "663ac4",
+    REPTILE = "bcdf9d",
+    PETTING = "cb9813",
+    BEAR = "8e40a9",
+    WATER = "079056",
+    ROCK = "85bfd1",
+    WILD = "3060d7"
+  },
+  blue = {
+    state = "fff452",
+    AMERICA = "37f68d",
+    AFRICA = "9a7ec6",
+    EUROPE = "aaa23b",
+    ASIA = "919931",
+    AUSTRALIA = "bc6396",
+    MICROSCOPE = "4aa587",
+    PRIMATE = "3a397a",
+    HERBIVORE = "f80a74",
+    PREDATOR = "12f558",
+    BIRD = "60cfb2",
+    REPTILE = "2f330f",
+    PETTING = "82884c",
+    BEAR = "3339cc",
+    WATER = "aab98c",
+    ROCK = "059b31",
+    WILD = "206ecd"
+  }
+}
+
+TAG_TYPES = {"AMERICA", "AFRICA", "EUROPE", "ASIA", "AUSTRALIA", "MICROSCOPE", "PRIMATE", "HERBIVORE", "PREDATOR", "BIRD", "REPTILE", "PETTING", "BEAR", "WATER", "ROCK", "WILD"}
+
+PLAYER_COUNTER = {
+  white = {
+    counter = "55f6eb",
+    add_one = "f0c482",
+    add_five = "14b008",
+    add_ten = "873ae0",
+    sub_one = "be5e61",
+    sub_five = "1ee350",
+    sub_ten = "ced1f8"
+  },
+  yellow = {
+    counter = "06dad3",
+    add_one = "e86a23",
+    add_five = "6dc1c1",
+    add_ten = "43e5b0",
+    sub_one = "1eeef4",
+    sub_five = "a37fa6",
+    sub_ten = "b11366"
+  },
+  red = {
+    counter = "280df4",
+    add_one = "a7e64e",
+    add_five = "71103e",
+    add_ten = "03ad84",
+    sub_one = "4fba77",
+    sub_five = "8bd3dd",
+    sub_ten = "bf2ab8"
+  },
+  blue = {
+    counter = "e4b119",
+    add_one = "4e8cfc",
+    add_five = "516543",
+    add_ten = "339d41",
+    sub_one = "c62408",
+    sub_five = "44f673",
+    sub_ten = "ae1f15"
+  }
 }
 
 EXTRA_MARKERS = "669758"

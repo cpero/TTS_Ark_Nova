@@ -1,0 +1,77 @@
+require("ArkNova.Constants")
+
+local DEBUG = true
+
+local state = {
+  color = "",
+  AMERICA = 0,
+  AFRICA = 0,
+  EUROPE = 0,
+  ASIA = 0,
+  AUSTRALIA = 0,
+  MICROSCOPE = 0,
+  PRIMATE = 0,
+  HERBIVORE = 0,
+  PREDATOR = 0,
+  BIRD = 0,
+  REPTILE = 0,
+  PETTING = 0,
+  BEAR = 0,
+  WATER = 0,
+  ROCK = 0,
+  WILD = 0,
+  initScales = {}
+}
+
+function onLoad(save)
+  local s = JSON.decode(save)
+  if #save > 0 and next(s) == not nil and #s["color"] > 0 then
+    state = save
+  else
+    local color = self.UI.getAttribute("tagPanel", "color")
+    log(color)
+    for i, t in ipairs(TAG_TYPES) do
+      local tag = getObjectFromGUID(TAGS[color][t])
+      state["initScales"][i] = tag.getScale()
+      if not DEBUG then
+        tag.setScale({0, 0, 0})
+      end
+    end
+  end
+end
+
+function onSave()
+  local str = JSON.encode(state)
+  return str
+end
+
+function initPlayerTags(params)
+  local color = params["color"]
+  state["color"] = color
+  local anchor = getObjectFromGUID(ANCHORS[color])
+  self.setPosition(anchor.getPosition() + vector(19, 1, -50))
+  self.setColorTint(Color.White)
+  self.locked = true
+  self.interactable = false
+  self.UI.setAttributes("tagPanel", { active = "true" })
+
+  if DEBUG then
+    for _, color in ipairs(ALL_COLORS) do
+      for i, t in ipairs(TAG_TYPES) do
+        local tag = getObjectFromGUID(TAGS[color][t])
+        tag.setScale(state["initScales"][i])
+        tag.locked = true
+        tag.interactable = true
+      end
+    end
+  else
+    for _, color in ipairs(getSeatedPlayers()) do
+      for i, t in ipairs(TAG_TYPES) do
+        local tag = getObjectFromGUID(TAGS[color][t])
+        tag.setScale(state["initScales"][i])
+        tag.locked = true
+        tag.interactable = false
+      end
+    end
+  end
+end

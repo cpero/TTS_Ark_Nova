@@ -4,6 +4,8 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
+local DEBUG = true
+
 local MAP_ROTATION = {"A", "O", "Misc"}
 local MAP_INDEX = 1
 
@@ -12,11 +14,22 @@ local map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)
 local map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)
 local map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)
 
-function handleSetup(params)
+function initAnchor(params)
   color = params["color"]
   self_pos = self.getPosition()
 
+  counter = getObjectFromGUID(PLAYER_COUNTER[color]["counter"])
+  add_one = getObjectFromGUID(PLAYER_COUNTER[color]["add_one"])
+  add_five = getObjectFromGUID(PLAYER_COUNTER[color]["add_five"])
+  add_ten = getObjectFromGUID(PLAYER_COUNTER[color]["add_ten"])
+  sub_one = getObjectFromGUID(PLAYER_COUNTER[color]["sub_one"])
+  sub_five = getObjectFromGUID(PLAYER_COUNTER[color]["sub_five"])
+  sub_ten = getObjectFromGUID(PLAYER_COUNTER[color]["sub_ten"])
+end
+
+function handleSetup(params)
   initBorder()
+
   self.UI.setAttributes(color.."ActiveZone", {active = true})
   self.UI.setAttributes(color.."SetupLayout", {active = true})
   self.UI.setAttributes(color.."SetupBtn", { color = color})
@@ -128,10 +141,27 @@ function initBorder()
 
   if not Global.getVar(color.."_border") then
     border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)
-    border.interactable = false
+    border.setScale({19, 1, 29})
+    border.interactable = true
     border.locked = true
-    border.setColorTint(getPlayer(color).color)
+    border.setColorTint(Color.fromString(color))
 
-     Global.setVar(color.."_border", true)
+    Global.setVar(color.."_border", true)
   end
+end
+
+function gameInit(params)
+  local color = params["color"]
+
+  self.UI.setAttributes(color.."SetupLayout", { active = false })
+  map.setPositionSmooth(map.getPosition() + vector(0, -1, -10), false, true)
+  map.interactable = DEBUG
+
+  local counter = getObjectFromGUID(PLAYER_COUNTER[color]["counter"])
+  counter.call("initCounter", {color = color, score = 25})
+
+  log(color)
+  local playerTags = getObjectFromGUID(TAGS[color]["state"])
+  log(playerTags)
+  playerTags.call("initPlayerTags", {color = color})
 end
