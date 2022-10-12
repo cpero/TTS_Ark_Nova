@@ -185,6 +185,64 @@ PLAYER_COUNTER = {
   }
 }
 
+PLAYER_BAGS = {
+  white = {
+    one = "a8c365",
+    two = "ef063e",
+    three = "bff298",
+    four = "8b9d9b",
+    five = "61bfaf",
+    aviary = "bd1aaf",
+    reptile = "cf28f1",
+    petting = "78db9d",
+    special = "6be1bc",
+    kiosk = "8a5ed2",
+    pavillion = "1d7c0d"
+
+  },
+  yellow = {
+    one = "1eaf14",
+    two = "403f6b",
+    three = "d3698e",
+    four = "a06e9c",
+    five = "6855a9",
+    aviary = "0b0d4e",
+    reptile = "b97a72",
+    petting = "bb8797",
+    special = "7b2f2b",
+    kiosk = "b9b388",
+    pavillion = "5085c2"
+  },
+  red = {
+    one = "e3a2b8",
+    two = "11699b",
+    three = "66797b",
+    four = "242aab",
+    five = "7c0254",
+    aviary = "bdc00c",
+    reptile = "4668c0",
+    petting = "b34565",
+    special = "4de575",
+    kiosk = "3fa157",
+    pavillion = "b1cb88"
+  },
+  blue = {
+    one = "51ff8c",
+    two = "76aa6a",
+    three = "fde300",
+    four = "83df6c",
+    five = "1f33fe",
+    aviary = "3bdfb6",
+    reptile = "a0df9d",
+    petting = "6817d1",
+    special = "9c743c",
+    kiosk = "2db5d6",
+    pavillion = "af8a47"
+  }
+}
+
+PLAYER_BAG_TYPES = {"one", "two", "three", "four", "five", "aviary", "reptile", "petting", "special", "kiosk", "pavillion" }
+
 EXTRA_MARKERS = "669758"
 BREAK_TOKEN = "bbf4bd"
 CONSTRICT_TOKENS = "902d46"

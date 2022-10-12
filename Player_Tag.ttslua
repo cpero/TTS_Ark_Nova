@@ -19,30 +19,101 @@ local state = {
   BEAR = 0,
   WATER = 0,
   ROCK = 0,
-  WILD = 0,
-  initScales = {}
+  WILD = 0
+}
+
+local TAG_X_POS = {
+  16.4,  -- Amer
+  14.9,  -- Africa
+  13.4,  -- Euro
+  11.9,  -- Asia
+  10.4,  -- Aus
+  8.9,   -- Micro
+  7.4,   -- Primate
+  5.9,   -- Herb
+  4.3,   -- Pred
+  2.9,   -- Bird
+  1.4,   -- Rep
+  -.1,   -- Pet
+  -1.55, -- Bear
+  -3.1,  -- Water
+  -4.9,  -- Rock
+  -6.3   -- Wild
+}
+
+local TAG_Y_POS = {
+  -52,    -- Amer
+  -52.1,  -- Africa
+  -52.01, -- Euro
+  -52.1,  -- Asia
+  -52.01, -- Aus
+  -52,    -- Micro
+  -52.01, -- Primate
+  -52.1,  -- Herb
+  -52.1,  -- Pred
+  -52,    -- Bird
+  -52,    -- Rep
+  -52,    -- Pet
+  -52,    -- Bear
+  -52,    -- Water
+  -52,    -- Rock
+  -52     -- Wild
+}
+
+
+local BAG_X_POS = {
+  15.7, -- One
+  13.5, -- Two
+  11.2, -- Three
+  8.7, -- Four
+  6, -- Five
+  3, -- Bird
+  -0.5, -- Reptile
+  -3.5, -- Petting
+  -5, -- Special
+  -8.5, -- Kiosk
+  -8.5 -- Pavillion
+}
+
+local BAG_Y_POS = {
+  -44.9, -- One
+  -45.6, -- Two
+  -45.3, -- Three
+  -45.5, -- Four
+  -45.8, -- Five
+  -45.3, -- Bird
+  -45.3, -- Reptile
+  -45.3, -- Petting
+  -44.7, -- Special
+  -44.7, -- Kiosk
+  -46.5 -- Pavillion
 }
 
 function onLoad(save)
+  local color = self.UI.getAttribute("tagPanel", "color")
+  local anchor = getObjectFromGUID(ANCHORS[color])
+
+  for i, t in ipairs(TAG_TYPES) do
+    local tag = getObjectFromGUID(TAGS[color][t])
+    tag.setPosition(anchor.getPosition() + vector(TAG_X_POS[i], 0, TAG_Y_POS[i]))
+  end
+
+  for i, t in ipairs(PLAYER_BAG_TYPES) do
+    local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
+    bag.locked = true
+    log(BAG_X_POS[i])
+    bag.setPosition(anchor.getPosition() + vector(BAG_X_POS[i], 0, BAG_Y_POS[i]))
+  end
+
   local s = JSON.decode(save)
   if #save > 0 and next(s) == not nil and #s["color"] > 0 then
     state = save
-  else
-    local color = self.UI.getAttribute("tagPanel", "color")
-    log(color)
-    for i, t in ipairs(TAG_TYPES) do
-      local tag = getObjectFromGUID(TAGS[color][t])
-      state["initScales"][i] = tag.getScale()
-      if not DEBUG then
-        tag.setScale({0, 0, 0})
-      end
-    end
   end
 end
 
 function onSave()
-  local str = JSON.encode(state)
-  return str
+  -- local str = JSON.encode(state)
+  -- return str
 end
 
 function initPlayerTags(params)
@@ -59,18 +130,30 @@ function initPlayerTags(params)
     for _, color in ipairs(ALL_COLORS) do
       for i, t in ipairs(TAG_TYPES) do
         local tag = getObjectFromGUID(TAGS[color][t])
-        tag.setScale(state["initScales"][i])
+        tag.setPosition(tag.getPosition() + vector(0, .45, 0))
         tag.locked = true
         tag.interactable = true
+      end
+    end
+
+    for _, color in ipairs(ALL_COLORS) do
+      for _, t in ipairs(PLAYER_BAG_TYPES) do
+        local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
+        bag.setPosition(bag.getPosition() + vector(0, .45, 0))
       end
     end
   else
     for _, color in ipairs(getSeatedPlayers()) do
       for i, t in ipairs(TAG_TYPES) do
         local tag = getObjectFromGUID(TAGS[color][t])
-        tag.setScale(state["initScales"][i])
+        tag.setPosition(tag.getPosition() + vector(0, .45, 0))
         tag.locked = true
         tag.interactable = false
+      end
+
+      for _, t in ipairs(PLAYER_BAG_TYPES) do
+        local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
+        bag.setPosition(bag.getPosition() + vector(0, .45, 0))
       end
     end
   end

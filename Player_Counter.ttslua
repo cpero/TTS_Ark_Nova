@@ -2,17 +2,16 @@ require("ArkNova.Constants")
 
 local state = {
   color = "",
-  score = 0
+  score = 0,
+  setup = false
 }
 
 
 function onLoad(save)
+  self.locked = true
+
   local s = JSON.decode(save)
-  -- state["initScale"] = self.getScale()
-  -- state["initPosition"] = self.getPosition()
-  --
-  -- self.setScale({0, 0 ,0})
-  if next(s) == not nil then
+  if next(s) == not nil and s["setup"] == "true" then
     state["color"] = s["color"]
     state["score"] = s["score"]
 
@@ -29,13 +28,13 @@ function initCounter(params)
   local color = params["color"]
   local score = params["score"]
 
-  -- self.setScale(state["initScale"])
-  -- self.setPosition(state["initPosition"])
-  -- self.setRotation({0, 180 ,0})
-
+  state["setup"] = true
+  local anchor = getObjectFromGUID(ANCHORS[color])
   counter = getObjectFromGUID(PLAYER_COUNTER[color]["counter"])
   counter.setColorTint(Color.fromString(color))
   counter.setValue(score)
+  counter.setPosition(anchor.getPosition() + vector(-13.5, .8, -50.5))
+  counter.setScale({2.5, 2.5, 2.5})
 end
 
 function handleAddOne()

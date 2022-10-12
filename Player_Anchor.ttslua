@@ -140,8 +140,7 @@ function initBorder()
   border = getObjectFromGUID(PIECES[color]["border"])
 
   if not Global.getVar(color.."_border") then
-    border.setPositionSmooth(self.getPosition() + vector(-0.5, 1.7, -29), false, true)
-    border.setScale({19, 1, 29})
+    border.setPosition(border.getPosition() + vector(0, 1.7, 0))
     border.interactable = true
     border.locked = true
     border.setColorTint(Color.fromString(color))
@@ -160,8 +159,6 @@ function gameInit(params)
   local counter = getObjectFromGUID(PLAYER_COUNTER[color]["counter"])
   counter.call("initCounter", {color = color, score = 25})
 
-  log(color)
   local playerTags = getObjectFromGUID(TAGS[color]["state"])
-  log(playerTags)
   playerTags.call("initPlayerTags", {color = color})
 end

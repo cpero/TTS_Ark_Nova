@@ -8,9 +8,12 @@ function onLoad(script_state)
     local b = getObjectFromGUID(PIECES[color]["border"])
     b.interactable = false
     b.locked = true
+    b.setScale({19, 10, 32})
 
     local anchor = getObjectFromGUID(ANCHORS[color])
     anchor.call("initAnchor", {color = color})
+
+    b.setPosition(anchor.getPosition() + vector(0, 0, -30))
   end
 
   local state = JSON.decode(script_state)
