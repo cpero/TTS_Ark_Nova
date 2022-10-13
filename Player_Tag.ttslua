@@ -89,6 +89,13 @@ local BAG_Y_POS = {
   -46.5 -- Pavillion
 }
 
+local EXTRA_BAG_X_POS = {
+  -10.8, -- Constriction
+  -12.5, -- Venom
+  -14.5, -- X
+  -16.5, -- 2X
+}
+
 function onLoad(save)
   local color = self.UI.getAttribute("tagPanel", "color")
   local anchor = getObjectFromGUID(ANCHORS[color])
@@ -101,8 +108,14 @@ function onLoad(save)
   for i, t in ipairs(PLAYER_BAG_TYPES) do
     local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
     bag.locked = true
-    log(BAG_X_POS[i])
     bag.setPosition(anchor.getPosition() + vector(BAG_X_POS[i], 0, BAG_Y_POS[i]))
+  end
+
+  for i, t in ipairs(EXTRA_BAG_TYPES) do
+    local bag = getObjectFromGUID(EXTRA_BAGS[color][t])
+    bag.locked = true
+    bag.setPosition(anchor.getPosition() + vector(EXTRA_BAG_X_POS[i], 0, -45.5))
+    bag.setRotation({0, 0, 0})
   end
 
   local s = JSON.decode(save)
@@ -126,6 +139,8 @@ function initPlayerTags(params)
   self.interactable = false
   self.UI.setAttributes("tagPanel", { active = "true" })
 
+  self.UI.setAttributes("extraBags", { active = "true" })
+
   if DEBUG then
     for _, color in ipairs(ALL_COLORS) do
       for i, t in ipairs(TAG_TYPES) do
@@ -134,11 +149,14 @@ function initPlayerTags(params)
         tag.locked = true
         tag.interactable = true
       end
-    end
 
-    for _, color in ipairs(ALL_COLORS) do
       for _, t in ipairs(PLAYER_BAG_TYPES) do
         local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
+        bag.setPosition(bag.getPosition() + vector(0, .45, 0))
+      end
+
+      for _, t in ipairs(EXTRA_BAG_TYPES) do
+        local bag = getObjectFromGUID(EXTRA_BAGS[color][t])
         bag.setPosition(bag.getPosition() + vector(0, .45, 0))
       end
     end
@@ -153,6 +171,11 @@ function initPlayerTags(params)
 
       for _, t in ipairs(PLAYER_BAG_TYPES) do
         local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
+        bag.setPosition(bag.getPosition() + vector(0, .45, 0))
+      end
+
+      for _, t in ipairs(EXTRA_BAG_TYPES) do
+        local bag = getObjectFromGUID(EXTRA_BAGS[color][t])
         bag.setPosition(bag.getPosition() + vector(0, .45, 0))
       end
     end

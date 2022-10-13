@@ -1,0 +1,11 @@
+function initBreakToken(params)
+  local numPlayers = params["numPlayers"]
+
+  if numPlayers == 2 then
+    log("2 Players")
+  elseif numPlayers == 3 then
+    log("3 Players")
+  elseif numPlayers == 4 then
+    log("4 Players")
+  end
+end

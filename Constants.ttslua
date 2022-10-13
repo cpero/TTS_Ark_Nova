@@ -243,14 +243,40 @@ PLAYER_BAGS = {
 
 PLAYER_BAG_TYPES = {"one", "two", "three", "four", "five", "aviary", "reptile", "petting", "special", "kiosk", "pavillion" }
 
+EXTRA_BAGS = {
+  white = {
+    constriction = "902d46",
+    venom = "81cd3e",
+    x = "e2af64",
+    twox = "1bd7f1"
+  },
+  yellow = {
+    constriction = "8f6a4b",
+    venom = "251f4d",
+    x = "c1e90c",
+    twox = "3cf0c9"
+  },
+  red = {
+    constriction = "1d6e14",
+    venom = "5b9df5",
+    x = "0c449c",
+    twox = "29a759"
+  },
+  blue = {
+    constriction = "69f1c1",
+    venom = "0ca5ac",
+    x = "53db13",
+    twox = "6278aa"
+  }
+}
+
+EXTRA_BAG_TYPES = {"constriction", "venom", "x", "twox"}
+
 EXTRA_MARKERS = "669758"
 BREAK_TOKEN = "bbf4bd"
-CONSTRICT_TOKENS = "902d46"
-VENOM_TOKENS = "81cd3e"
-X_TOKENS = "e2af64" -- This represents the black "X" tokens
-TWO_X_TOKENS = "1bd7f1" -- This represents the "2x" tokens. Name is slightly misleading
 
 TABLE = "d7b6e1"
+MAIN_BOARD = "1b01e6"
 
 ASSOCIATION_DECK = "118109"
 ANIMALS_DECK = "5e1d75"
@@ -259,14 +285,6 @@ SPONSORS_DECK = "50c25f"
 CARDS_DECK = "14c118"
 
 SINGLE_PLAYER_CARD = "1e5455"
-
-ENCLOSURES = {"b89493", "a23b67", "1fd2c8", "33b7eb", "d15fab"}
-AVIARY = "d9ff5d"
-REPTILE_HOUSE = "3cd044"
-PETTING_ZOO = "d20da2"
-SPECIAL_ENCLOSURES = "6be1bc"
-KIOSK = "f95ecc"
-PAVILLION = "de5f43"
 
 GLOBE_MISC_MAPS = "c142e2"
 GLOBE_A_MAPS = "9c19ae"

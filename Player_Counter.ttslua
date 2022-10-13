@@ -29,6 +29,9 @@ function initCounter(params)
   local score = params["score"]
 
   state["setup"] = true
+  state["score"] = score
+  state["color"] = color
+
   local anchor = getObjectFromGUID(ANCHORS[color])
   counter = getObjectFromGUID(PLAYER_COUNTER[color]["counter"])
   counter.setColorTint(Color.fromString(color))
@@ -39,30 +42,30 @@ end
 
 function handleAddOne()
   state["score"] = state["score"] + 1
-  counter.setValue(score)
+  counter.setValue(state["score"])
 end
 
 function handleAddFive()
   state["score"] = state["score"] + 5
-  counter.setValue(score)
+  counter.setValue(state["score"])
 end
 
 function handleAddTen()
   state["score"] = state["score"] + 10
-  counter.setValue(score)
+  counter.setValue(state["score"])
 end
 
 function handleSubOne()
   state["score"] = state["score"] - 1
-  counter.setValue(score)
+  counter.setValue(state["score"])
 end
 
 function handleSubFive()
   state["score"] = state["score"] - 5
-  counter.setValue(score)
+  counter.setValue(state["score"])
 end
 
 function handleSubTen()
   state["score"] = state["score"] - 10
-  counter.setValue(score)
+  counter.setValue(state["score"])
 end

@@ -97,6 +97,14 @@ function gameInit()
       local anchor = getObjectFromGUID(ANCHORS[c])
       anchor.call("gameInit", {color = c})
     end
+
+    local i = math.random(0, #ALL_COLORS)
+    local firstPlayer = ALL_COLORS[i]
+    broadcastToAll(firstPlayer.." will go first!")
+
+    Turns.enable = true
+    Turns.type = 1
+    Turns.order = getTurnOrder(ALL_COLORS, i)
   else
     for _,color in ipairs(getSeatedPlayers()) do
       local c = toLowerCase(color)
@@ -104,5 +112,30 @@ function gameInit()
       local anchor = getObjectFromGUID(ANCHORS[c])
       anchor.call("gameInit", {color = c})
     end
+
+    local i = math.random(0, #getSeatedPlayers())
+    local firstPlayer = getSeatedPlayers()[i]
+    broadcastToAll(firstPlayer.." will go first!")
+
+    Turns.enable = true
+    Turns.type = 1
+    Turns.order = getTurnOrder(getSeatedPlayers(), i)
   end
+
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  mainBoard.call("initBoard", {turnOrder = Turns.order})
+end
+
+function getTurnOrder(players, startIndex)
+  local turnOrder = {}
+  local turnIndex = 1
+  for i = startIndex, #players, 1 do
+    turnOrder[turnIndex] = players[i]
+    turnIndex = turnIndex + 1
+  end
+  for i = 1, startIndex - 1, 1 do
+    turnOrder[turnIndex] = players[i]
+    turnIndex = turnIndex + 1
+  end
+  return turnOrder
 end

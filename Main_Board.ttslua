@@ -1,0 +1,10 @@
+require("ArkNova.Constants")
+
+function initBoard(params)
+  local turnOrder = params["turnOrder"]
+
+  local numPlayers = #turnOrder
+
+  local breakToken = getObjectFromGUID(BREAK_TOKEN)
+  breakToken.call("initBreakToken", {numPlayers = numPlayers})
+end
