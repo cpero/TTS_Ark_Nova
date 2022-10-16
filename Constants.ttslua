@@ -8,7 +8,6 @@ ALL_COLORS = {"white", "yellow", "red", "blue"}
 
 PIECES = {
   white = {
-    bag = "911ef6",
     agent1 = "8226c6",
     agent2 = "76e12b",
     agent3 = "fc5be3",
@@ -20,7 +19,6 @@ PIECES = {
     border = "08c4e3"
   },
   yellow = {
-    bag = "e0309b",
     agent1 = "9edac5",
     agent2 = "731ac3",
     agent3 = "5c010f",
@@ -32,7 +30,6 @@ PIECES = {
     border = "c9b2f6"
   },
   red = {
-    bag = "32df13",
     agent1 = "53910d",
     agent2 = "484be4",
     agent3 = "a106d9",
@@ -44,7 +41,6 @@ PIECES = {
     border = "a6fac9"
   },
   blue = {
-    bag = "acea32",
     agent1 = "273ceb",
     agent2 = "6b8fa0",
     agent3 = "a2bda7",
@@ -56,6 +52,7 @@ PIECES = {
     border = "af1cfe"
   }
 }
+
 
 -- These are centered in front of the player zones for easier button spawning/manipulation
 ANCHORS = {
@@ -268,6 +265,13 @@ EXTRA_BAGS = {
     x = "53db13",
     twox = "6278aa"
   }
+}
+
+PLAYER_CUBES = {
+  white = "911ef6",
+  yellow = "e0309b",
+  red = "32df13",
+  blue = "acea32"
 }
 
 EXTRA_BAG_TYPES = {"constriction", "venom", "x", "twox"}

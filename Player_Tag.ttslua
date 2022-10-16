@@ -118,6 +118,10 @@ function onLoad(save)
     bag.setRotation({0, 0, 0})
   end
 
+  local cubes = getObjectFromGUID(PLAYER_CUBES[color])
+  cubes.setPosition(anchor.getPosition() + vector(BAG_X_POS[1] + 0.1, 0, BAG_Y_POS[1] - 2))
+  cubes.locked = true
+
   local s = JSON.decode(save)
   if #save > 0 and next(s) == not nil and #s["color"] > 0 then
     state = save
@@ -133,12 +137,11 @@ function initPlayerTags(params)
   local color = params["color"]
   state["color"] = color
   local anchor = getObjectFromGUID(ANCHORS[color])
+
   self.setPosition(anchor.getPosition() + vector(19, 1, -50))
-  self.setColorTint(Color.White)
   self.locked = true
   self.interactable = false
   self.UI.setAttributes("tagPanel", { active = "true" })
-
   self.UI.setAttributes("extraBags", { active = "true" })
 
   if DEBUG then
@@ -159,6 +162,9 @@ function initPlayerTags(params)
         local bag = getObjectFromGUID(EXTRA_BAGS[color][t])
         bag.setPosition(bag.getPosition() + vector(0, .45, 0))
       end
+
+      local cubes = getObjectFromGUID(PLAYER_CUBES[color])
+      cubes.setPosition(cubes.getPosition() + vector(0, .45, 0))
     end
   else
     for _, color in ipairs(getSeatedPlayers()) do
@@ -178,6 +184,9 @@ function initPlayerTags(params)
         local bag = getObjectFromGUID(EXTRA_BAGS[color][t])
         bag.setPosition(bag.getPosition() + vector(0, .45, 0))
       end
+
+      local cubes = getObjectFromGUID(PLAYER_CUBES[color])
+      cubes.setPosition(cubes.getPosition() + vector(0, .45, 0))
     end
   end
 end

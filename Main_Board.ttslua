@@ -1,5 +1,11 @@
 require("ArkNova.Constants")
 
+local APPEAL_TRACK_X_POS = {
+
+}
+
+local CONSERVATION_TRACK_X_POS
+
 function initBoard(params)
   local turnOrder = params["turnOrder"]
 

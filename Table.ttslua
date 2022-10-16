@@ -2,6 +2,7 @@ require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
 local DEBUG = true
+local break_token = getObjectFromGUID(BREAK_TOKEN)
 
 function onLoad(script_state)
   for _,color in ipairs(ALL_COLORS) do
@@ -87,8 +88,9 @@ function readyPlayer(params)
 end
 
 function gameInit()
-  self.UI.setAttribute("allReadyBtn", "active", false)
+  self.UI.setAttributes("allReadyBtn", { active = false })
   gameStarted = true
+  self.UI.setAttributes("moveBreakTokenBtn", { active = true })
 
   if DEBUG then
     for _,color in ipairs(ALL_COLORS) do
@@ -98,7 +100,7 @@ function gameInit()
       anchor.call("gameInit", {color = c})
     end
 
-    local i = math.random(0, #ALL_COLORS)
+    local i = math.random(1, #ALL_COLORS)
     local firstPlayer = ALL_COLORS[i]
     broadcastToAll(firstPlayer.." will go first!")
 
@@ -113,7 +115,7 @@ function gameInit()
       anchor.call("gameInit", {color = c})
     end
 
-    local i = math.random(0, #getSeatedPlayers())
+    local i = math.random(1, #getSeatedPlayers())
     local firstPlayer = getSeatedPlayers()[i]
     broadcastToAll(firstPlayer.." will go first!")
 
@@ -138,4 +140,8 @@ function getTurnOrder(players, startIndex)
     turnIndex = turnIndex + 1
   end
   return turnOrder
+end
+
+function onMoveBreakTokenClick()
+  break_token.call("moveToken")
 end

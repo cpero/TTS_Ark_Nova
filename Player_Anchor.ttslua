@@ -153,6 +153,7 @@ function gameInit(params)
   local color = params["color"]
 
   self.UI.setAttributes(color.."SetupLayout", { active = false })
+  self.UI.setAttributes("playerZone", { active = true })
   map.setPositionSmooth(map.getPosition() + vector(0, -1, -10), false, true)
   map.interactable = DEBUG
 
