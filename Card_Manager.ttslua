@@ -1,0 +1,94 @@
+require("ArkNova.Constants")
+
+local state = {
+  color = "",
+  isInit = false
+}
+
+function initCardManager()
+  state["isInit"] = true
+end
+
+function onLoad(save)
+  if #save > 0 then
+    local s = JSON.decode(save)
+    if s["isInit"] then
+      state = s
+    end
+  end
+
+  state["color"] = self.UI.getAttribute("cardManager", "class")
+  log(state["color"])
+  anchor = getObjectFromGUID(ANCHORS[state["color"]])
+  self.setPosition(anchor.getPosition() + vector(0, 0, -20))
+  self.locked = true
+  self.interactable = false
+
+  if state["isInit"] != "" then
+    initCardManager()
+  end
+end
+
+function onSave()
+  return JSON.encode(state)
+end
+
+function onSlotOneBackClick()
+  log("1 back clicked")
+end
+
+function onSlotOnePlayClick()
+  log("1 play clicked")
+end
+
+function onSlotOneNextClick()
+  log("1 next clicked")
+end
+
+function onSlotTwoBackClick()
+  log("2 back clicked")
+end
+
+function onSlotTwoPlayClick()
+  log("2 play clicked")
+end
+
+function onSlotTwoNextClick()
+  log("2 next clicked")
+end
+
+function onSlotThreeBackClick()
+  log("3 back clicked")
+end
+
+function onSlotThreePlayClick()
+  log("3 play clicked")
+end
+
+function onSlotThreeNextClick()
+  log("3 next clicked")
+end
+
+function onSlotFourBackClick()
+  log("4 back clicked")
+end
+
+function onSlotFourPlayClick()
+  log("4 play clicked")
+end
+
+function onSlotFourNextClick()
+  log("4 next clicked")
+end
+
+function onSlotFiveBackClick()
+  log("5 back clicked")
+end
+
+function onSlotFivePlayClick()
+  log("5 play clicked")
+end
+
+function onSlotFiveNextClick()
+  log("5 next clicked")
+end

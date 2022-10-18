@@ -140,7 +140,7 @@ function initBorder()
   border = getObjectFromGUID(PIECES[color]["border"])
 
   if not Global.getVar(color.."_border") then
-    border.setPosition(border.getPosition() + vector(0, 1.7, 0))
+    border.setPosition(border.getPosition() + vector(0, 1.63, 0))
     border.interactable = true
     border.locked = true
     border.setColorTint(Color.fromString(color))
@@ -162,4 +162,7 @@ function gameInit(params)
 
   local playerTags = getObjectFromGUID(TAGS[color]["state"])
   playerTags.call("initPlayerTags", {color = color})
+
+  local cardManager = getObjectFromGUID(CARD_MANAGERS[color])
+  cardManager.call("initCardManager")
 end

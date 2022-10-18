@@ -62,6 +62,13 @@ ANCHORS = {
   blue = "dacc52"
 }
 
+CARD_MANAGERS = {
+  white = "2b7e74",
+  yellow = "59c510",
+  red = "9b6da1",
+  blue = "8f21bc"
+}
+
 TAGS = {
   white = {
     state = "824008",
@@ -282,11 +289,13 @@ BREAK_TOKEN = "bbf4bd"
 TABLE = "d7b6e1"
 MAIN_BOARD = "1b01e6"
 
-ASSOCIATION_DECK = "118109"
-ANIMALS_DECK = "5e1d75"
-BUILD_DECK = "071284"
-SPONSORS_DECK = "50c25f"
-CARDS_DECK = "14c118"
+DECKS = {
+  animals = "5e1d75",
+  white = "fa8699",
+  yellow = "ee5fcc",
+  red = "5998a0",
+  blue = "d78088"
+}
 
 SINGLE_PLAYER_CARD = "1e5455"
 
