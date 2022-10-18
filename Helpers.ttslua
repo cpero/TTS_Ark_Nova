@@ -45,6 +45,10 @@ function pluralize(str, num)
   end
 end
 
+function capitalize(str)
+  return string.upper(string.sub(str, 1, 1))..string.sub(str, 2)
+end
+
 function getPlayer(color)
   players = Player.getPlayers()
   for _, player in ipairs(players) do

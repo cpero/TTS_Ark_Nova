@@ -1,31 +1,71 @@
 require("ArkNova.Constants")
+require("ArkNova.Helpers")
+
+local DEBUG = true
 
 local state = {
   color = "",
-  isInit = false
+  isInit = false,
+  order = {"animals", "sponsors", "cards", "association", "build"}
 }
 
 function initCardManager()
   state["isInit"] = true
+
+  self.UI.setAttributes("cardManager", { active = true })
+  for i, card in ipairs(state["order"]) do
+    local currentCard = getObjectFromGUID(ACTION_CARDS[state["color"]][card])
+    currentCard.setPosition(ALL_SLOT_POS[i] + vector(0, 2, 0))
+    currentCard.setRotation({0, 0, 0})
+    currentCard.locked = true
+    currentCard.interactable = false
+  end
 end
 
 function onLoad(save)
-  if #save > 0 then
-    local s = JSON.decode(save)
-    if s["isInit"] then
-      state = s
-    end
-  end
-
   state["color"] = self.UI.getAttribute("cardManager", "class")
-  log(state["color"])
   anchor = getObjectFromGUID(ANCHORS[state["color"]])
   self.setPosition(anchor.getPosition() + vector(0, 0, -20))
   self.locked = true
   self.interactable = false
 
-  if state["isInit"] != "" then
-    initCardManager()
+  SLOT_ONE_POS = self.getPosition() + vector(13.25, 0, -.75)
+  SLOT_TWO_POS = self.getPosition() + vector(6.4, 0, -.75)
+  SLOT_THREE_POS = self.getPosition() + vector(-.6, 0, -.75)
+  SLOT_FOUR_POS = self.getPosition() + vector(-7.4, 0, -.75)
+  SLOT_FIVE_POS = self.getPosition() + vector(-14.3, 0, -.75)
+
+  ALL_SLOT_POS = {SLOT_ONE_POS, SLOT_TWO_POS, SLOT_THREE_POS, SLOT_FOUR_POS, SLOT_FIVE_POS}
+
+  if #save > 0 then
+    local s = JSON.decode(save)
+    log(s)
+    if s["isInit"] then
+      state = s
+    end
+  end
+
+  if state["isInit"] == false and DEBUG then
+    for i, card in ipairs(state["order"]) do
+      local currentCard = getObjectFromGUID(ACTION_CARDS[state["color"]][card])
+      currentCard.setPosition(ALL_SLOT_POS[i] + vector(0, 0, 0))
+      currentCard.setRotation({0, 0, 0})
+      currentCard.locked = true
+      currentCard.interactable = false
+    end
+
+    shuffleActionCards()
+
+    self.UI.setAttributes("cardManager", { active = false })
+  elseif state["isInit"] == true then
+    self.UI.setAttributes("cardManager", { active = true })
+    for i, card in ipairs(state["order"]) do
+      local currentCard = getObjectFromGUID(ACTION_CARDS[state["color"]][card])
+      currentCard.setPosition(ALL_SLOT_POS[i] + vector(0, 2, 0))
+      currentCard.setRotation({0, 0, 0})
+      currentCard.locked = true
+      currentCard.interactable = false
+    end
   end
 end
 
@@ -38,7 +78,7 @@ function onSlotOneBackClick()
 end
 
 function onSlotOnePlayClick()
-  log("1 play clicked")
+  broadcastToAll(capitalize(state["color"]).." has played "..string.upper(state["order"][1]).." at strength 1!")
 end
 
 function onSlotOneNextClick()
@@ -50,7 +90,7 @@ function onSlotTwoBackClick()
 end
 
 function onSlotTwoPlayClick()
-  log("2 play clicked")
+  handlePlayClick(state["color"], 2)
 end
 
 function onSlotTwoNextClick()
@@ -62,7 +102,7 @@ function onSlotThreeBackClick()
 end
 
 function onSlotThreePlayClick()
-  log("3 play clicked")
+  handlePlayClick(state["color"], 3)
 end
 
 function onSlotThreeNextClick()
@@ -74,7 +114,7 @@ function onSlotFourBackClick()
 end
 
 function onSlotFourPlayClick()
-  log("4 play clicked")
+  handlePlayClick(state["color"], 4)
 end
 
 function onSlotFourNextClick()
@@ -86,9 +126,48 @@ function onSlotFiveBackClick()
 end
 
 function onSlotFivePlayClick()
-  log("5 play clicked")
+  handlePlayClick(state["color"], 5)
 end
 
 function onSlotFiveNextClick()
   log("5 next clicked")
+end
+
+function handlePlayClick(color, cardNum)
+  broadcastToAll(capitalize(color).." has played "..string.upper(state["order"][cardNum]).." at strength "..cardNum.."!")
+  local this_card = state["order"][cardNum]
+
+  local this_card_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][this_card])
+  this_card_obj.setPosition(this_card_obj.getPosition() + vector(0, 0, 10))
+  newOrder = state["order"]
+  for i=cardNum, 1, -1 do
+    if i > 1 then
+      local card_before = state["order"][i-1]
+      local card_before_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][state["order"][i-1]])
+      newOrder[i] = card_before
+
+      Wait.frames(function()
+        card_before_obj.setPositionSmooth(ALL_SLOT_POS[i] + vector(0, 2, 0), false, false)
+      end, 30)
+    else
+      newOrder[i] = this_card
+      Wait.frames(function()
+        this_card_obj.setPositionSmooth(ALL_SLOT_POS[i] + vector(0, 2, 0), false, false)
+      end, 60)
+    end
+
+    state["order"] = newOrder
+    log(newOrder)
+  end
+end
+
+function shuffleActionCards()
+  log("TODO: Shuffle")
+  -- state["order"] = {
+  --   "animals", -- Always comes first
+  --   ACTION_CARDS[state["color"]][slotTwo.getGUID()],
+  --   ACTION_CARDS[state["color"]][slotThree.getGUID()],
+  --   ACTION_CARDS[state["color"]][slotFour.getGUID()],
+  --   ACTION_CARDS[state["color"]][slotFive.getGUID()]
+  -- }
 end

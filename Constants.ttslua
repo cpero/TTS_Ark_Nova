@@ -289,13 +289,66 @@ BREAK_TOKEN = "bbf4bd"
 TABLE = "d7b6e1"
 MAIN_BOARD = "1b01e6"
 
-DECKS = {
+ACTION_DECKS = {
   animals = "5e1d75",
   white = "fa8699",
   yellow = "ee5fcc",
   red = "5998a0",
   blue = "d78088"
 }
+
+ACTION_CARDS = {
+  white = {
+    animals = "59c954",
+    cards = "ee40d1",
+    sponsors = "efed81",
+    association = "d3e928",
+    build = "d2ebda",
+    ["59c954"] = "animals",
+    ["ee40d1"] = "cards",
+    ["efed81"] = "sponsors",
+    ["d3e928"] = "association",
+    ["d2ebda"] = "build"
+  },
+  yellow = {
+    animals = "a05e7d",
+    cards = "f10deb",
+    sponsors = "ecb325",
+    association = "3bff08",
+    build = "7e08db",
+    ["a05e7d"] = "animals",
+    ["f10deb"] = "cards",
+    ["ecb325"] = "sponsors",
+    ["3bff08"] = "association",
+    ["7e08db"] = "build"
+  },
+  red = {
+    animals = "b32205",
+    cards = "08fdc8",
+    sponsors = "1bbbde",
+    association = "0cb191",
+    build = "d5b774",
+    ["b32205"] = "animals",
+    ["08fdc8"] = "cards",
+    ["1bbbde"] = "sponsors",
+    ["0cb191"] = "association",
+    ["d5b774"] = "build"
+  },
+  blue = {
+    animals = "4b34c7",
+    cards = "8a9284",
+    sponsors = "b6ef1f",
+    association = "ec2027",
+    build = "157b5f",
+    ["4b34c7"] = "animals",
+    ["8a9284"] = "cards",
+    ["b6ef1f"] = "sponsors",
+    ["ec2027"] = "association",
+    ["157b5f"] = "build"
+  }
+}
+
+ACTION_CARD_TYPES = {"animals", "cards", "sponsors", "association", "build"}
 
 SINGLE_PLAYER_CARD = "1e5455"
 
