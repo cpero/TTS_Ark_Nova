@@ -158,7 +158,7 @@ function gameInit()
     Wait.frames(function()
       map_misc_bag.shuffle()
       map = map_misc_bag.takeObject({position = self.getPosition() + vector(-.5, 3, -25), rotation = {0, 0, 0}})
-    end, 180)
+    end, 120)
   end
 
   local counter = getObjectFromGUID(PLAYER_COUNTER[state["color"]]["counter"])
@@ -174,7 +174,7 @@ function gameInit()
 
     local cardManager = getObjectFromGUID(CARD_MANAGERS[state["color"]])
     cardManager.call("initCardManager")
-  end, 240)
+  end, 300)
 
   initPlayerPieces()
 end
