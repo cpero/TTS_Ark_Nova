@@ -1,7 +1,7 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
-local DEBUG = true
+local DEBUG = false
 local break_token = getObjectFromGUID(BREAK_TOKEN)
 
 local state = {
@@ -48,9 +48,9 @@ function setup()
       anchor.call("setupAnchor")
     end
   else
-    local players = Player.getPlayers()
-    for _, player in ipairs(players) do
-      local color = toLowerCase(player.color)
+    local players = getSeatedPlayers()
+    for _, c in ipairs(players) do
+      local color = string.lower(c)
       local anchor = getObjectFromGUID(ANCHORS[color])
 
       anchor.call("setupAnchor")
@@ -123,15 +123,12 @@ function gameInit()
   Turns.enable = true
   Turns.type = 1
 
-  for _,c in ipairs(Turns.order) do
+  for i,c in ipairs(Turns.order) do
+
     local agent1 = getObjectFromGUID(PIECES[c]["agent1"])
     local agent2 = getObjectFromGUID(PIECES[c]["agent2"])
     local agent3 = getObjectFromGUID(PIECES[c]["agent3"])
     local agent4 = getObjectFromGUID(PIECES[c]["agent4"])
-
-    local appeal_token = getObjectFromGUID(PIECES[c]["appeal_token"])
-    local conservation_token = getObjectFromGUID(PIECES[c]["conservation_token"])
-    local rep_token = getObjectFromGUID(PIECES[c]["rep_token"])
 
     local anchor = getObjectFromGUID(ANCHORS[c])
 
@@ -149,22 +146,24 @@ function gameInit()
       agent4.setRotation({90, 0, 180})
     end, 280)
 
-
+    Notes.setNotes("")
   end
 
   local mainBoard = getObjectFromGUID(MAIN_BOARD)
   mainBoard.call("initBoard", {turnOrder = Turns.order})
+
+  self.UI.setAttributes("flipDisplay", {active = true})
 end
 
 function getTurnOrder(players, startIndex)
   local turnOrder = {}
   local turnIndex = 1
   for i = startIndex, #players, 1 do
-    turnOrder[turnIndex] = players[i]
+    turnOrder[turnIndex] = string.lower(players[i])
     turnIndex = turnIndex + 1
   end
   for i = 1, startIndex - 1, 1 do
-    turnOrder[turnIndex] = players[i]
+    turnOrder[turnIndex] = string.lower(players[i])
     turnIndex = turnIndex + 1
   end
   return turnOrder
@@ -184,4 +183,10 @@ function onPlayerTurnStart(player_color_start, player_color_previous)
     end
   end
   state["turnIndex"] = idx
+end
+
+function flipDisplay()
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  mainBoard.call("flipDisplay")
+  self.UI.setAttributes("flipDisplay", {active = false})
 end

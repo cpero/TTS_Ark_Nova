@@ -19,7 +19,7 @@ function onLoad(save)
   self.setPosition({73.00, 2.33, -62})
   self.interactable = false
   self.locked = true
-  
+
   if DEBUG then
     self.UI.setAttributes("movDevButton", { active = false })
     initBreakToken({numPlayers = 4})
@@ -38,7 +38,10 @@ function initBreakToken(params)
   local numPlayers = params["numPlayers"]
   state["numPlayers"] = numPlayers
 
-  if numPlayers == 2 then
+  if numPlayers == 1 then
+    self.setPosition({BREAK_TOKEN_START_POS[1], 2.33, -14.4})
+    state["index"] = 10
+  elseif numPlayers == 2 then
     self.setPosition({BREAK_TOKEN_START_POS[1], 2.33, -14.4})
     state["index"] = 10
   elseif numPlayers == 3 then

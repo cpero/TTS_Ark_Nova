@@ -4,7 +4,7 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
-local DEBUG = true
+local DEBUG = false
 
 local MAP_ROTATION = {"A", "O", "Misc"}
 

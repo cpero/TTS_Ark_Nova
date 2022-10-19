@@ -1,5 +1,7 @@
 require("ArkNova.Constants")
 
+local DEBUG = false
+
 local APPEAL_TRACK_X_POS = {
 
 }
@@ -9,17 +11,241 @@ local CONSERVATION_TRACK_X_POS = {
 }
 
 local state = {
-  numPlayers = 0
+  numPlayers = 0,
+  color = "",
+  turnOrder = {},
+  appeal = {
+    white = 0,
+    yellow = 0,
+    red = 0,
+    blue = 0
+  },
+  conservation = {
+    white = 0,
+    yellow = 0,
+    red = 0,
+    blue = 0
+  },
+  rep = {
+    white = 0,
+    yellow = 0,
+    red = 0,
+    blue = 0
+  },
+  university_guids = {},
+  partnership_guids = {},
+  card_guids = {}
 }
 
 function initBoard(params)
   local turnOrder = params["turnOrder"]
 
-  local numPlayers = #turnOrder
-  state["numPlayers"] = numPlayers
+  state["numPlayers"] = #turnOrder
+  state["turnOrder"] = turnOrder
+  state["color"] = params["color"]
+
+  for i,c in ipairs(turnOrder) do
+
+    local appeal_token = getObjectFromGUID(PIECES[c]["appeal_token"])
+    local conservation_token = getObjectFromGUID(PIECES[c]["conservation_token"])
+    local rep_token = getObjectFromGUID(PIECES[c]["rep_token"])
+    local mainBoard = getObjectFromGUID(MAIN_BOARD)
+
+    appeal_token.setPositionSmooth(mainBoard.getPosition() + vector(34+(i*1.55), 1, 10), false, false)
+    state["appeal"][c] = i - 1
+
+    conservation_token.setPositionSmooth(mainBoard.getPosition() + vector(44, 1, -13+(i*1.25)), false, false)
+    rep_token.setPositionSmooth(mainBoard.getPosition() + vector(27+(i*1.5), 1, -3), false, false)
+  end
 
   local breakToken = getObjectFromGUID(BREAK_TOKEN)
-  breakToken.call("initBreakToken", {numPlayers = numPlayers})
+  breakToken.call("initBreakToken", {numPlayers = state["numPlayers"]})
+
+  local conservationTokenBag = getObjectFromGUID(CONSERVATION_TOKEN_BAG)
+  conservationTokenBag.shuffle()
+  conservationTokenBag.takeObject({
+    position = self.getPosition() + vector(30, 1, -6.2),
+    rotation = {0, 0, 0}
+  })
+
+  conservationTokenBag.takeObject({
+    position = self.getPosition() + vector(26.5, 1, -6.2),
+    rotation = {0, 0, 0}
+  })
+
+  conservationTokenBag.takeObject({
+    position = self.getPosition() + vector(20.2, 1, -6.2),
+    rotation = {0, 0, 0}
+  })
+  conservationTokenBag.takeObject({
+    position = self.getPosition() + vector(16.8, 1, -6.2),
+    rotation = {0, 0, 0}
+  })
+
+  local associationBoard = getObjectFromGUID(ASSOCIATION_BOARD)
+
+  local university1 = getObjectFromGUID(UNIVERSITIES[1])
+  local university2 = getObjectFromGUID(UNIVERSITIES[2])
+  local university3 = getObjectFromGUID(UNIVERSITIES[3])
+
+  u1 = university1.takeObject({
+    position = associationBoard.getPosition() + vector(-7.3, 1, -1.53),
+    rotation = {0, 0, 0}
+  })
+
+  u2 = university2.takeObject({
+    position = associationBoard.getPosition() + vector(-5.1, 1, 1.25),
+    rotation = {0, 0, 0}
+  })
+
+  u3 = university2.takeObject({
+    position = associationBoard.getPosition() + vector(-8.4, 1, 1.25),
+    rotation = {0, 0, 0}
+  })
+
+  state["university_guids"] = {u1.getGUID(), u2.getGUID(), u3.getGUID()}
+
+  local partnership1 = getObjectFromGUID(PARTNERSHIPS[1])
+  local partnership2 = getObjectFromGUID(PARTNERSHIPS[2])
+  local partnership3 = getObjectFromGUID(PARTNERSHIPS[3])
+  local partnership4 = getObjectFromGUID(PARTNERSHIPS[4])
+  local partnership5 = getObjectFromGUID(PARTNERSHIPS[5])
+
+  p1 = partnership1.takeObject({
+    position = associationBoard.getPosition() + vector(4.15, 1, -.5),
+    rotation = {0, 0, 0}
+  })
+
+  p2 = partnership2.takeObject({
+    position = associationBoard.getPosition() + vector(1.4, 1, 1.15),
+    rotation = {0, 0, 0}
+  })
+
+  p3 = partnership3.takeObject({
+    position = associationBoard.getPosition() + vector(-1.75, 1, 1.15),
+    rotation = {0, 0, 0}
+  })
+
+  p4 = partnership4.takeObject({
+    position = associationBoard.getPosition() + vector(-1.75, 1, -1.7),
+    rotation = {0, 0, 0}
+  })
+
+  p5 = partnership5.takeObject({
+    position = associationBoard.getPosition() + vector(1.4, 1, -1.7),
+    rotation = {0, 0, 0}
+  })
+
+  state["partnership_guids"] = {p1.getGUID(), p2.getGUID(), p3.getGUID(), p4.getGUID(), p5.getGUID()}
+
+  local conservationDeck = getObjectFromGUID(CONSERVATION_DECK)
+  conservationDeck.shuffle()
+
+  conservationDeck.takeObject({
+    position = associationBoard.getPosition() + vector(9.3, 1, 10.5),
+    rotation = {0, 0, 0}
+  })
+
+  conservationDeck.takeObject({
+    position = associationBoard.getPosition() + vector(3, 1, 10.5),
+    rotation = {0, 0, 0}
+  })
+
+  conservationDeck.takeObject({
+    position = associationBoard.getPosition() + vector(-3.15, 1, 10.5),
+    rotation = {0, 0, 0}
+  })
+
+  if #state["turnOrder"] == 4 then
+    conservationDeck.takeObject({
+      position = associationBoard.getPosition() + vector(-9.3, 1, 10.5),
+      rotation = {0, 0, 0}
+    })
+  end
+
+  local extraMarkers = getObjectFromGUID(EXTRA_MARKERS)
+
+  if #state["turnOrder"] == 2 or DEBUG then
+    e1 = extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(11.15, 1, 13.2),
+      rotation = {0, 0, 0}
+    })
+
+    e2 = extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(2.95, 1, 13.2),
+      rotation = {0, 0, 0}
+    })
+
+    e3 = extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(-5.15, 1, 13.2),
+      rotation = {0, 0, 0}
+    })
+  end
+
+  extraMarkers.destroy()
+
+  local projectDeck = getObjectFromGUID(PROJECT_DECK)
+  projectDeck.shuffle()
+  c1 = projectDeck.takeObject({
+    position = self.getPosition() + vector(29.5, 1, 2.3),
+    rotation = {0, 0, 180}
+  })
+
+  c2 = projectDeck.takeObject({
+    position = self.getPosition() + vector(18.1, 1, 2.3),
+    rotation = {0, 0, 180}
+  })
+
+  c3 = projectDeck.takeObject({
+    position = self.getPosition() + vector(6.5, 1, 2.3),
+    rotation = {0, 0, 180}
+  })
+
+  c4 = projectDeck.takeObject({
+    position = self.getPosition() + vector(-4.9, 1, 2.3),
+    rotation = {0, 0, 180}
+  })
+
+  c5 = projectDeck.takeObject({
+    position = self.getPosition() + vector(-16.1, 1, 2.3),
+    rotation = {0, 0, 180}
+  })
+
+  c6 = projectDeck.takeObject({
+    position = self.getPosition() + vector(-27.8, 1, 2.3),
+    rotation = {0, 0, 180}
+  })
+
+  state["card_guids"] = {c1.getGUID(), c2.getGUID(), c3.getGUID(), c4.getGUID(), c5.getGUID(), c6.getGUID()}
+
+  local objectiveDeck = getObjectFromGUID(OBJECTIVE_DECK)
+
+  for _,c in ipairs(state["turnOrder"]) do
+    local playerZone = getObjectFromGUID(PIECES[c]["zone"])
+
+    for i=1, 8 do
+      local z = projectDeck.takeObject({
+        position = playerZone.getPosition(),
+        rotation = {0, 0, 180}
+      })
+      playerZone.putObject(z)
+
+      if i < 3 then
+        local y = objectiveDeck.takeObject({
+          position = playerZone.getPosition(),
+          rotation = {0, 0, 180}
+        })
+
+      end
+
+      Wait.frames(function()
+        z.flip()
+      end, 200)
+    end
+    for i=1, 2 do
+
+    end
+  end
 end
 
 function onSave()
@@ -32,5 +258,12 @@ function onLoad(save)
     if s["numPlayers"] > 0 then
       state = s
     end
+  end
+end
+
+function flipDisplay()
+  for _,c in ipairs(state["card_guids"]) do
+    local card = getObjectFromGUID(c)
+    card.flip()
   end
 end
