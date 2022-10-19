@@ -1,24 +1,6 @@
 require('ArkNova.Constants')
 
---  Global Event Handlers
-function onLoad(saved_data)
-  for _,color in ipairs(ALL_COLORS) do
-
-  end
-end
-
-function onSave()
-
-end
-
--- Helpers
-
-function loadGame(state)
-  log('Global loaded state: '..JSON.encode(state))
-end
-
--- If a game is not found, a new game will be started
-function createGame()
-  -- table = getObjectFromGUID(TABLE)
-  -- table.call("createGame")
+function onClickTag(button, color)
+  local tags = getObjectFromGUID(TAGS[string.lower(color)]["state"])
+  tags.call("onClickTag", {guid = button.getGUID()})
 end

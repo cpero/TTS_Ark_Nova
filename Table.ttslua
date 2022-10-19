@@ -4,40 +4,37 @@ require("ArkNova.Helpers")
 local DEBUG = true
 local break_token = getObjectFromGUID(BREAK_TOKEN)
 
-function onLoad(script_state)
-  for _,color in ipairs(ALL_COLORS) do
-    local b = getObjectFromGUID(PIECES[color]["border"])
-    b.interactable = false
-    b.locked = true
-    b.setScale({19, 10, 32})
+local state = {
+  gameStarted = false,
+  activeColors = {},
+  turnIndex = 0,
+  turnOrder = {}
+}
 
-    local anchor = getObjectFromGUID(ANCHORS[color])
-    anchor.call("initAnchor", {color = color})
-
-    b.setPosition(anchor.getPosition() + vector(0, 0, -30))
+function onLoad(save)
+  if #save > 0 then
+    local s = JSON.decode(save)
+    if s["gameStarted"] then
+      state = s
+    end
   end
 
-  local state = JSON.decode(script_state)
-  gameStarted = state["gameStarted"]
+  ready_players = {}
 
-  Global.setVar("white_active", state["white_active"])
-  Global.setVar("yellow_active", state["yelow_active"])
-  Global.setVar("red_active", state["red_active"])
-  Global.setVar("blue_active", state["blue_active"])
+  self.UI.setAttribute("setupBtn", "active", state["gameStarted"] == false)
 
-  self.UI.setAttribute("setupBtn", "active", not gameStarted)
+  if state["gameStarted"] then
+    broadcastToAll("Welcome back! It's now "..state["turnOrder"][state["turnIndex"]].."'s turn.")
+
+    Turns.enable = true
+    Turns.type = 1
+    Turns.order = state["turnOrder"]
+    Turns.turn_color = state["turnOrder"][state["turnIndex"]]
+  end
 end
 
 function onSave()
-  -- local state = {
-  --   gameStarted = gameStarted,
-  --   white_active = Global.getVar("white_active"),
-  --   yellow_active = Global.getVar("yellow_active"),
-  --   red_active = Global.getVar("red_active"),
-  --   blue_active = Global.getVar("blue_active"),
-  -- }
-  -- local state_str = JSON.encode(state)
-  -- return state_str
+  return JSON.encode(state)
 end
 
 function setup()
@@ -47,21 +44,18 @@ function setup()
 
   if DEBUG then
     for _,color in ipairs(ALL_COLORS) do
-      log("Now processing " .. color)
       local anchor = getObjectFromGUID(ANCHORS[color])
-      anchor.call("handleSetup", {color = color})
+      anchor.call("setupAnchor")
     end
   else
     local players = Player.getPlayers()
     for _, player in ipairs(players) do
       local color = toLowerCase(player.color)
-      log("Now processing " .. color)
       local anchor = getObjectFromGUID(ANCHORS[color])
-      anchor.call("initAnchor", {color = color})
-      anchor.call("handleSetup", {color = color})
+
+      anchor.call("setupAnchor")
     end
   end
-
 end
 
 function readyPlayer(params)
@@ -89,40 +83,45 @@ end
 
 function gameInit()
   self.UI.setAttributes("allReadyBtn", { active = false })
-  gameStarted = true
+  state["gameStarted"] = true
   self.UI.setAttributes("moveBreakTokenBtn", { active = true })
+  local activeColors = {}
 
   if DEBUG then
     for _,color in ipairs(ALL_COLORS) do
-      local c = toLowerCase(color)
-      Global.setVar(c.."_active", true)
+      local c = string.lower(color)
+      table.insert(activeColors, c)
+
       local anchor = getObjectFromGUID(ANCHORS[c])
       anchor.call("gameInit", {color = c})
     end
 
     local i = math.random(1, #ALL_COLORS)
     local firstPlayer = ALL_COLORS[i]
-    broadcastToAll(firstPlayer.." will go first!")
+    broadcastToAll(capitalize(firstPlayer).." will go first!")
 
-    Turns.enable = true
-    Turns.type = 1
     Turns.order = getTurnOrder(ALL_COLORS, i)
   else
     for _,color in ipairs(getSeatedPlayers()) do
-      local c = toLowerCase(color)
-      Global.setVar(c.."_active", true)
+      local c = string.lower(color)
+      table.insert(activeColors, c)
+
       local anchor = getObjectFromGUID(ANCHORS[c])
       anchor.call("gameInit", {color = c})
     end
 
     local i = math.random(1, #getSeatedPlayers())
     local firstPlayer = getSeatedPlayers()[i]
-    broadcastToAll(firstPlayer.." will go first!")
+    broadcastToAll(capitalize(firstPlayer).." will go first!")
 
-    Turns.enable = true
-    Turns.type = 1
     Turns.order = getTurnOrder(getSeatedPlayers(), i)
   end
+
+  state["activeColors"] = activeColors
+  state["turnIndex"] = 1
+  state["turnOrder"] = Turns.order
+  Turns.enable = true
+  Turns.type = 1
 
   local mainBoard = getObjectFromGUID(MAIN_BOARD)
   mainBoard.call("initBoard", {turnOrder = Turns.order})
@@ -144,4 +143,16 @@ end
 
 function onMoveBreakTokenClick()
   break_token.call("moveToken")
+end
+
+function onPlayerTurnStart(player_color_start, player_color_previous)
+  local idx = 1
+
+  for i,color in ipairs(Turns.order) do
+    if string.lower(color) == string.lower(player_color_start) then
+      idx = i
+      break
+    end
+  end
+  state["turnIndex"] = idx
 end

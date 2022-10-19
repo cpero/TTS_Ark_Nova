@@ -1,8 +1,6 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
-local DEBUG = true
-
 local state = {
   color = "",
   isInit = false,
@@ -39,13 +37,12 @@ function onLoad(save)
 
   if #save > 0 then
     local s = JSON.decode(save)
-    log(s)
     if s["isInit"] then
       state = s
     end
   end
 
-  if state["isInit"] == false and DEBUG then
+  if state["isInit"] == false then
     for i, card in ipairs(state["order"]) do
       local currentCard = getObjectFromGUID(ACTION_CARDS[state["color"]][card])
       currentCard.setPosition(ALL_SLOT_POS[i] + vector(0, 0, 0))
@@ -74,66 +71,67 @@ function onSave()
 end
 
 function onSlotOneBackClick()
-  log("1 back clicked")
+  handleBackClick(1)
 end
 
 function onSlotOnePlayClick()
-  broadcastToAll(capitalize(state["color"]).." has played "..string.upper(state["order"][1]).." at strength 1!")
+  handlePlayClick(1)
 end
 
 function onSlotOneNextClick()
-  log("1 next clicked")
+  handleNextClick(1)
 end
 
 function onSlotTwoBackClick()
-  log("2 back clicked")
+  handleBackClick(2)
 end
 
 function onSlotTwoPlayClick()
-  handlePlayClick(state["color"], 2)
+  handlePlayClick(2)
 end
 
 function onSlotTwoNextClick()
-  log("2 next clicked")
+  handleNextClick(2)
 end
 
 function onSlotThreeBackClick()
-  log("3 back clicked")
+  handleBackClick(3)
 end
 
 function onSlotThreePlayClick()
-  handlePlayClick(state["color"], 3)
+  handlePlayClick(3)
 end
 
 function onSlotThreeNextClick()
-  log("3 next clicked")
+  handleNextClick(3)
 end
 
 function onSlotFourBackClick()
-  log("4 back clicked")
+  handleBackClick(4)
 end
 
 function onSlotFourPlayClick()
-  handlePlayClick(state["color"], 4)
+  handlePlayClick(4)
 end
 
 function onSlotFourNextClick()
-  log("4 next clicked")
+  handleNextClick(4)
 end
 
 function onSlotFiveBackClick()
-  log("5 back clicked")
+  handleBackClick(5)
 end
 
 function onSlotFivePlayClick()
-  handlePlayClick(state["color"], 5)
+  handlePlayClick(5)
 end
 
 function onSlotFiveNextClick()
-  log("5 next clicked")
+  handleNextClick(5)
 end
 
-function handlePlayClick(color, cardNum)
+function handlePlayClick(cardNum)
+  local color = state["color"]
   broadcastToAll(capitalize(color).." has played "..string.upper(state["order"][cardNum]).." at strength "..cardNum.."!")
   local this_card = state["order"][cardNum]
 
@@ -157,7 +155,65 @@ function handlePlayClick(color, cardNum)
     end
 
     state["order"] = newOrder
-    log(newOrder)
+  end
+end
+
+function handleBackClick(cardNum)
+  local color = state["color"]
+
+  broadcastToAll(capitalize(color).." is moving "..string.upper(state["order"][cardNum]).." to strength 1!")
+  local this_card = state["order"][cardNum]
+
+  local this_card_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][this_card])
+  this_card_obj.setPosition(this_card_obj.getPosition() + vector(0, 0, 10))
+  newOrder = state["order"]
+  for i=cardNum, 1, -1 do
+    if i > 1 then
+      local card_before = state["order"][i-1]
+      local card_before_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][state["order"][i-1]])
+      newOrder[i] = card_before
+
+      Wait.frames(function()
+        card_before_obj.setPositionSmooth(ALL_SLOT_POS[i] + vector(0, 2, 0), false, false)
+      end, 30)
+    else
+      newOrder[1] = this_card
+      Wait.frames(function()
+        this_card_obj.setPositionSmooth(ALL_SLOT_POS[1] + vector(0, 2, 0), false, false)
+      end, 60)
+    end
+
+    state["order"] = newOrder
+  end
+end
+
+function handleNextClick(cardNum)
+  local color = state["color"]
+
+  broadcastToAll(capitalize(color).." is moving "..string.upper(state["order"][cardNum]).." to strength 5!")
+  local this_card = state["order"][cardNum]
+
+  local this_card_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][this_card])
+  this_card_obj.setPosition(this_card_obj.getPosition() + vector(0, 0, 10))
+  newOrder = state["order"]
+
+  for i=cardNum, 5, 1 do
+    if i < 5 then
+      local card_before = state["order"][i+1]
+      local card_before_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][state["order"][i+1]])
+      newOrder[i] = card_before
+
+      Wait.frames(function()
+        card_before_obj.setPositionSmooth(ALL_SLOT_POS[i] + vector(0, 2, 0), false, false)
+      end, 30)
+    else
+      newOrder[5] = this_card
+      Wait.frames(function()
+        this_card_obj.setPositionSmooth(ALL_SLOT_POS[5] + vector(0, 2, 0), false, false)
+      end, 60)
+    end
+
+    state["order"] = newOrder
   end
 end
 

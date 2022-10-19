@@ -7,16 +7,25 @@ require("ArkNova.Helpers")
 local DEBUG = true
 
 local MAP_ROTATION = {"A", "O", "Misc"}
-local MAP_INDEX = 1
 
-local table = getObjectFromGUID(TABLE)
-local map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)
-local map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)
-local map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)
+local state = {
+  color = "",
+  map_guid = "",
+  map_index = 1
+}
 
-function initAnchor(params)
-  color = params["color"]
-  self_pos = self.getPosition()
+function onSave()
+  -- return JSON.encode(state)
+end
+
+function onLoad(save)
+  table = getObjectFromGUID(TABLE)
+  map_a_bag = getObjectFromGUID(GLOBE_A_MAPS)
+  map_o_bag = getObjectFromGUID(GLOBE_O_MAPS)
+  map_misc_bag = getObjectFromGUID(GLOBE_MISC_MAPS)
+
+  color = self.UI.getAttribute("activeZone", "class")
+  state["color"] = color
 
   counter = getObjectFromGUID(PLAYER_COUNTER[color]["counter"])
   add_one = getObjectFromGUID(PLAYER_COUNTER[color]["add_one"])
@@ -25,51 +34,52 @@ function initAnchor(params)
   sub_one = getObjectFromGUID(PLAYER_COUNTER[color]["sub_one"])
   sub_five = getObjectFromGUID(PLAYER_COUNTER[color]["sub_five"])
   sub_ten = getObjectFromGUID(PLAYER_COUNTER[color]["sub_ten"])
+
+  if save != "null" then
+    local s = JSON.decode(save)
+    if s["color"] != "" then
+      state = s
+    end
+  end
 end
 
-function handleSetup(params)
+function initBorder()
+  border = getObjectFromGUID(PIECES[state["color"]]["border"])
+  border.setScale({19, 10, 32})
+  border.setPosition(self.getPosition() + vector(0, 1.63, -28))
+  border.interactable = false
+  border.locked = true
+  border.setColorTint(Color.fromString(color))
+end
+
+function setupAnchor()
   initBorder()
 
-  self.UI.setAttributes(color.."ActiveZone", {active = true})
-  self.UI.setAttributes(color.."SetupLayout", {active = true})
-  self.UI.setAttributes(color.."SetupBtn", { color = color})
+  self.UI.setAttributes("activeZone", {active = true})
+  self.UI.setAttributes("setupLayout", {active = true})
+  self.UI.setAttributes("setupBtn", { color = state["color"]})
 
-  if not Global.getVar(color.."_map_guid") then
-    map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
-    map.locked = true
-    self.UI.setAttributes(color.."Map" .. MAP_ROTATION[1] .. "Title", { active = true })
-    self.UI.setAttributes(color.."Map" .. MAP_ROTATION[1] .. "Subtitle", { active = true })
-    Global.setVar(color.."_map_index", 1)
-    Global.setVar(color.."_map_guid", map.getGUID())
-  else
-    map = getObjectFromGUID(Global.getVar(color.."_map_guid"))
-    map.locked = true
-    local map_index = getObjectFromGUID(Global.getVar(color.."_map_index"))
-    self.UI.setAttributes(color.."Map" .. MAP_ROTATION[map_index] .. "Title", { active = true })
-    self.UI.setAttributes(color.."Map" .. MAP_ROTATION[map_index] .. "Subtitle", { active = true })
-    MAP_INDEX = map_index
-  end
+  map = map_a_bag.takeObject({position = self.getPosition() + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+  map.locked = true
+  self.UI.setAttributes("map" .. MAP_ROTATION[1] .. "Title", { active = true })
+  self.UI.setAttributes("map" .. MAP_ROTATION[1] .. "Subtitle", { active = true })
+  state["map_index"] = 1
+  state["map_guid"] = map.getGUID()
 
-  table.call("readyPlayer", {color = color, ready = false})
+  table.call("readyPlayer", {color = state["color"], ready = false})
 end
 
 function onClickReady()
-  local ready_color = self.UI.getAttribute(color.."SetupBtn", "color")
+  local ready_color = self.UI.getAttribute("setupBtn", "color")
   local ready = ready_color ~= "#00ff00"
 
   log(color .. " is " .. ternary(ready, "", "not ") .. "ready")
 
   table.call("readyPlayer", {color = color, ready = ready})
 
-  if ready then
-    self.UI.setAttribute(color.."SetupBtn", "color", "#00ff00")
-    self.UI.setAttributes(color.."NextBtn", {interactable = false})
-    self.UI.setAttributes(color.."BackBtn", {interactable = false})
-  else
-    self.UI.setAttribute(color.."SetupBtn", "color", color)
-    self.UI.setAttributes(color.."NextBtn", {interactable = true})
-    self.UI.setAttributes(color.."BackBtn", {interactable = true})
-  end
+  self.UI.setAttribute("setupBtn", "color", ternary(ready, "#00ff00", color))
+  self.UI.setAttributes("nextBtn", {interactable = not ready})
+  self.UI.setAttributes("backBtn", {interactable = not ready})
 end
 
 debounce_map = false
@@ -78,91 +88,91 @@ function onClickNextMap()
   if debounce_map then
     return
   end
+
   debounce_map = true;
-  local curr_index = MAP_INDEX
-  MAP_INDEX = MAP_INDEX + 1
-  if MAP_INDEX > #MAP_ROTATION then
-    MAP_INDEX = 1
+  local curr_index = state["map_index"]
+  local new_index = curr_index + 1
+
+  if new_index > #MAP_ROTATION then
+    new_index = 1
   end
 
-  Global.setVar(color.."_map_index", MAP_INDEX)
-  moveMap(curr_index)
+  moveMap(curr_index, new_index)
 end
 
 function onClickBackMap()
   if debounce_map then
     return
   end
+
   debounce_map = true;
-  local curr_index = MAP_INDEX
-  MAP_INDEX = MAP_INDEX - 1
-  if MAP_INDEX < 1 then
-    MAP_INDEX = 3
+  local curr_index = state["map_index"]
+  local new_index = curr_index - 1
+
+  if new_index < 1 then
+    new_index = #MAP_ROTATION
   end
 
-  Global.setVar(color.."_map_index", MAP_INDEX)
-  moveMap(curr_index)
+  moveMap(curr_index, new_index)
 end
 
-function moveMap(curr_index)
+function moveMap(curr_index, new_index)
   -- Handle the existing map before spawning a new one
-  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[curr_index] .. "Title", { active = false })
-  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[curr_index] .. "Subtitle", { active = false })
+  self.UI.setAttributes("map" .. MAP_ROTATION[curr_index] .. "Title", { active = false })
+  self.UI.setAttributes("map" .. MAP_ROTATION[curr_index] .. "Subtitle", { active = false })
   if MAP_ROTATION[curr_index] == "A" then
-    map.setPositionSmooth(map_a_bag.getPosition(), false, true)
-    Wait.frames(function() map.destroy() end, 30)
+    map.destroy()
   elseif MAP_ROTATION[curr_index] == "O" then
-    map.setPositionSmooth(map_o_bag.getPosition(), false, true)
-    Wait.frames(function() map.destroy() end, 30)
+    map.destroy()
   else
     map.setPositionSmooth(map_misc_bag.getPosition(), false, true)
     Wait.frames(function() map_misc_bag.putObject(map) end, 30)
   end
 
-  if MAP_ROTATION[MAP_INDEX] == "A" then
-    new_map = map_a_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
-  elseif MAP_ROTATION[MAP_INDEX] == "O" then
-    new_map = map_o_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+  if MAP_ROTATION[new_index] == "A" then
+    new_map = map_a_bag.takeObject({position = self.getPosition() + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+  elseif MAP_ROTATION[new_index] == "O" then
+    new_map = map_o_bag.takeObject({position = self.getPosition() + vector(-.5, 3, -25), rotation = {0, 0, 0}})
   else
-    new_map = map_misc_bag.takeObject({position = self_pos + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+    new_map = map_misc_bag.takeObject({position = self.getPosition() + vector(-.5, 3, -25), rotation = {0, 0, 0}})
   end
 
   new_map.locked = true
-  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[MAP_INDEX] .. "Title", { active = true })
-  self.UI.setAttributes(color.."Map" .. MAP_ROTATION[MAP_INDEX] .. "Subtitle", { active = true })
+  self.UI.setAttributes("map" .. MAP_ROTATION[new_index] .. "Title", { active = true })
+  self.UI.setAttributes("map" .. MAP_ROTATION[new_index] .. "Subtitle", { active = true })
   Wait.frames(function()
     map = new_map
     debounce_map = false
+    state["map_index"] = new_index
   end, 120) -- Wait for the animation to finish before setting the new one so it doesn't get deleted
 end
 
-function initBorder()
-  border = getObjectFromGUID(PIECES[color]["border"])
-
-  if not Global.getVar(color.."_border") then
-    border.setPosition(border.getPosition() + vector(0, 1.63, 0))
-    border.interactable = true
-    border.locked = true
-    border.setColorTint(Color.fromString(color))
-
-    Global.setVar(color.."_border", true)
-  end
-end
-
-function gameInit(params)
-  local color = params["color"]
-
-  self.UI.setAttributes(color.."SetupLayout", { active = false })
+function gameInit()
+  self.UI.setAttributes("setupLayout", { active = false })
   self.UI.setAttributes("playerZone", { active = true })
-  map.setPositionSmooth(map.getPosition() + vector(0, -1, -10), false, true)
-  map.interactable = DEBUG
 
-  local counter = getObjectFromGUID(PLAYER_COUNTER[color]["counter"])
-  counter.call("initCounter", {color = color, score = 25})
+  if state["map_index"] == 3 then
+    map.setPositionSmooth(map_misc_bag.getPosition(), false, false)
+    Wait.frames(function() map_misc_bag.putObject(map) end, 30)
 
-  local playerTags = getObjectFromGUID(TAGS[color]["state"])
-  playerTags.call("initPlayerTags", {color = color})
+    Wait.frames(function()
+      map_misc_bag.shuffle()
+      map = map_misc_bag.takeObject({position = self.getPosition() + vector(-.5, 3, -25), rotation = {0, 0, 0}})
+    end, 180)
+  end
 
-  local cardManager = getObjectFromGUID(CARD_MANAGERS[color])
-  cardManager.call("initCardManager")
+  local counter = getObjectFromGUID(PLAYER_COUNTER[state["color"]]["counter"])
+  counter.call("initCounter", {color = state["color"], score = 25})
+
+  local playerTags = getObjectFromGUID(TAGS[state["color"]]["state"])
+  playerTags.call("initPlayerTags", {color = state["color"]})
+
+  Wait.frames(function()
+    map.setPositionSmooth(map.getPosition() + vector(0, -1, -10), false, true)
+    map.interactable = false
+    map.locked = true
+
+    local cardManager = getObjectFromGUID(CARD_MANAGERS[state["color"]])
+    cardManager.call("initCardManager")
+  end, 360)
 end

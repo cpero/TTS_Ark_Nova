@@ -4,13 +4,33 @@ local APPEAL_TRACK_X_POS = {
 
 }
 
-local CONSERVATION_TRACK_X_POS
+local CONSERVATION_TRACK_X_POS = {
+
+}
+
+local state = {
+  numPlayers = 0
+}
 
 function initBoard(params)
   local turnOrder = params["turnOrder"]
 
   local numPlayers = #turnOrder
+  state["numPlayers"] = numPlayers
 
   local breakToken = getObjectFromGUID(BREAK_TOKEN)
   breakToken.call("initBreakToken", {numPlayers = numPlayers})
+end
+
+function onSave()
+  return JSON.encode(state)
+end
+
+function onLoad(save)
+  if #save > 0 then
+    local s = JSON.decode(save)
+    if s["numPlayers"] > 0 then
+      state = s
+    end
+  end
 end

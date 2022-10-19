@@ -36,7 +36,7 @@ function initCounter(params)
   counter = getObjectFromGUID(PLAYER_COUNTER[color]["counter"])
   counter.setColorTint(Color.fromString(color))
   counter.setValue(score)
-  counter.setPosition(anchor.getPosition() + vector(-13.5, .8, -50.5))
+  counter.setPosition(anchor.getPosition() + vector(-13.5, 1.6, -50.5))
   counter.setScale({2.5, 2.5, 2.5})
 end
 

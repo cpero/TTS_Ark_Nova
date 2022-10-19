@@ -1,6 +1,6 @@
 require("ArkNova.Constants")
 
-local DEBUG = true
+local DEBUG = false
 
 local state = {
   color = "",
@@ -96,13 +96,25 @@ local EXTRA_BAG_X_POS = {
   -16.5, -- 2X
 }
 
+local tagBtns = {}
+
 function onLoad(save)
   local color = self.UI.getAttribute("tagPanel", "color")
   local anchor = getObjectFromGUID(ANCHORS[color])
 
   for i, t in ipairs(TAG_TYPES) do
     local tag = getObjectFromGUID(TAGS[color][t])
+    table.insert(tagBtns, tag.getGUID())
     tag.setPosition(anchor.getPosition() + vector(TAG_X_POS[i], 0, TAG_Y_POS[i]))
+    tag.createButton({
+      position = {0, 1, 0},
+      rotation = {0, 0, 0},
+      height = 1000,
+      width = 1000,
+      color = "White",
+      click_function = "onClickTag",
+      owner = self
+    })
   end
 
   for i, t in ipairs(PLAYER_BAG_TYPES) do
@@ -129,8 +141,7 @@ function onLoad(save)
 end
 
 function onSave()
-  -- local str = JSON.encode(state)
-  -- return str
+  return JSON.encode(state)
 end
 
 function initPlayerTags(params)
@@ -148,45 +159,63 @@ function initPlayerTags(params)
     for _, color in ipairs(ALL_COLORS) do
       for i, t in ipairs(TAG_TYPES) do
         local tag = getObjectFromGUID(TAGS[color][t])
-        tag.setPosition(tag.getPosition() + vector(0, .45, 0))
+        tag.setPosition(tag.getPosition() + vector(0, 1.85, 0))
         tag.locked = true
         tag.interactable = true
       end
 
       for _, t in ipairs(PLAYER_BAG_TYPES) do
         local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
-        bag.setPosition(bag.getPosition() + vector(0, .45, 0))
+        bag.setPosition(bag.getPosition() + vector(0, 1.85, 0))
       end
 
       for _, t in ipairs(EXTRA_BAG_TYPES) do
         local bag = getObjectFromGUID(EXTRA_BAGS[color][t])
-        bag.setPosition(bag.getPosition() + vector(0, .45, 0))
+        bag.setPosition(bag.getPosition() + vector(0, 1.85, 0))
       end
 
       local cubes = getObjectFromGUID(PLAYER_CUBES[color])
-      cubes.setPosition(cubes.getPosition() + vector(0, .45, 0))
+      cubes.setPosition(cubes.getPosition() + vector(0, 1.85, 0))
     end
   else
-    for _, color in ipairs(getSeatedPlayers()) do
-      for i, t in ipairs(TAG_TYPES) do
-        local tag = getObjectFromGUID(TAGS[color][t])
-        tag.setPosition(tag.getPosition() + vector(0, .45, 0))
-        tag.locked = true
-        tag.interactable = false
-      end
+    for i, t in ipairs(TAG_TYPES) do
+      local tag = getObjectFromGUID(TAGS[state["color"]][t])
+      tag.setPosition(tag.getPosition() + vector(0, 1.85, 0))
+      tag.locked = true
+      tag.interactable = false
+    end
 
-      for _, t in ipairs(PLAYER_BAG_TYPES) do
-        local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
-        bag.setPosition(bag.getPosition() + vector(0, .45, 0))
-      end
+    for _, t in ipairs(PLAYER_BAG_TYPES) do
+      local bag = getObjectFromGUID(PLAYER_BAGS[state["color"]][t])
+      bag.setPosition(bag.getPosition() + vector(0, 1.85, 0))
+    end
 
-      for _, t in ipairs(EXTRA_BAG_TYPES) do
-        local bag = getObjectFromGUID(EXTRA_BAGS[color][t])
-        bag.setPosition(bag.getPosition() + vector(0, .45, 0))
-      end
+    for _, t in ipairs(EXTRA_BAG_TYPES) do
+      local bag = getObjectFromGUID(EXTRA_BAGS[state["color"]][t])
+      bag.setPosition(bag.getPosition() + vector(0, 1.85, 0))
+    end
 
-      local cubes = getObjectFromGUID(PLAYER_CUBES[color])
-      cubes.setPosition(cubes.getPosition() + vector(0, .45, 0))
+    local cubes = getObjectFromGUID(PLAYER_CUBES[state["color"]])
+    cubes.setPosition(cubes.getPosition() + vector(0, 1.85, 0))
+  end
+end
+
+function onClickTag(params)
+  local guid = params["guid"]
+  local idx = 0
+
+  for i,tag in ipairs(tagBtns) do
+    log(tag)
+    if tag == guid then
+      idx = i
+      break
     end
   end
+  log(idx)
+  addToTag(TAG_TYPES[idx], 1)
+end
+
+function addToTag(tag, num)
+  log(tag)
+  state[tag] = state[tag] + num
 end
