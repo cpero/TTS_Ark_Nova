@@ -123,6 +123,35 @@ function gameInit()
   Turns.enable = true
   Turns.type = 1
 
+  for _,c in ipairs(Turns.order) do
+    local agent1 = getObjectFromGUID(PIECES[c]["agent1"])
+    local agent2 = getObjectFromGUID(PIECES[c]["agent2"])
+    local agent3 = getObjectFromGUID(PIECES[c]["agent3"])
+    local agent4 = getObjectFromGUID(PIECES[c]["agent4"])
+
+    local appeal_token = getObjectFromGUID(PIECES[c]["appeal_token"])
+    local conservation_token = getObjectFromGUID(PIECES[c]["conservation_token"])
+    local rep_token = getObjectFromGUID(PIECES[c]["rep_token"])
+
+    local anchor = getObjectFromGUID(ANCHORS[c])
+
+    Wait.frames(function()
+      agent1.setPositionSmooth(anchor.getPosition() + vector(-13, 2.2, -38), false, false)
+      agent1.setRotation({0, 0, 0})
+
+      agent2.setPositionSmooth(anchor.getPosition() + vector(-15.6, 2.2, -28.5), false, false)
+      agent2.setRotation({90, 0, 180})
+
+      agent3.setPositionSmooth(anchor.getPosition() + vector(-15.6, 2.2, -31), false, false)
+      agent3.setRotation({90, 0, 180})
+
+      agent4.setPositionSmooth(anchor.getPosition() + vector(-15.6, 2.2, -33.3), false, false)
+      agent4.setRotation({90, 0, 180})
+    end, 280)
+
+
+  end
+
   local mainBoard = getObjectFromGUID(MAIN_BOARD)
   mainBoard.call("initBoard", {turnOrder = Turns.order})
 end

@@ -174,5 +174,10 @@ function gameInit()
 
     local cardManager = getObjectFromGUID(CARD_MANAGERS[state["color"]])
     cardManager.call("initCardManager")
-  end, 360)
+  end, 240)
+
+  initPlayerPieces()
+end
+
+function initPlayerPieces()
 end

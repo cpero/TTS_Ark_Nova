@@ -102,20 +102,20 @@ function onLoad(save)
   local color = self.UI.getAttribute("tagPanel", "color")
   local anchor = getObjectFromGUID(ANCHORS[color])
 
-  for i, t in ipairs(TAG_TYPES) do
-    local tag = getObjectFromGUID(TAGS[color][t])
-    table.insert(tagBtns, tag.getGUID())
-    tag.setPosition(anchor.getPosition() + vector(TAG_X_POS[i], 0, TAG_Y_POS[i]))
-    tag.createButton({
-      position = {0, 1, 0},
-      rotation = {0, 0, 0},
-      height = 1000,
-      width = 1000,
-      color = "White",
-      click_function = "onClickTag",
-      owner = self
-    })
-  end
+  -- for i, t in ipairs(TAG_TYPES) do
+  --   local tag = getObjectFromGUID(TAGS[color][t])
+  --   table.insert(tagBtns, tag.getGUID())
+  --   tag.setPosition(anchor.getPosition() + vector(TAG_X_POS[i], 0, TAG_Y_POS[i]))
+  --   -- tag.createButton({
+  --   --   position = {0, 1, 0},
+  --   --   rotation = {0, 0, 0},
+  --   --   height = 1000,
+  --   --   width = 1000,
+  --   --   color = "White",
+  --   --   click_function = "onClickTag",
+  --   --   owner = self
+  --   -- })
+  -- end
 
   for i, t in ipairs(PLAYER_BAG_TYPES) do
     local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
@@ -152,17 +152,17 @@ function initPlayerTags(params)
   self.setPosition(anchor.getPosition() + vector(19, 1, -50))
   self.locked = true
   self.interactable = false
-  self.UI.setAttributes("tagPanel", { active = "true" })
+  self.UI.setAttributes("tagPanel", { active = "false" })
   self.UI.setAttributes("extraBags", { active = "true" })
 
   if DEBUG then
     for _, color in ipairs(ALL_COLORS) do
-      for i, t in ipairs(TAG_TYPES) do
-        local tag = getObjectFromGUID(TAGS[color][t])
-        tag.setPosition(tag.getPosition() + vector(0, 1.85, 0))
-        tag.locked = true
-        tag.interactable = true
-      end
+      -- for i, t in ipairs(TAG_TYPES) do
+      --   local tag = getObjectFromGUID(TAGS[color][t])
+      --   tag.setPosition(tag.getPosition() + vector(0, 1.85, 0))
+      --   tag.locked = true
+      --   tag.interactable = true
+      -- end
 
       for _, t in ipairs(PLAYER_BAG_TYPES) do
         local bag = getObjectFromGUID(PLAYER_BAGS[color][t])
@@ -178,12 +178,12 @@ function initPlayerTags(params)
       cubes.setPosition(cubes.getPosition() + vector(0, 1.85, 0))
     end
   else
-    for i, t in ipairs(TAG_TYPES) do
-      local tag = getObjectFromGUID(TAGS[state["color"]][t])
-      tag.setPosition(tag.getPosition() + vector(0, 1.85, 0))
-      tag.locked = true
-      tag.interactable = false
-    end
+    -- for i, t in ipairs(TAG_TYPES) do
+    --   local tag = getObjectFromGUID(TAGS[state["color"]][t])
+    --   tag.setPosition(tag.getPosition() + vector(0, 1.85, 0))
+    --   tag.locked = true
+    --   tag.interactable = false
+    -- end
 
     for _, t in ipairs(PLAYER_BAG_TYPES) do
       local bag = getObjectFromGUID(PLAYER_BAGS[state["color"]][t])
