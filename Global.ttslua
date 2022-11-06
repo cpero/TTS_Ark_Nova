@@ -1,6 +1,6 @@
 require('ArkNova.Constants')
 
-function onClickTag(button, color)
+function onClickTag(Button, color)
   local tags = getObjectFromGUID(TAGS[string.lower(color)]["state"])
-  tags.call("onClickTag", {guid = button.getGUID()})
+  tags.call("onClickTag", {guid = Button.getGUID()})
 end

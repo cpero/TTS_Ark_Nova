@@ -37,9 +37,19 @@ function onLoad(save)
 
   if save != "null" then
     local s = JSON.decode(save)
-    if s["color"] != "" then
+    if s["color"] ~= "" then
       state = s
+
+      self.UI.setAttributes("mapControlLayout", { active = true })
+      self.UI.setAttributes("setupLayout", { active = false })
+      self.UI.setAttributes("playerZone", { active = true })
     end
+  end
+
+  if state["color"] == "" then
+    self.UI.setAttributes("mapControlLayout", { active = false })
+    self.UI.setAttributes("setupLayout", { active = true })
+    self.UI.setAttributes("playerZone", { active = false })
   end
 end
 
@@ -150,6 +160,7 @@ end
 function gameInit()
   self.UI.setAttributes("setupLayout", { active = false })
   self.UI.setAttributes("playerZone", { active = true })
+  self.UI.setAttributes("mapControlLayout", { active = true })
 
   if state["map_index"] == 3 then
     map.setPositionSmooth(map_misc_bag.getPosition(), false, false)
@@ -175,9 +186,4 @@ function gameInit()
     local cardManager = getObjectFromGUID(CARD_MANAGERS[state["color"]])
     cardManager.call("initCardManager")
   end, 300)
-
-  initPlayerPieces()
-end
-
-function initPlayerPieces()
 end

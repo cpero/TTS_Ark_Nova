@@ -39,16 +39,16 @@ function initBreakToken(params)
   state["numPlayers"] = numPlayers
 
   if numPlayers == 1 then
-    self.setPosition({BREAK_TOKEN_START_POS[1], 2.33, -14.4})
+    self.setPositionSmooth({BREAK_TOKEN_START_POS[1], 2.33, -14.4}, false, false)
     state["index"] = 10
   elseif numPlayers == 2 then
-    self.setPosition({BREAK_TOKEN_START_POS[1], 2.33, -14.4})
+    self.setPositionSmooth({BREAK_TOKEN_START_POS[1], 2.33, -14.4}, false, false)
     state["index"] = 10
   elseif numPlayers == 3 then
-    self.setPosition({BREAK_TOKEN_START_POS[2], 2.33, -14.4})
+    self.setPositionSmooth({BREAK_TOKEN_START_POS[2], 2.33, -14.4}, false, false)
     state["index"] = 13
   elseif numPlayers == 4 then
-    self.setPosition({BREAK_TOKEN_START_POS[3], 2.33, -14.4})
+    self.setPositionSmooth({BREAK_TOKEN_START_POS[3], 2.33, -14.4}, false, false)
     state["index"] = 16
   end
 end
@@ -59,8 +59,9 @@ function moveToken()
   state["index"] = i
 
   if i == 1 then
-    broadcastToAll("BREAK TIME!!!!!!!!!!!!!!")
+    main_board = getObjectFromGUID(MAIN_BOARD)
+    main_board.call("breakTime")
 
-    --recall initBreakToken
+    initBreakToken({numPlayers = state["numPlayers"]})
   end
 end

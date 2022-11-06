@@ -1,7 +1,7 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
-local DEBUG = false
+local DEBUG = true
 local break_token = getObjectFromGUID(BREAK_TOKEN)
 
 local state = {
@@ -30,6 +30,8 @@ function onLoad(save)
     Turns.type = 1
     Turns.order = state["turnOrder"]
     Turns.turn_color = state["turnOrder"][state["turnIndex"]]
+
+    flipDisplay()
   end
 end
 
@@ -38,7 +40,7 @@ function onSave()
 end
 
 function setup()
-  log("Setup button clicked")
+  log("Setup Button clicked")
   self.UI.setAttribute("setupBtn", "active", false)
   ready_players = {}
 
@@ -189,4 +191,10 @@ function flipDisplay()
   local mainBoard = getObjectFromGUID(MAIN_BOARD)
   mainBoard.call("flipDisplay")
   self.UI.setAttributes("flipDisplay", {active = false})
+  self.UI.setAttributes("refillDisplayBtn", {active = true})
+end
+
+function onRefillDisplayClick()
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  mainBoard.call("refillDisplay")
 end

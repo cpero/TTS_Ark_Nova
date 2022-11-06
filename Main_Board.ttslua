@@ -1,9 +1,13 @@
 require("ArkNova.Constants")
+require("ArkNova.Helpers")
 
-local DEBUG = false
+local DEBUG = true
 
-local APPEAL_TRACK_X_POS = {
-
+local APPEAL_TRACK_POS = {
+  {41.6, 1, 10},
+  {40, 1, 10},
+  {38, 1, 10},
+  {36, 1, 10}
 }
 
 local CONSERVATION_TRACK_X_POS = {
@@ -11,6 +15,7 @@ local CONSERVATION_TRACK_X_POS = {
 }
 
 local state = {
+  game_started = false,
   numPlayers = 0,
   color = "",
   turnOrder = {},
@@ -37,8 +42,11 @@ local state = {
   card_guids = {}
 }
 
+local debounceCardZones = false
+
 function initBoard(params)
   local turnOrder = params["turnOrder"]
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
 
   state["numPlayers"] = #turnOrder
   state["turnOrder"] = turnOrder
@@ -49,9 +57,8 @@ function initBoard(params)
     local appeal_token = getObjectFromGUID(PIECES[c]["appeal_token"])
     local conservation_token = getObjectFromGUID(PIECES[c]["conservation_token"])
     local rep_token = getObjectFromGUID(PIECES[c]["rep_token"])
-    local mainBoard = getObjectFromGUID(MAIN_BOARD)
 
-    appeal_token.setPositionSmooth(mainBoard.getPosition() + vector(34+(i*1.55), 1, 10), false, false)
+    appeal_token.setPositionSmooth(getAppealPosition(i), false, false)
     state["appeal"][c] = i - 1
 
     conservation_token.setPositionSmooth(mainBoard.getPosition() + vector(44, 1, -13+(i*1.25)), false, false)
@@ -184,39 +191,20 @@ function initBoard(params)
 
   extraMarkers.destroy()
 
+  local card_guids = {}
   local projectDeck = getObjectFromGUID(PROJECT_DECK)
   projectDeck.shuffle()
-  c1 = projectDeck.takeObject({
-    position = self.getPosition() + vector(29.5, 1, 2.3),
-    rotation = {0, 0, 180}
-  })
+  for i,z in ipairs(BOARD_CARD_ZONES) do
+    local zone = getObjectFromGUID(z)
+    local card = projectDeck.takeObject({
+      position = zone.getPosition(),
+      rotation = {0, 0, 180}
+    })
 
-  c2 = projectDeck.takeObject({
-    position = self.getPosition() + vector(18.1, 1, 2.3),
-    rotation = {0, 0, 180}
-  })
+    table.insert(card_guids, card.getGUID())
+  end
 
-  c3 = projectDeck.takeObject({
-    position = self.getPosition() + vector(6.5, 1, 2.3),
-    rotation = {0, 0, 180}
-  })
-
-  c4 = projectDeck.takeObject({
-    position = self.getPosition() + vector(-4.9, 1, 2.3),
-    rotation = {0, 0, 180}
-  })
-
-  c5 = projectDeck.takeObject({
-    position = self.getPosition() + vector(-16.1, 1, 2.3),
-    rotation = {0, 0, 180}
-  })
-
-  c6 = projectDeck.takeObject({
-    position = self.getPosition() + vector(-27.8, 1, 2.3),
-    rotation = {0, 0, 180}
-  })
-
-  state["card_guids"] = {c1.getGUID(), c2.getGUID(), c3.getGUID(), c4.getGUID(), c5.getGUID(), c6.getGUID()}
+  state["card_guids"] = card_guids
 
   local objectiveDeck = getObjectFromGUID(OBJECTIVE_DECK)
 
@@ -246,6 +234,33 @@ function initBoard(params)
 
     end
   end
+
+  Wait.frames(function()
+    state["game_started"] = true
+  end, 360)
+end
+
+function onObjectLeaveScriptingZone(zone, enter_object)
+  if state["numPlayers"] > 0 and state["game_started"] then
+    local name = zone.getName()
+    local card_zone = string.find(name, "Card Zone")
+    local partnership_zone = string.find(name, "Partnership Zone")
+    local university_zone = string.find(name, "University Zone")
+
+    if debounceCardZones == false and card_zone ~= nil and card_zone > 0 then
+      local str = string.gsub(name, "Card Zone ", "", 1)
+      local zone_idx = tonumber(str)
+      state["card_guids"][zone_idx] = ""
+    elseif partnership_zone ~= nil and partnership_zone > 0 then
+        local str = string.gsub(name, "Partnership Zone ", "", 1)
+        local zone_idx = tonumber(str)
+        state["partnership_guids"][zone_idx] = ""
+    elseif university_zone ~= nil and university_zone > 0 then
+      local str = string.gsub(name, "University Zone ", "", 1)
+      local zone_idx = tonumber(str)
+      state["university_guids"][zone_idx] = ""
+    end
+  end
 end
 
 function onSave()
@@ -265,5 +280,256 @@ function flipDisplay()
   for _,c in ipairs(state["card_guids"]) do
     local card = getObjectFromGUID(c)
     card.flip()
+  end
+end
+
+function refillDisplay()
+  if debounceCardZones then
+    return
+  end
+
+  local new_order = {"", "", "", "", "", ""}
+  local project_deck = getObjectFromGUID(PROJECT_DECK)
+  debounceCardZones = true
+
+  local order_idx = 1
+  for i, c in ipairs(state["card_guids"]) do
+    if c ~= "" then
+      new_order[order_idx] = c
+      order_idx = order_idx + 1
+    end
+  end
+
+  for i,c in ipairs(new_order) do
+    local zone = getObjectFromGUID(BOARD_CARD_ZONES[i])
+    if c == "" then
+      local card = project_deck.takeObject({
+         position = zone.getPosition(),
+         rotation = {0, 0, 0}
+       })
+       new_order[i] = card.getGUID()
+     else
+       local card = getObjectFromGUID(c)
+       card.setPositionSmooth(zone.getPosition(), false, true)
+       card.setRotation({0, 0, 0})
+    end
+  end
+
+  Wait.frames(function ()
+    debounceCardZones = false
+    state["card_guids"] = new_order
+  end, 60)
+end
+
+function onPlayerTurnEnd(player_color_end, player_color_next)
+  if state["numPlayers"] > 0 and state["game_started"] and debounceCardZones == false then
+    refillDisplay()
+  end
+end
+
+function breakTime()
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  local associationBoard = getObjectFromGUID(ASSOCIATION_BOARD)
+  local university1 = getObjectFromGUID(UNIVERSITIES[1])
+  local university2 = getObjectFromGUID(UNIVERSITIES[2])
+  local university3 = getObjectFromGUID(UNIVERSITIES[3])
+  local partnership1 = getObjectFromGUID(PARTNERSHIPS[1])
+  local partnership2 = getObjectFromGUID(PARTNERSHIPS[2])
+  local partnership3 = getObjectFromGUID(PARTNERSHIPS[3])
+  local partnership4 = getObjectFromGUID(PARTNERSHIPS[4])
+  local partnership5 = getObjectFromGUID(PARTNERSHIPS[5])
+
+  local card1 = getObjectFromGUID(state["card_guids"][1])
+  card1.setPositionSmooth(mainBoard.getPosition() + vector(40.5, 1, 2.4), false, false)
+
+  local card2 = getObjectFromGUID(state["card_guids"][2])
+  card2.setPositionSmooth(mainBoard.getPosition() + vector(40.5, 1, 2.4), false, false)
+
+  Wait.frames(function()
+    refillDisplay()
+    foghorn("Don't forget to discard to hand size, discard tokens, and collect money!", {r=1,g=0,b=0})
+  end
+  , 240)
+
+
+  for i,id in ipairs(state["partnership_guids"]) do
+    if id == "" then
+      if i == 1 then
+        p1 = partnership1.takeObject({
+          position = associationBoard.getPosition() + vector(4.15, 1, -.5),
+          rotation = {0, 0, 0}
+        })
+      elseif i == 2 then
+        p2 = partnership2.takeObject({
+          position = associationBoard.getPosition() + vector(1.4, 1, 1.15),
+          rotation = {0, 0, 0}
+        })
+      elseif i == 3 then
+        p3 = partnership3.takeObject({
+          position = associationBoard.getPosition() + vector(-1.75, 1, 1.15),
+          rotation = {0, 0, 0}
+        })
+      elseif i == 4 then
+        p4 = partnership4.takeObject({
+          position = associationBoard.getPosition() + vector(-1.75, 1, -1.7),
+          rotation = {0, 0, 0}
+        })
+      elseif i == 5 then
+        p5 = partnership5.takeObject({
+          position = associationBoard.getPoawition() + vector(1.4, 1, -1.7),
+          rotation = {0, 0, 0}
+        })
+      end
+    end
+  end
+  for i,id in ipairs(state["university_guids"]) do
+    if id == "" then
+      if i == 1 then
+        u1 = university1.takeObject({
+          position = associationBoard.getPosition() + vector(-7.3, 1, -1.53),
+          rotation = {0, 0, 0}
+        })
+      elseif i == 2 then
+        u2 = university2.takeObject({
+          position = associationBoard.getPosition() + vector(-5.1, 1, 1.25),
+          rotation = {0, 0, 0}
+        })
+      elseif i == 3 then
+        u3 = university2.takeObject({
+          position = associationBoard.getPosition() + vector(-8.4, 1, 1.25),
+          rotation = {0, 0, 0}
+        })
+      end
+    end
+  end
+end
+
+function getAppealPosition(index)
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  local APPEAL_POS = {
+    40.3,
+    38.6,
+    37,
+    35.45,
+    33.9,
+    32.15, -- 5
+    30.5,
+    28.95,
+    27.3,
+    25.7,
+    24.1, -- 10
+    22.4,
+    20.9,
+    19.3,
+    17.6,
+    16, -- 15
+    14.5,
+    12.9,
+    11.25,
+    9.65,
+    8, -- 20
+    6.4,
+    4.8,
+    3.2,
+    1.6,
+    0, -- 25
+    -1.65,
+    -3.3,
+    -4.95,
+    -6.5,
+    -8.1, -- 30
+    -9.7,
+    -11.35,
+    -12.95,
+    -14.6,
+    -16.25, -- 35
+    -17.85,
+    -19.4,
+    -21.05,
+    -22.7,
+    -24.25, -- 40
+    -25.85,
+    -27.5,
+    -29.2,
+    -30.8,
+    -32.45, -- 45
+    -33.95,
+    -35.55,
+    -37.2,
+    -38.75,
+    -40.4, -- 50
+    -42,
+    6.3,
+    4.8,
+    3.2,
+    1.5, -- 55
+    0,
+    -1.55,
+    -3.2,
+    -4.9,
+    -6.35, -- 60
+    -42,
+    -40.4,
+    -38.75,
+    -37.2,
+    -35.55, -- 65
+    -33.95,
+    -32.45,
+    -30.8,
+    -29.2,
+    -27.5, -- 70
+    -25.85,
+    -24.25,
+    -22.7,
+    -21.05,
+    -19.4, -- 75
+    -17.85,
+    -16.25,
+    -14.6,
+    -12.95,
+    -11.35, -- 80
+    -9.7,
+    -8.1,
+    -6.5,
+    -4.95,
+    -3.3, -- 85
+    -1.65,
+    0,
+    1.6,
+    3.2,
+    4.8, -- 90
+    6.4,
+    8,
+    9.65,
+    11.25,
+    12.9, -- 95
+    14.5,
+    16,
+    17.6,
+    19.3,
+    20.9, -- 100
+    22.4,
+    24.1,
+    25.7,
+    27.3,
+    28.95, -- 105
+    30.5,
+    32.15,
+    33.9,
+    35.45,
+    37, -- 110
+    38.6,
+    40.3,
+    41.9
+  }
+
+  if index < 53 then
+    return mainBoard.getPosition() + vector(APPEAL_POS[index], 1, 10)
+  elseif index < 61 then
+    return mainBoard.getPosition() + vector(-43, 1, APPEAL_POS[index])
+  elseif index == 61 then
+    return mainBoard.getPosition() + vector(-43, 2, APPEAL_POS[index])
+  elseif index < 115 then
+    return mainBoard.getPosition() + vector(APPEAL_POS[index], 1, -10)
   end
 end

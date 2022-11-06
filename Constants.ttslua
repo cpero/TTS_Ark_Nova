@@ -58,7 +58,7 @@ PIECES = {
 }
 
 
--- These are centered in front of the player zones for easier button spawning/manipulation
+-- These are centered in front of the player zones for easier Button spawning/manipulation
 ANCHORS = {
   white = "7efeef",
   yellow = "7380ea",
@@ -371,3 +371,7 @@ PROJECT_DECK = "27f70f"
 SIDE_BOARD = "21492c"
 CONSERVATION_DECK = "853c1f"
 OBJECTIVE_DECK = "bd92ce"
+
+BOARD_CARD_ZONES = {"aaa8f7", "1e11b5", "447628", "b0a510", "6ce291", "297bfd"}
+PARTNERSHIP_CARD_ZONES = {"9aacb5", "556e1e", "5d9474", "12392c", "c89134"}
+UNIVERSITY_CARD_ZONES = {"559621", "d7b395", "adf716"}

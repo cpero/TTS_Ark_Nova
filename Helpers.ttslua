@@ -48,3 +48,17 @@ function removeItem(arr, val)
     return toReturn
   end
 end
+
+function foghorn(msg, opts)
+  for _,player in ipairs(Player.getPlayers()) do
+    player.broadcast(msg, opts)
+  end
+end
+
+function shuffle(tbl)
+  for i = #tbl, 2, -1 do
+    local j = math.random(i)
+    tbl[i], tbl[j] = tbl[j], tbl[i]
+  end
+  return tbl
+end

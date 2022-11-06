@@ -218,12 +218,12 @@ function handleNextClick(cardNum)
 end
 
 function shuffleActionCards()
-  log("TODO: Shuffle")
-  -- state["order"] = {
-  --   "animals", -- Always comes first
-  --   ACTION_CARDS[state["color"]][slotTwo.getGUID()],
-  --   ACTION_CARDS[state["color"]][slotThree.getGUID()],
-  --   ACTION_CARDS[state["color"]][slotFour.getGUID()],
-  --   ACTION_CARDS[state["color"]][slotFive.getGUID()]
-  -- }
+  local new_order = shuffle(state["order"])
+  for i = #new_order, 2, -1 do
+    if new_order[i] == "animals" then
+      new_order[1], new_order[i] = new_order[i], new_order[1]
+      break
+    end
+  end
+  state["order"] = new_order
 end
