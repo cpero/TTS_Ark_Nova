@@ -6,32 +6,28 @@ local BREAK_TOKEN_START_POS = {
   -9
 }
 
-local DEBUG = false
-
 local state = {
   index = 1,
   numPlayers = 0
 }
 
-TOKEN = getObjectFromGUID(BREAK_TOKEN)
+local TOKEN = getObjectFromGUID(BREAK_TOKEN)
 
 function onLoad(save)
-  self.setPosition({73.00, 2.33, -62})
-  self.interactable = false
-  self.locked = true
-
-  if DEBUG then
-    self.UI.setAttributes("movDevButton", { active = false })
-    initBreakToken({numPlayers = 4})
+  if #save then
+    local s = JSON.decode(save)
+    if s and s["numPlayers"] > 0 then
+      state = s
+    else
+      self.setPosition({73.00, 2.33, -62})
+      self.interactable = false
+      self.locked = true
+    end
+  else
+    self.setPosition({73.00, 2.33, -62})
+    self.interactable = false
+    self.locked = true
   end
-
-  -- if #save then
-  --   local s = JSON.decode(save)
-  --   if s and s["resetIndex"] > 1 then
-  --     state = s
-  --     self.setPosition({73.00, 2.33, -14.4})
-  --   end
-  -- end
 end
 
 function initBreakToken(params)

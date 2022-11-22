@@ -62,3 +62,19 @@ function shuffle(tbl)
   end
   return tbl
 end
+
+function min(val1, val2)
+  if val1 < val2 then
+    return val1
+  else
+    return val2
+  end
+end
+
+function max(val1, val2)
+  if val1 > val2 then
+    return val1
+  else
+    return val2
+  end
+end

@@ -12,10 +12,7 @@ function onLoad(save)
 
   local s = JSON.decode(save)
   if next(s) == not nil and s["setup"] == "true" then
-    state["color"] = s["color"]
-    state["score"] = s["score"]
-
-    initCounter({color = state["color"], score = state["score"]})
+    initCounter({color = s["color"], score = s["score"]})
   end
 end
 

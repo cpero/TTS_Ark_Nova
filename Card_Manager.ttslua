@@ -16,7 +16,6 @@ function initCardManager()
     currentCard.setPosition(ALL_SLOT_POS[i] + vector(0, 2, 0))
     currentCard.setRotation({0, 0, 0})
     currentCard.locked = true
-    currentCard.interactable = false
   end
 end
 
@@ -25,7 +24,6 @@ function onLoad(save)
   anchor = getObjectFromGUID(ANCHORS[state["color"]])
   self.setPosition(anchor.getPosition() + vector(0, 0, -20))
   self.locked = true
-  self.interactable = false
 
   SLOT_ONE_POS = self.getPosition() + vector(13.25, 0, -.75)
   SLOT_TWO_POS = self.getPosition() + vector(6.4, 0, -.75)
@@ -48,7 +46,6 @@ function onLoad(save)
       currentCard.setPosition(ALL_SLOT_POS[i] + vector(0, 0, 0))
       currentCard.setRotation({0, 0, 0})
       currentCard.locked = true
-      currentCard.interactable = false
     end
 
     shuffleActionCards()
@@ -61,7 +58,6 @@ function onLoad(save)
       currentCard.setPosition(ALL_SLOT_POS[i] + vector(0, 2, 0))
       currentCard.setRotation({0, 0, 0})
       currentCard.locked = true
-      currentCard.interactable = false
     end
   end
 end
@@ -130,9 +126,29 @@ function onSlotFiveNextClick()
   handleNextClick(5)
 end
 
+function onSlotOneUpgradeClick()
+  handleUpgradeClick(1)
+end
+
+function onSlotTwoUpgradeClick()
+  handleUpgradeClick(2)
+end
+
+function onSlotThreeUpgradeClick()
+  handleUpgradeClick(3)
+end
+
+function onSlotFourUpgradeClick()
+  handleUpgradeClick(4)
+end
+
+function onSlotFiveUpgradeClick()
+  handleUpgradeClick(5)
+end
+
 function handlePlayClick(cardNum)
   local color = state["color"]
-  broadcastToAll(capitalize(color).." has played "..string.upper(state["order"][cardNum]).." at strength "..cardNum.."!")
+  foghorn(capitalize(color).." has played "..string.upper(state["order"][cardNum]).." at strength "..cardNum.."!")
   local this_card = state["order"][cardNum]
 
   local this_card_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][this_card])
@@ -161,7 +177,7 @@ end
 function handleBackClick(cardNum)
   local color = state["color"]
 
-  broadcastToAll(capitalize(color).." is moving "..string.upper(state["order"][cardNum]).." to strength 1!")
+  foghorn(capitalize(color).." is moving "..string.upper(state["order"][cardNum]).." to strength 1!")
   local this_card = state["order"][cardNum]
 
   local this_card_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][this_card])
@@ -190,7 +206,7 @@ end
 function handleNextClick(cardNum)
   local color = state["color"]
 
-  broadcastToAll(capitalize(color).." is moving "..string.upper(state["order"][cardNum]).." to strength 5!")
+  foghorn(capitalize(color).." is moving "..string.upper(state["order"][cardNum]).." to strength 5!")
   local this_card = state["order"][cardNum]
 
   local this_card_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][this_card])
@@ -215,6 +231,15 @@ function handleNextClick(cardNum)
 
     state["order"] = newOrder
   end
+end
+
+function handleUpgradeClick(cardNum)
+  local color = state["color"]
+
+  foghorn(capitalize(color).." is upgrading "..string.upper(state["order"][cardNum]).."!")
+  local this_card = state["order"][cardNum]
+  local this_card_obj = getObjectFromGUID(ACTION_CARDS[state["color"]][this_card])
+  this_card_obj.setRotation({0, 0, 180})
 end
 
 function shuffleActionCards()

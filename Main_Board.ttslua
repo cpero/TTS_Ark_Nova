@@ -1,45 +1,52 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
-local DEBUG = true
-
-local APPEAL_TRACK_POS = {
-  {41.6, 1, 10},
-  {40, 1, 10},
-  {38, 1, 10},
-  {36, 1, 10}
-}
-
-local CONSERVATION_TRACK_X_POS = {
-
-}
+local DEBUG = false
 
 local state = {
-  game_started = false,
+  gameStarted = false,
   numPlayers = 0,
-  color = "",
   turnOrder = {},
   appeal = {
-    white = 0,
-    yellow = 0,
-    red = 0,
-    blue = 0
+    guids = {
+      white = "",
+      yellow = "",
+      red = "",
+      blue = ""
+    },
+    white = -1,
+    yellow = -1,
+    red = -1,
+    blue = -1
   },
   conservation = {
-    white = 0,
-    yellow = 0,
-    red = 0,
-    blue = 0
+    guids = {
+      white = "",
+      yellow = "",
+      red = "",
+      blue = ""
+    },
+    white = -1,
+    yellow = -1,
+    red = -1,
+    blue = -1
   },
-  rep = {
-    white = 0,
-    yellow = 0,
-    red = 0,
-    blue = 0
+  reputation = {
+    guids = {
+      white = "",
+      yellow = "",
+      red = "",
+      blue = ""
+    },
+    white = -1,
+    yellow = -1,
+    red = -1,
+    blue = -1
   },
-  university_guids = {},
-  partnership_guids = {},
-  card_guids = {}
+  universityGUIDs = {},
+  partnershipGUIDs = {},
+  cardGUIDs = {},
+  soloMarkers = {}
 }
 
 local debounceCardZones = false
@@ -50,7 +57,6 @@ function initBoard(params)
 
   state["numPlayers"] = #turnOrder
   state["turnOrder"] = turnOrder
-  state["color"] = params["color"]
 
   for i,c in ipairs(turnOrder) do
 
@@ -58,15 +64,37 @@ function initBoard(params)
     local conservation_token = getObjectFromGUID(PIECES[c]["conservation_token"])
     local rep_token = getObjectFromGUID(PIECES[c]["rep_token"])
 
-    appeal_token.setPositionSmooth(getAppealPosition(i), false, false)
-    state["appeal"][c] = i - 1
+    state["appeal"]["guids"][c] = appeal_token.guid
+    appeal_token.setPositionSmooth(getAppealPosition(c, i, true), false, false)
+    appeal_token.interactable = false
+    appeal_token.locked = true
 
-    conservation_token.setPositionSmooth(mainBoard.getPosition() + vector(44, 1, -13+(i*1.25)), false, false)
-    rep_token.setPositionSmooth(mainBoard.getPosition() + vector(27+(i*1.5), 1, -3), false, false)
+    state["conservation"]["guids"][c] = conservation_token.guid
+    conservation_token.setPositionSmooth(getConservationPosition(c, 0, true), false, false)
+    conservation_token.interactable = false
+    conservation_token.locked = true
+
+    state["reputation"]["guids"][c] = rep_token.guid
+    rep_token.setPositionSmooth(getReputationPosition(c, 1, true), false, false)
+    rep_token.interactable = false
+    rep_token.locked = true
   end
 
   local breakToken = getObjectFromGUID(BREAK_TOKEN)
-  breakToken.call("initBreakToken", {numPlayers = state["numPlayers"]})
+  local associationBoard = getObjectFromGUID(ASSOCIATION_BOARD)
+
+  if #turnOrder == 1 then
+    local soloCard = getObjectFromGUID(SOLO_CARD)
+    soloCard.setPosition(associationBoard.getPosition() + vector(17, 1, 7))
+    soloCard.locked = true
+    soloCard.interactable = false
+    local soloColor = string.lower(getSeatedPlayers()[1])
+    local appeal_token = getObjectFromGUID(PIECES[soloColor]["appeal_token"])
+    appeal_token.setPositionSmooth(getAppealPosition(soloColor, 20, true), false, false)
+  else
+    breakToken.call("initBreakToken", {numPlayers = #turnOrder})
+  end
+
 
   local conservationTokenBag = getObjectFromGUID(CONSERVATION_TOKEN_BAG)
   conservationTokenBag.shuffle()
@@ -89,8 +117,6 @@ function initBoard(params)
     rotation = {0, 0, 0}
   })
 
-  local associationBoard = getObjectFromGUID(ASSOCIATION_BOARD)
-
   local university1 = getObjectFromGUID(UNIVERSITIES[1])
   local university2 = getObjectFromGUID(UNIVERSITIES[2])
   local university3 = getObjectFromGUID(UNIVERSITIES[3])
@@ -110,7 +136,7 @@ function initBoard(params)
     rotation = {0, 0, 0}
   })
 
-  state["university_guids"] = {u1.getGUID(), u2.getGUID(), u3.getGUID()}
+  state["universityGUIDs"] = {u1.getGUID(), u2.getGUID(), u3.getGUID()}
 
   local partnership1 = getObjectFromGUID(PARTNERSHIPS[1])
   local partnership2 = getObjectFromGUID(PARTNERSHIPS[2])
@@ -143,7 +169,7 @@ function initBoard(params)
     rotation = {0, 0, 0}
   })
 
-  state["partnership_guids"] = {p1.getGUID(), p2.getGUID(), p3.getGUID(), p4.getGUID(), p5.getGUID()}
+  state["partnershipGUIDs"] = {p1.getGUID(), p2.getGUID(), p3.getGUID(), p4.getGUID(), p5.getGUID()}
 
   local conservationDeck = getObjectFromGUID(CONSERVATION_DECK)
   conservationDeck.shuffle()
@@ -172,26 +198,76 @@ function initBoard(params)
 
   local extraMarkers = getObjectFromGUID(EXTRA_MARKERS)
 
-  if #state["turnOrder"] == 2 or DEBUG then
+  if #state["turnOrder"] == 1 then
     e1 = extraMarkers.takeObject({
-      position = associationBoard.getPosition() + vector(11.15, 1, 13.2),
+      position = associationBoard.getPosition() + vector(17.9, 2, 4),
       rotation = {0, 0, 0}
     })
 
     e2 = extraMarkers.takeObject({
-      position = associationBoard.getPosition() + vector(2.95, 1, 13.2),
+      position = associationBoard.getPosition() + vector(17.9, 2, 5),
       rotation = {0, 0, 0}
     })
 
     e3 = extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(17.9, 2, 6.1),
+      rotation = {0, 0, 0}
+    })
+
+    e4 = extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(17.9, 2, 7.1),
+      rotation = {0, 0, 0}
+    })
+
+    e5 = extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(17.9, 2, 8.15),
+      rotation = {0, 0, 0}
+    })
+
+    e6 = extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(17.9, 2, 9.2),
+      rotation = {0, 0, 0}
+    })
+
+    e7 = extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(17.9, 2, 10.2),
+      rotation = {0, 0, 0}
+    })
+  elseif #state["turnOrder"] == 2 then
+    extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(11.15, 1, 13.2),
+      rotation = {0, 0, 0}
+    })
+
+    extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(2.95, 1, 13.2),
+      rotation = {0, 0, 0}
+    })
+
+    extraMarkers.takeObject({
       position = associationBoard.getPosition() + vector(-5.15, 1, 13.2),
+      rotation = {0, 0, 0}
+    })
+
+    extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(12.2, 1, -.2),
+      rotation = {0, 0, 0}
+    })
+
+    extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(12.2, 1, 1.2),
+      rotation = {0, 0, 0}
+    })
+
+    extraMarkers.takeObject({
+      position = associationBoard.getPosition() + vector(12.2, 1, 2.4),
       rotation = {0, 0, 0}
     })
   end
 
   extraMarkers.destroy()
 
-  local card_guids = {}
+  local cardGUIDs = {}
   local projectDeck = getObjectFromGUID(PROJECT_DECK)
   projectDeck.shuffle()
   for i,z in ipairs(BOARD_CARD_ZONES) do
@@ -201,10 +277,10 @@ function initBoard(params)
       rotation = {0, 0, 180}
     })
 
-    table.insert(card_guids, card.getGUID())
+    table.insert(cardGUIDs, card.getGUID())
   end
 
-  state["card_guids"] = card_guids
+  state["cardGUIDs"] = cardGUIDs
 
   local objectiveDeck = getObjectFromGUID(OBJECTIVE_DECK)
 
@@ -236,12 +312,12 @@ function initBoard(params)
   end
 
   Wait.frames(function()
-    state["game_started"] = true
+    state["gameStarted"] = true
   end, 360)
 end
 
 function onObjectLeaveScriptingZone(zone, enter_object)
-  if state["numPlayers"] > 0 and state["game_started"] then
+  if state["numPlayers"] > 0 and state["gameStarted"] then
     local name = zone.getName()
     local card_zone = string.find(name, "Card Zone")
     local partnership_zone = string.find(name, "Partnership Zone")
@@ -250,15 +326,15 @@ function onObjectLeaveScriptingZone(zone, enter_object)
     if debounceCardZones == false and card_zone ~= nil and card_zone > 0 then
       local str = string.gsub(name, "Card Zone ", "", 1)
       local zone_idx = tonumber(str)
-      state["card_guids"][zone_idx] = ""
+      state["cardGUIDs"][zone_idx] = ""
     elseif partnership_zone ~= nil and partnership_zone > 0 then
         local str = string.gsub(name, "Partnership Zone ", "", 1)
         local zone_idx = tonumber(str)
-        state["partnership_guids"][zone_idx] = ""
+        state["partnershipGUIDs"][zone_idx] = ""
     elseif university_zone ~= nil and university_zone > 0 then
       local str = string.gsub(name, "University Zone ", "", 1)
       local zone_idx = tonumber(str)
-      state["university_guids"][zone_idx] = ""
+      state["universityGUIDs"][zone_idx] = ""
     end
   end
 end
@@ -277,7 +353,7 @@ function onLoad(save)
 end
 
 function flipDisplay()
-  for _,c in ipairs(state["card_guids"]) do
+  for _,c in ipairs(state["cardGUIDs"]) do
     local card = getObjectFromGUID(c)
     card.flip()
   end
@@ -293,7 +369,7 @@ function refillDisplay()
   debounceCardZones = true
 
   local order_idx = 1
-  for i, c in ipairs(state["card_guids"]) do
+  for i, c in ipairs(state["cardGUIDs"]) do
     if c ~= "" then
       new_order[order_idx] = c
       order_idx = order_idx + 1
@@ -317,12 +393,12 @@ function refillDisplay()
 
   Wait.frames(function ()
     debounceCardZones = false
-    state["card_guids"] = new_order
+    state["cardGUIDs"] = new_order
   end, 60)
 end
 
 function onPlayerTurnEnd(player_color_end, player_color_next)
-  if state["numPlayers"] > 0 and state["game_started"] and debounceCardZones == false then
+  if state["numPlayers"] > 0 and state["gameStarted"] and debounceCardZones == false then
     refillDisplay()
   end
 end
@@ -339,10 +415,10 @@ function breakTime()
   local partnership4 = getObjectFromGUID(PARTNERSHIPS[4])
   local partnership5 = getObjectFromGUID(PARTNERSHIPS[5])
 
-  local card1 = getObjectFromGUID(state["card_guids"][1])
+  local card1 = getObjectFromGUID(state["cardGUIDs"][1])
   card1.setPositionSmooth(mainBoard.getPosition() + vector(40.5, 1, 2.4), false, false)
 
-  local card2 = getObjectFromGUID(state["card_guids"][2])
+  local card2 = getObjectFromGUID(state["cardGUIDs"][2])
   card2.setPositionSmooth(mainBoard.getPosition() + vector(40.5, 1, 2.4), false, false)
 
   Wait.frames(function()
@@ -352,7 +428,7 @@ function breakTime()
   , 240)
 
 
-  for i,id in ipairs(state["partnership_guids"]) do
+  for i,id in ipairs(state["partnershipGUIDs"]) do
     if id == "" then
       if i == 1 then
         p1 = partnership1.takeObject({
@@ -376,13 +452,13 @@ function breakTime()
         })
       elseif i == 5 then
         p5 = partnership5.takeObject({
-          position = associationBoard.getPoawition() + vector(1.4, 1, -1.7),
+          position = associationBoard.getPosition() + vector(1.4, 1, -1.7),
           rotation = {0, 0, 0}
         })
       end
     end
   end
-  for i,id in ipairs(state["university_guids"]) do
+  for i,id in ipairs(state["universityGUIDs"]) do
     if id == "" then
       if i == 1 then
         u1 = university1.takeObject({
@@ -404,7 +480,7 @@ function breakTime()
   end
 end
 
-function getAppealPosition(index)
+function getAppealPosition(color, index, isFirstTurn)
   local mainBoard = getObjectFromGUID(MAIN_BOARD)
   local APPEAL_POS = {
     40.3,
@@ -523,13 +599,235 @@ function getAppealPosition(index)
     41.9
   }
 
-  if index < 53 then
-    return mainBoard.getPosition() + vector(APPEAL_POS[index], 1, 10)
-  elseif index < 61 then
-    return mainBoard.getPosition() + vector(-43, 1, APPEAL_POS[index])
-  elseif index == 61 then
-    return mainBoard.getPosition() + vector(-43, 2, APPEAL_POS[index])
-  elseif index < 115 then
-    return mainBoard.getPosition() + vector(APPEAL_POS[index], 1, -10)
+  local additional_z = 0
+
+  if isFirstTurn == false then
+    for i,c in ipairs(state["turnOrder"]) do
+      if c ~= color then
+        if tonumber(state["appeal"][c]) == tonumber(index) then
+          additional_z = additional_z + 1
+        end
+      end
+    end
   end
+
+  if index <= 0 then
+    state["appeal"][color] = 0
+    return mainBoard.getPosition() + vector(APPEAL_POS[1], .5 + additional_z, 10)
+  elseif index > 114 then
+    state["appeal"][color] = 114
+    return mainBoard.getPosition() + vector(APPEAL_POS[114], .5 + additional_z, -10)
+  else
+    state["appeal"][color] = tonumber(index)
+
+    if index < 53 then
+      return mainBoard.getPosition() + vector(APPEAL_POS[index], .5 + additional_z, 10)
+    elseif index < 61 then
+      return mainBoard.getPosition() + vector(-43, .5 + additional_z, APPEAL_POS[index])
+    elseif index == 61 then
+      return mainBoard.getPosition() + vector(-43, .5 + additional_z, APPEAL_POS[index])
+    elseif index < 115 then
+      return mainBoard.getPosition() + vector(APPEAL_POS[index], .5 + additional_z, -10)
+    else
+    end
+  end
+end
+
+function getConservationPosition(color, index, isFirstTurn)
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  local CONSERVATION_POS = {
+    43.8,
+    41,
+    37.9,
+    34.5,
+    31.4,
+    28, -- 5
+    24.7,
+    21.7,
+    18.4,
+    15.3,
+    12, -- 10
+    7.8,
+    3.2,
+    -2,
+    -6.8,
+    -11.3, -- 15
+    -16.1,
+    -21,
+    -26,
+    -31,
+    -35.9, -- 20
+    -40.5,
+    -5,
+    0,
+    5,
+    -40.5, -- 25
+    -35.9,
+    -31,
+    -26,
+    -21,
+    -16.1, -- 30
+    -11.3,
+    -6.8,
+    -2,
+    3.2,
+    7.9, -- 35
+    12.7,
+    17.5,
+    22.3,
+    27.1,
+    31.9,
+    36.7
+  }
+
+  local additional_z = 0
+  local additional_y = 0
+
+  if isFirstTurn == false then
+    for i,c in ipairs(state["turnOrder"]) do
+      if c ~= color then
+        if tonumber(state["conservation"][c]) == tonumber(index) then
+          additional_z = additional_z + 1
+        end
+      end
+    end
+  else
+    for i,c in ipairs(state["turnOrder"]) do
+      if c ~= color then
+        if tonumber(state["conservation"][c]) == tonumber(index) then
+          additional_y = additional_y - 1
+        end
+      end
+    end
+  end
+
+  local i = tonumber(index)
+
+  if i == 0 and isFirstTurn then
+    state["conservation"][color] = 0
+    return mainBoard.getPosition() + vector(CONSERVATION_POS[1], .5 + additional_z, -8 + additional_y)
+  elseif i <= 0 then
+    state["conservation"][color] = 0
+    return mainBoard.getPosition() + vector(CONSERVATION_POS[1], .5 + additional_z, -9)
+  elseif i < 23 then
+    state["conservation"][color] = i
+    return mainBoard.getPosition() + vector(CONSERVATION_POS[i + 1], .5 + additional_z, -8)
+  elseif i < 26 then
+    state["conservation"][color] = i
+    return mainBoard.getPosition() + vector(-41.2, .5 + additional_z, CONSERVATION_POS[i + 1])
+  elseif i < 43 then
+    state["conservation"][color] = i
+    return mainBoard.getPosition() + vector(CONSERVATION_POS[i + 1], .5 + additional_z, 8.2)
+  else
+    state["conservation"][color] = 42
+    return mainBoard.getPosition() + vector(CONSERVATION_POS[42], .5 + additional_z, 8.2)
+  end
+end
+
+function getReputationPosition(color, index, isFirstTurn)
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  local REPUTATION_POS = {
+    31,
+    21,
+    17,
+    10,
+    7.5, -- 5
+    5,
+    -1,
+    -3.5,
+    -7,
+    -13, -- 10
+    -16,
+    -18.5,
+    -24,
+    -27,
+    -30
+  }
+
+  local additional_z = 0
+  local additional_x = 0
+
+  if isFirstTurn == false then
+    for i,c in ipairs(state["turnOrder"]) do
+      if c ~= color then
+        if tonumber(state["reputation"][c]) == tonumber(index) then
+          additional_z = additional_z + 1
+        end
+      end
+    end
+  else
+    for i,c in ipairs(state["turnOrder"]) do
+      if c ~= color then
+        if tonumber(state["reputation"][c]) == tonumber(index) then
+          additional_x = additional_x + 1
+        end
+      end
+    end
+  end
+
+  if index == 1 and isFirstTurn then
+    state["reputation"][color] = 1
+    return mainBoard.getPosition() + vector(REPUTATION_POS[1] + additional_x, .5, -3)
+  elseif index <= 1 then
+    state["reputation"][color] = 1
+    return mainBoard.getPosition() + vector(REPUTATION_POS[1], .5 + additional_z, -3)
+  elseif index < 16 then
+    state["reputation"][color] = index
+    return mainBoard.getPosition() + vector(REPUTATION_POS[index], .5 + additional_z, -3)
+  else
+    state["reputation"][color] = 15
+    return mainBoard.getPosition() + vector(REPUTATION_POS[15], .5 + additional_z, -3)
+  end
+end
+
+function addAppeal(params)
+  local color = params["color"]
+  local value = tonumber(params["value"])
+
+  local curr = tonumber(state["appeal"][color])
+
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  local token = getObjectFromGUID(state["appeal"]["guids"][color])
+  local newVal = value + curr
+
+  if newVal ~= curr and newVal >= 0 then
+    foghorn(capitalize(color).." changed appeal from "..(curr-1).." to "..max(value + curr - 1, 0))
+  end
+
+  token.setPositionSmooth(getAppealPosition(color, value + curr, false), false, false)
+end
+
+function addConservation(params)
+  local color = params["color"]
+  local value = tonumber(params["value"])
+
+  local curr = tonumber(state["conservation"][color])
+
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  local token = getObjectFromGUID(state["conservation"]["guids"][color])
+  local newVal = value + curr
+
+  if newVal ~= curr and newVal >= 0 then
+    foghorn(capitalize(color).." changed conservation from "..curr.." to "..max(value + curr, 0))
+  end
+
+  token.setPositionSmooth(getConservationPosition(color, value + curr, false), false, false)
+end
+
+function addReputation(params)
+  local color = params["color"]
+  local value = tonumber(params["value"])
+
+  local curr = tonumber(state["reputation"][color])
+
+  local mainBoard = getObjectFromGUID(MAIN_BOARD)
+  local token = getObjectFromGUID(state["reputation"]["guids"][color])
+
+  local newVal = value + curr
+
+  if newVal ~= curr and newVal > 0 then
+    foghorn(capitalize(color).." changed reputation from "..curr.." to "..max(value + curr, 1))
+  end
+
+  token.setPositionSmooth(getReputationPosition(color, value + curr, false), false, false)
 end

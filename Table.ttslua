@@ -1,37 +1,63 @@
 require("ArkNova.Constants")
 require("ArkNova.Helpers")
 
-local DEBUG = true
-local break_token = getObjectFromGUID(BREAK_TOKEN)
+local DEBUG = false
+local breakToken = getObjectFromGUID(BREAK_TOKEN)
 
 local state = {
   gameStarted = false,
+  gameSetup = false,
+  flipDisplayClicked = true,
   activeColors = {},
   turnIndex = 0,
-  turnOrder = {}
+  turnOrder = {},
+  readyPlayers = {}
 }
 
 function onLoad(save)
   if #save > 0 then
     local s = JSON.decode(save)
-    if s["gameStarted"] then
+    if s["gameSetup"] then
       state = s
+
+      for i,c in ipairs(state["activeColors"]) do
+        local anchor = getObjectFromGUID(ANCHORS[c])
+
+        anchor.call("initAnchor")
+      end
+
+      if #state["readyPlayers"] == #state["activePlayers"] then
+        broadcastToAll("All " .. #state["activePlayers"] .. " players are ready!")
+        self.UI.setAttribute("allReadyBtn", "active", true)
+      end
+    elseif s["gameStarted"] then
+      state = s
+
+      broadcastToAll("Welcome back! It's now "..state["turnOrder"][state["turnIndex"]].."'s turn.")
+
+      Turns.enable = true
+      Turns.type = 1
+      Turns.order = state["turnOrder"]
+      Turns.turn_color = state["turnOrder"][state["turnIndex"]]
+
+      self.UI.setAttribute("setupBtn", "active", false)
+
+      if #s["activeColors"] > 1 then
+        self.UI.setAttributes("moveBreakTokenBtn", { active = true })
+      end
+
+      if state["flipDisplayClicked"] then
+        self.UI.setAttributes("refillDisplayBtn", {active = true})
+        self.UI.setAttributes("flipDisplay", {active = false})
+      else
+        self.UI.setAttributes("flipDisplay", {active = true})
+        self.UI.setAttributes("refillDisplayBtn", {active = false})
+      end
+    else
+      self.UI.setAttribute("setupBtn", "active", true)
     end
-  end
-
-  ready_players = {}
-
-  self.UI.setAttribute("setupBtn", "active", state["gameStarted"] == false)
-
-  if state["gameStarted"] then
-    broadcastToAll("Welcome back! It's now "..state["turnOrder"][state["turnIndex"]].."'s turn.")
-
-    Turns.enable = true
-    Turns.type = 1
-    Turns.order = state["turnOrder"]
-    Turns.turn_color = state["turnOrder"][state["turnIndex"]]
-
-    flipDisplay()
+  else
+    self.UI.setAttribute("setupBtn", "active", true)
   end
 end
 
@@ -39,23 +65,26 @@ function onSave()
   return JSON.encode(state)
 end
 
-function setup()
-  log("Setup Button clicked")
+function onClickSetupBtn()
   self.UI.setAttribute("setupBtn", "active", false)
-  ready_players = {}
+  state["readyPlayers"] = {}
+  state["gameSetup"] = true
 
   if DEBUG then
     for _,color in ipairs(ALL_COLORS) do
+      log(color)
       local anchor = getObjectFromGUID(ANCHORS[color])
-      anchor.call("setupAnchor")
+      state["activeColors"] = table.insert(state["activeColors"], color)
+      anchor.call("initAnchor")
     end
   else
     local players = getSeatedPlayers()
-    for _, c in ipairs(players) do
+    for _,c in ipairs(players) do
       local color = string.lower(c)
+      state["activeColors"] = table.insert(state["activeColors"], color)
       local anchor = getObjectFromGUID(ANCHORS[color])
 
-      anchor.call("setupAnchor")
+      anchor.call("initAnchor")
     end
   end
 end
@@ -65,18 +94,13 @@ function readyPlayer(params)
   local ready = params["ready"]
 
   if ready then
-    ready_players = table.insert(ready_players, color)
+    state["readyPlayers"] = table.insert(state["readyPlayers"], color)
   else
-    ready_players = removeItem(ready_players, color)
+    state["readyPlayers"] = removeItem(state["readyPlayers"], color)
   end
 
-  if DEBUG and #ready_players == 4 then
-    log("All "..#ready_players.." players are ready!")
-    broadcastToAll("All " .. #ready_players .. " players are ready!")
-    self.UI.setAttribute("allReadyBtn", "active", true)
-  elseif not DEBUG and #ready_players == #getSeatedPlayers() then
-    log("All "..#ready_players.." players are ready!")
-    broadcastToAll("All " .. #ready_players .. " players are ready!")
+  if #state["readyPlayers"] == #state["activeColors"] then
+    broadcastToAll("All " .. #state["activeColors"] .. " players are ready!")
     self.UI.setAttribute("allReadyBtn", "active", true)
   else
     self.UI.setAttribute("allReadyBtn", "active", false)
@@ -86,40 +110,23 @@ end
 function gameInit()
   self.UI.setAttributes("allReadyBtn", { active = false })
   state["gameStarted"] = true
-  self.UI.setAttributes("moveBreakTokenBtn", { active = true })
-  local activeColors = {}
+  state["gameSetup"] = false
 
-  if DEBUG then
-    for _,color in ipairs(ALL_COLORS) do
-      local c = string.lower(color)
-      table.insert(activeColors, c)
-
-      local anchor = getObjectFromGUID(ANCHORS[c])
-      anchor.call("gameInit", {color = c})
-    end
-
-    local i = math.random(1, #ALL_COLORS)
-    local firstPlayer = ALL_COLORS[i]
-    broadcastToAll(capitalize(firstPlayer).." will go first!")
-
-    Turns.order = getTurnOrder(ALL_COLORS, i)
-  else
-    for _,color in ipairs(getSeatedPlayers()) do
-      local c = string.lower(color)
-      table.insert(activeColors, c)
-
-      local anchor = getObjectFromGUID(ANCHORS[c])
-      anchor.call("gameInit", {color = c})
-    end
-
-    local i = math.random(1, #getSeatedPlayers())
-    local firstPlayer = getSeatedPlayers()[i]
-    broadcastToAll(capitalize(firstPlayer).." will go first!")
-
-    Turns.order = getTurnOrder(getSeatedPlayers(), i)
+  if #state["activeColors"] > 1 then
+    self.UI.setAttributes("moveBreakTokenBtn", { active = true })
   end
 
-  state["activeColors"] = activeColors
+  for _,color in ipairs(state["activeColors"]) do
+    local anchor = getObjectFromGUID(ANCHORS[color])
+    anchor.call("gameInit", {color = color})
+  end
+
+  local i = math.random(1, #state["activeColors"])
+  local firstPlayer = state["activeColors"][i]
+  broadcastToAll(capitalize(firstPlayer).." will go first!")
+
+  Turns.order = getTurnOrder(state["activeColors"], i)
+
   state["turnIndex"] = 1
   state["turnOrder"] = Turns.order
   Turns.enable = true
@@ -147,13 +154,12 @@ function gameInit()
       agent4.setPositionSmooth(anchor.getPosition() + vector(-15.6, 2.2, -33.3), false, false)
       agent4.setRotation({90, 0, 180})
     end, 280)
-
-    Notes.setNotes("")
   end
 
+  Notes.setNotes("")
   local mainBoard = getObjectFromGUID(MAIN_BOARD)
   mainBoard.call("initBoard", {turnOrder = Turns.order})
-
+  state["flipDisplayClicked"] = false
   self.UI.setAttributes("flipDisplay", {active = true})
 end
 
@@ -172,7 +178,7 @@ function getTurnOrder(players, startIndex)
 end
 
 function onMoveBreakTokenClick()
-  break_token.call("moveToken")
+  breakToken.call("moveToken")
 end
 
 function onPlayerTurnStart(player_color_start, player_color_previous)
@@ -190,6 +196,7 @@ end
 function flipDisplay()
   local mainBoard = getObjectFromGUID(MAIN_BOARD)
   mainBoard.call("flipDisplay")
+  state["flipDisplayClicked"] = true
   self.UI.setAttributes("flipDisplay", {active = false})
   self.UI.setAttributes("refillDisplayBtn", {active = true})
 end
